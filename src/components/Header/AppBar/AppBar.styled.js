@@ -61,3 +61,10 @@ export const NavWrapper = styled.div`
     gap: 22px;
   }
 `;
+
+export const UserNavWrapper = styled.div`
+  display: none;
+  @media screen and (min-width: ${breakPoints.tablet}) {
+    display: block;
+  }
+`;

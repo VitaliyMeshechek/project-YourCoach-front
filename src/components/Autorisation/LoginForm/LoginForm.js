@@ -22,6 +22,7 @@ import {
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const [type, setType] = useState('password');
   const [name, setName] = useState('password');
   const [toggleIconPass, setToggleIconPass] = useState(<CloseEyeIcon />);
 
