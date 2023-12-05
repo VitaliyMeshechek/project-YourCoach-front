@@ -54,7 +54,7 @@ export const CoachPageInfo = () => {
 
       <CoachPageContainer>
         <CoachBlock>
-          <Header>My information:</Header>
+          <Header>Моя інформація:</Header>
 
           <ContainerCoach>
             <CoachData />
@@ -63,7 +63,7 @@ export const CoachPageInfo = () => {
         </CoachBlock>
         <ProgramBlock>
           <MyProgramHeaderContainer>
-            <Header>My pets:</Header>
+            <Header>Моя програма:</Header>
 
             {/* <AddPetBtn text="Add pet" path="/add-pet" /> */}
           </MyProgramHeaderContainer>

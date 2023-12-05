@@ -1,1 +1,1 @@
-export const selectUserPets = state => state.pets.items;
+export const selectUserPrograms = state => state.programs.items;

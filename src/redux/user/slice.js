@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { deletePet, fetchPets, addPet } from './operations';
+import { deleteProgram, fetchPrograms, addProgram } from './operations';
 import { updateUser, updateUserPhoto } from './operations';
 
 export const userDataSlice = createSlice({
@@ -40,7 +40,7 @@ export const userDataSlice = createSlice({
 });
 
 export const programsSlice = createSlice({
-  name: 'pets',
+  name: 'programs',
   initialState: {
     items: [],
     isLoading: false,
@@ -49,34 +49,44 @@ export const programsSlice = createSlice({
   extraReducers: builder => {
     builder
 
-      .addCase(fetchPets.fulfilled, (state, action) => {
+      .addCase(fetchPrograms.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         // console.log(action.payload);
-        state.pet = action.payload;
+        state.program = action.payload;
         // console.log( state.pet);
       })
-      .addCase(addPet.fulfilled, (state, action) => {
+      .addCase(addProgram.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
       })
-      .addCase(deletePet.fulfilled, (state, action) => {
+      .addCase(deleteProgram.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         console.log(action.payload.id);
-        console.log(state.pet);
-        state.pet = state.pet.filter(pet => pet._id !== action.payload.id);
+        console.log(state.program);
+        state.program = state.program.filter(
+          program => program._id !== action.payload.id
+        );
         console.log(state.items);
       })
       .addMatcher(
-        isAnyOf(fetchPets.pending, addPet.pending, deletePet.pending),
+        isAnyOf(
+          fetchPrograms.pending,
+          addProgram.pending,
+          deleteProgram.pending
+        ),
         state => {
           state.isLoading = true;
         }
       )
       .addMatcher(
-        isAnyOf(fetchPets.rejected, addPet.rejected, deletePet.rejected),
+        isAnyOf(
+          fetchPrograms.rejected,
+          addProgram.rejected,
+          deleteProgram.rejected
+        ),
         (state, action) => {
           state.isLoading = false;
           state.error = action.payload;

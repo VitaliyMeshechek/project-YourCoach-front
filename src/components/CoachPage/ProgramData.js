@@ -1,8 +1,8 @@
-import { selectPet } from 'redux/auth/selectors';
+import { selectProgram } from 'redux/auth/selectors';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiTrash2 } from 'react-icons/fi';
-import { deletePet, fetchPets } from '../../redux/user/operations';
+import { deleteProgram, fetchPrograms } from '../../redux/user/operations';
 import {
   ContainerProgram,
   LabelProgram,
@@ -18,33 +18,33 @@ import {
 export const ProgramData = () => {
   const dispatch = useDispatch();
 
-  const pet = useSelector(selectPet);
+  const program = useSelector(selectProgram);
 
   useEffect(() => {
-    dispatch(fetchPets());
+    dispatch(fetchPrograms());
   }, [dispatch]);
 
-  const visiblePets = pet
-    ? pet.filter(pet => pet.category.includes('your pet'))
+  const visiblePrograms = program
+    ? program.filter(program => program.category.includes('your pet'))
     : [];
 
   return (
     <div>
-      {visiblePets.length === 0 && (
-        <Header>You have not added your pets yet</Header>
+      {visiblePrograms.length === 0 && (
+        <Header>You have not added your programs yet</Header>
       )}
-      <ProgramList pets={visiblePets} />
+      <ProgramList programs={visiblePrograms} />
     </div>
   );
 };
 
 const ProgramList = props => {
-  const { pets } = props;
+  const { programs } = props;
   return (
     <div>
-      {pets && (
+      {programs && (
         <ProgramItemUl>
-          {pets.map(item => (
+          {programs.map(item => (
             <ProgramItem key={item._id} item={item} />
           ))}
         </ProgramItemUl>
@@ -58,7 +58,7 @@ const ProgramItem = ({ item }) => {
   const dispatch = useDispatch();
 
   const HandleDeleteProgram = () => {
-    dispatch(deletePet(_id));
+    dispatch(deleteProgram(_id));
   };
 
   return (
@@ -67,7 +67,7 @@ const ProgramItem = ({ item }) => {
 
       <InfoProgram>
         <InfoProgramItem>
-          <LabelProgram>Name:</LabelProgram>
+          <LabelProgram>Назва:</LabelProgram>
           <InfoProgramText>{name}</InfoProgramText>
           <ButtonDeleteProgram onClick={HandleDeleteProgram}>
             <FiTrash2 style={{ width: '18px', height: '26px' }} />
