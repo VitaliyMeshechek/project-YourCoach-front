@@ -11,7 +11,7 @@ import {
 
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../redux/auth/operations';
-// import AddPetBtn from '../AddPetBtn/AddPetBtn';
+
 import { useState, useEffect } from 'react';
 // import CongratsModal from 'components/ReusableComponents/Modal/CongratsModal';
 // import LeavingModal from 'components/ReusableComponents/Modal/LeavingModal';
@@ -19,6 +19,7 @@ import { showModal } from '../../redux/modal/slice';
 import { updateUser } from '../../redux/user/operations';
 import { useAuth } from '../../hooks/useAuth';
 import { ProgramData } from './ProgramData';
+import AddProgramBtn from 'components/AddProgramBtn/AddProgramBtn';
 
 export const CoachPageInfo = () => {
   const { user } = useAuth();
@@ -65,7 +66,7 @@ export const CoachPageInfo = () => {
           <MyProgramHeaderContainer>
             <Header>Моя програма:</Header>
 
-            {/* <AddPetBtn text="Add pet" path="/add-pet" /> */}
+            <AddProgramBtn text="Add program" path="/add-program" />
           </MyProgramHeaderContainer>
 
           <ProgramData />

@@ -6,6 +6,7 @@ import LoginPage from 'pages/LoginPage/LoginPage';
 import CoachPage from 'pages/CoachPage/CoachPage';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
+import AddProgramPage from 'pages/AddProgramPage/AddProgramPage';
 
 export const App = () => {
   return (
@@ -28,6 +29,15 @@ export const App = () => {
           path="user"
           element={
             <PrivateRoute redirectTo="/login" component={<CoachPage />} />
+          }
+        />
+        <Route
+          path="add-program"
+          element={
+            <PrivateRoute
+              redirectTo="/notices"
+              component={<AddProgramPage />}
+            />
           }
         />
       </Routes>
