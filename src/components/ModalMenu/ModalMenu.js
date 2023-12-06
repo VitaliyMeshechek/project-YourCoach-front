@@ -1,5 +1,3 @@
-// import PropTypes from 'prop-types';
-// import { useLocation } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
 import { Backdrop, ModalWindow, CloseBtn, CloseIcon } from './ModalMenu.styled';

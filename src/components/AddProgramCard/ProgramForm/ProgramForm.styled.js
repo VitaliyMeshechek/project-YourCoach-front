@@ -75,7 +75,7 @@ export const AddFormButtonWrapper = styled.div`
   @media screen and (min-width: ${breakPoints.tablet}) {
     flex-direction: row-reverse;
     justify-content: ${({ category, isMoreInfo }) =>
-      category !== 'your pet' ? 'center' && isMoreInfo : 'end'};
+      category !== 'fitnes for women' ? 'center' && isMoreInfo : 'end'};
     margin-top: 40px;
     column-gap: 24px;
   }

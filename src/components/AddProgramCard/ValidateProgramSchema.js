@@ -89,7 +89,7 @@ export const ValidateProgramSchema = Yup.object().shape({
   ),
   duration: Yup.string().oneOf(
     [
-      '1-4 тижні',
+      '1-4 тижнів',
       '5-8 тижнів',
       '9-12 тижнів',
       '12-15 тижнів',

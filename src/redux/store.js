@@ -3,6 +3,7 @@ import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/slice';
 import { modalReducer } from './modal/slice';
 import { programReducer, userDataReducer } from './user/slice';
+import { noticesPageReducer, queryReducer } from './notices/slice';
 
 import {
   persistStore,
@@ -27,6 +28,8 @@ export const store = configureStore({
     showModal: modalReducer,
     program: programReducer,
     user: userDataReducer,
+    noticesPage: noticesPageReducer,
+    query: queryReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

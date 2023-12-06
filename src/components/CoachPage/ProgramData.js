@@ -52,6 +52,7 @@ const ProgramList = props => {
     </div>
   );
 };
+
 const ProgramItem = ({ item }) => {
   const { photo, name, dateOfBirth, breed, comments, _id } = item;
 

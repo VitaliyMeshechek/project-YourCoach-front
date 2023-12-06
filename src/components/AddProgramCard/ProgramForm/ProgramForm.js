@@ -12,18 +12,18 @@ import {
   AddFormStepName,
 } from './ProgramForm.styled';
 
-import { addNotice } from 'redux/noticesPage/operations';
+import { addNotice } from 'redux/notices/operations';
 // import { addMyPet } from 'redux/auth/operations';
 import { addProgram } from 'redux/user/operations';
 
-import { ValidateProgramSchema } from '../../components/AddProgramCard/ValidateProgramSchema';
-import Modal from '../Modal/Modal';
-import AddProgramModal from '../';
+import { ValidateProgramSchema } from '../ValidateProgramSchema';
+import Modal from '../../ModalMenu/ModalMenu';
+import AddProgramModal from '../AddProgramModal/AddProgramModal';
 // import AddModal from 'components/ReusableComponents/Modal/AddModal';
 
-import AdditionalInfo from '../../components/AdditionalInfo/AdditionalInfo';
-import ChooseCategory from '../../components/ChooseCategory/ChooseCategory';
-import ProgramDetails from '../../components/ProgramDetails/ProgramDetails';
+import AdditionalInfo from '../AdditionalInfo/AdditionalInfo';
+import ChooseCategory from '../ChooseCategory/ChooseCategory';
+import ProgramDetails from '../ProgramDetails/ProgramDetails';
 
 const AddProgramForm = () => {
   const [formData, setFormData] = useState({
@@ -162,14 +162,14 @@ const AddProgramForm = () => {
                 backStep={handlePrevClick}
               />
             )}
-            {step === 2 && (
+            {/* {step === 2 && (
               <AdditionalInfo
                 formData={formData}
                 setFormData={setFormData}
                 backStep={handlePrevClick}
                 submit={handleSubmit}
               />
-            )}
+            )} */}
           </AddForm>
         )}
       </Formik>
