@@ -25,14 +25,12 @@ export const ProgramData = () => {
   }, [dispatch]);
 
   const visiblePrograms = program
-    ? program.filter(program => program.category.includes('your pet'))
+    ? program.filter(program => program.category.includes('fitnes for women'))
     : [];
 
   return (
     <div>
-      {visiblePrograms.length === 0 && (
-        <Header>You have not added your programs yet</Header>
-      )}
+      {visiblePrograms.length === 0 && <Header>У Вас ще немає програми</Header>}
       <ProgramList programs={visiblePrograms} />
     </div>
   );

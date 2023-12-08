@@ -27,6 +27,9 @@ export const Btn = styled(Link)`
 
   z-index: 1;
 
+  transform-origin: center;
+  transform-box: fill-box;
+
   transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover,
@@ -58,7 +61,7 @@ export const Btn = styled(Link)`
   }
 
   & svg {
-    stroke: #fff;
+    fill: #ffff00;
   }
 
   @media screen and (min-width: ${breakPoints.tablet}) {
@@ -68,7 +71,7 @@ export const Btn = styled(Link)`
     flex-direction: row;
     gap: 8px;
 
-    width: 134px;
+    width: 164px;
     height: 40px;
     padding-top: 4px;
     padding-bottom: 4px;

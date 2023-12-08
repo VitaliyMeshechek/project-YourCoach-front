@@ -1,5 +1,5 @@
 // import PropTypes from 'prop-types';
-import { BsPlus } from 'react-icons/bs';
+import { MdOutlineFitnessCenter } from 'react-icons/md';
 import { useWindowSize } from 'hooks/useResize';
 import { Btn } from './AddProgramBtn.styled';
 import { useLocation } from 'react-router-dom';
@@ -22,9 +22,9 @@ const AddProgramBtn = ({ text, path }) => {
 
   return (
     <Btn to={path} state={{ from: location }} onClick={onAddBtnClick}>
-      {screenWidth < 768 && <BsPlus />}
+      {screenWidth < 768 && <MdOutlineFitnessCenter />}
       {text}
-      {screenWidth >= 768 && <BsPlus />}
+      {screenWidth >= 768 && <MdOutlineFitnessCenter />}
     </Btn>
   );
 };

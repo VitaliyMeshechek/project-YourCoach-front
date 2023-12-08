@@ -24,15 +24,19 @@ import AddProgramModal from '../AddProgramModal/AddProgramModal';
 import AdditionalInfo from '../AdditionalInfo/AdditionalInfo';
 import ChooseCategory from '../ChooseCategory/ChooseCategory';
 import ProgramDetails from '../ProgramDetails/ProgramDetails';
+import ProgramDetailsForWeigth from '../ProgramDetailsForWeigth/ProgramDetailsForWeigth';
 
 const AddProgramForm = () => {
   const [formData, setFormData] = useState({
     category: '',
     name: '',
+    nameWeightloss: '',
+    // name2: '',
     description: '',
     training: '',
     location: '',
     comments: '',
+    sell: '',
     food: '',
     special: '',
     avatar: null,
@@ -47,23 +51,28 @@ const AddProgramForm = () => {
   const dispatch = useDispatch();
 
   const getPageTitle = useCallback(() => {
-    if (step < 1) return 'Add Program';
+    if (step < 1) return 'Додавання програми';
 
     const titles = {
-      'fitnes for women': 'Add women program',
-      weightLossProgram: 'Add program for weight loss',
-      'strength fitness': 'Add program for strength fitness',
-      'flexibility and wellnes': 'Add program for flexibility and wellnes',
-      '': 'Add Program',
+      'fitnes for women': 'Додавання жіночої програми',
+      weigth: 'Додавання програми схуднення',
+      'strength fitness': 'Додавання програми для силового фітнесу',
+      'flexibility and wellness':
+        'Додавання програми гнучкості та оздоровлення',
+      '': 'Додавання програми',
     };
-    return titles[formData.category] || 'Add Program';
+    return titles[formData.category] || 'Додавання програми';
   }, [formData.category, step]);
 
   useEffect(() => {
     setTitle(getPageTitle());
   }, [getPageTitle]);
 
-  const steps = ['Choose Category', 'Program Details', 'Additional Info'];
+  const steps = [
+    'Виберіть категорію',
+    'Деталі програми',
+    'Додаткова информація',
+  ];
 
   const toggleModal = () => {
     setIsModalOpen(prevState => !prevState);
@@ -89,14 +98,12 @@ const AddProgramForm = () => {
     const newFormData = new FormData();
     newFormData.append('category', formData.category);
     newFormData.append('name', formData.name);
+
+    // newFormData.append('name2', formData.name2);
     newFormData.append('description', formData.description);
     newFormData.append('training', formData.training);
     newFormData.append('duration', formData.duration);
     newFormData.append('avatar', formData.avatar);
-
-    if (formData.comments) {
-      newFormData.append('comments', formData.comments);
-    }
 
     if (formData.category === 'fitnes for women') {
       dispatch(addProgram(newFormData));
@@ -104,25 +111,32 @@ const AddProgramForm = () => {
       return;
     }
 
-    if (formData.category === 'flexibility and wellnes') {
-      dispatch(addNotice({ category: 'lexibility and wellnes', newFormData }));
+    if (formData.comments) {
+      newFormData.append('comments', formData.comments);
+    }
+
+    if (formData.category === 'flexibility and wellness') {
+      dispatch(
+        addNotice({ category: 'flexibility and wellness', newFormData })
+      );
       toggleModal();
     }
 
+    newFormData.append('nameWeightloss', formData.nameWeightloss);
     newFormData.append('category', formData.category);
     newFormData.append('special', formData.special);
-
-    if (formData.category === 'weightLossProgram') {
-      dispatch(addNotice({ category: 'weight Loss Program', newFormData }));
-      toggleModal();
-      return;
-    }
 
     newFormData.append('category', formData.category);
     newFormData.append('food', formData.food);
 
     if (formData.category === 'strength fitness') {
       dispatch(addNotice({ category: 'strength fitness', newFormData }));
+      toggleModal();
+      return;
+    }
+
+    if (formData.category === 'weigth') {
+      dispatch(addNotice({ category: formData.category, newFormData }));
       toggleModal();
       return;
     }

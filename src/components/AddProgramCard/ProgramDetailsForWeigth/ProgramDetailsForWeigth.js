@@ -25,11 +25,16 @@ import {
   AddFormLabel,
   AddFormInput,
   AddFormLabelWrapper,
-} from './ProgramDetails.styled';
+} from '../../AddProgramCard/ProgramDetails/ProgramDetails.styled';
 
 import { validateField } from '../ValidateProgramSchema';
 
-const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
+const ProgramDetailsForWeigth = ({
+  formData,
+  setFormData,
+  nextStep,
+  backStep,
+}) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [personName, setPersonName] = useState([]);
   const [name, setName] = useState('');
@@ -104,7 +109,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
 
   return (
     <ProgramFormWrapper>
-      {/* <Box
+      <Box
         component="form"
         sx={{
           display: 'flex',
@@ -114,47 +119,25 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
         }}
       >
         <FormControl fullWidth>
-          <InputLabel id="name-label">Назва програми</InputLabel>
+          <InputLabel id="name-label-weight loss program">
+            Назва програми
+          </InputLabel>
           <Select
-            labelId="name-label"
-            id="name-select"
-            placeholder="Фітнес для жінок"
+            labelId="name-label-weight loss program"
+            id="name-select-weight loss program"
+            placeholder="Програма схуднення"
             type="text"
-            name="name"
+            name="nameWeightloss"
             onChange={handleInputChange}
-            value={formData.name}
-            category={formData.category}
-            // onBlur={() => validateField('name', formData, setErrors)}
-            // className={errors.name ? 'invalid' : ''}
+            value={formData.nameWeightloss}
           >
-            <MenuItem value={1}>Аеробні програми</MenuItem>
-            <MenuItem value={2}>Силові програми</MenuItem>
-            <MenuItem value={3}>Оздоровчі програми</MenuItem>
-            <MenuItem value={4}>Функціональний фітнес</MenuItem>
+            <MenuItem value={1}>Аеробіка</MenuItem>
+            <MenuItem value={2}>Аеробний фітнес</MenuItem>
           </Select>
           {!!errors.name && <ErrorMessage message={errors.name} />}
         </FormControl>
-              </Box> */}
-      {/* <FormControl fullWidth>
-            <InputLabel id="name-label-weight loss program">
-              Назва програми
-            </InputLabel>
-            <Select
-              labelId="name-label-weight loss program"
-              id="name-select-weight loss program"
-              placeholder="Програма схуднення"
-              type="text"
-              name="nameWeightloss"
-              onChange={handleInputChange}
-              value={formData.nameWeightloss}
-            >
-              <MenuItem value={1}>Аеробіка</MenuItem>
-              <MenuItem value={2}>Аеробний фітнес</MenuItem>
-            </Select>
-            {!!errors.name && <ErrorMessage message={errors.name} />}
-          </FormControl> */}
 
-      {/* <FormControl fullWidth>
+        {/* <FormControl fullWidth>
                 <InputLabel id="name-label-strength fitness">
                   Назва програми
                 </InputLabel>
@@ -177,22 +160,22 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 </Select>
                 {!!errors.name && <ErrorMessage message={errors.name} />}
               </FormControl>  */}
-      <AddFormLabelWrapper>
-        <AddFormLabel htmlFor="title">
+        {/* <AddFormLabelWrapper>
+        <AddFormLabel htmlFor="name">
           Назва програми
           <AddFormInput
             placeholder="Fitness for women"
             type="text"
-            name="title"
+            name="name"
             onChange={handleInputChange}
-            value={formData.title}
-            onBlur={() => validateField('title', formData, setErrors)}
-            className={errors.title ? 'invalid' : ''}
+            value={formData.name}
+            onBlur={() => validateField('name', formData, setErrors)}
+            className={errors.name ? 'invalid' : ''}
           />
         </AddFormLabel>
-        {!!errors.title && <ErrorMessage message={errors.title} />}
-      </AddFormLabelWrapper>
-      {/* <TextField
+        {!!errors.name && <ErrorMessage message={errors.name} />}
+      </AddFormLabelWrapper> */}
+        <TextField
           id="outlined-basic"
           label="Опис"
           variant="outlined"
@@ -204,9 +187,9 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
             marginTop: 4,
             minWidth: 494,
           }}
-        /> */}
+        />
 
-      <AddFormLabelWrapper>
+        {/* <AddFormLabelWrapper>
         <AddFormLabel htmlFor="description">
           Опис
           <AddFormInput
@@ -219,8 +202,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
           />
         </AddFormLabel>
         {!!errors.description && <ErrorMessage message={errors.description} />}
-      </AddFormLabelWrapper>
-      {/* <FormControl>
+      </AddFormLabelWrapper> */}
+        <FormControl>
           <FormLabel
             id="duration-label"
             sx={{
@@ -263,9 +246,9 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
               label="більше 15 тижнів"
             />
           </RadioGroup>
-          {!!errors.duration && <ErrorMessage message={errors.duration} />}
-        </FormControl> */}
-      <AddFormLabelWrapper>
+          {/* {!!errors.duration && <ErrorMessage message={errors.duration} />} */}
+        </FormControl>
+        {/* <AddFormLabelWrapper>
         <AddFormLabel htmlFor="duration">
           Тривалість
           <AddFormInput
@@ -278,8 +261,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
           />
         </AddFormLabel>
         {!!errors.duration && <ErrorMessage message={errors.duration} />}
-      </AddFormLabelWrapper>
-      {/* <FormControl
+      </AddFormLabelWrapper> */}
+        <FormControl
           sx={{
             marginTop: 4,
             minWidth: 494,
@@ -304,9 +287,9 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
             ))}
           </Select>
           {!!errors.training && <ErrorMessage message={errors.training} />}
-        </FormControl> */}
-
-      <AddFormLabelWrapper>
+        </FormControl>
+      </Box>
+      {/* <AddFormLabelWrapper>
         <AddFormLabel htmlFor="training">
           Тренування
           <AddFormInput
@@ -319,7 +302,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
           />
         </AddFormLabel>
         {!!errors.training && <ErrorMessage message={errors.training} />}
-      </AddFormLabelWrapper>
+      </AddFormLabelWrapper> */}
       <AddFormButtonWrapper>
         <AddFormButtonNext
           type="button"
@@ -344,4 +327,4 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
   );
 };
 
-export default ProgramDetails;
+export default ProgramDetailsForWeigth;

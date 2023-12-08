@@ -30,12 +30,12 @@ export const CoachData = () => {
   const [isPhotoEdit, setisPhotoEdit] = useState(false);
   const [isNameEdit, setisNameEdit] = useState(false);
   const [isEmailEdit, setisEmailEdit] = useState(false);
-  const [isBirthEdit, setisBirthEdit] = useState(false);
+  const [isExperienceEdit, setisExperienceEdit] = useState(false);
   const [isPhoneEdit, setisPhoneEdit] = useState(false);
   const [isCityEdit, setisCityEdit] = useState(false);
   const [isAllowedName, setisAllowedName] = useState(true);
   const [isAllowedEmail, setisAllowedEmail] = useState(true);
-  const [isAllowedBIrth, setisAllowedBirth] = useState(true);
+  const [isAllowedExperience, setisAllowedExperience] = useState(true);
   const [isAllowedPhone, setisAllowedPhone] = useState(true);
   const [isAllowedCity, setisAllowedCity] = useState(true);
 
@@ -45,13 +45,15 @@ export const CoachData = () => {
     avatarUrl: user.avatarUrl ? user.avatarUrl : PhotoDef,
     name: user.name ? user.name : defaultName,
     email: user.email ? user.email : 'user@pets.com',
-    birthday: user.birthday ? user.birthday : '00.00.0000',
+    experience: user.experience ? user.experience : '00.00.0000',
     phone: user.phone ? user.phone : '+380000000000',
     city: user.city ? user.city : 'City',
   };
   const [NameEdit, setNameEdit] = useState(initialValues.name);
   const [EmailEdit, setEmailEdit] = useState(initialValues.email);
-  const [BirthEdit, setBirthEdit] = useState(initialValues.birthday);
+  const [ExperienceEdit, setExperienceEdit] = useState(
+    initialValues.experience
+  );
   const [PhoneEdit, setPhoneEdit] = useState(initialValues.phone);
   const [CityEdit, setCityEdit] = useState(initialValues.city);
   const [PhotoEdit, setPhotoEdit] = useState(null);
@@ -60,7 +62,7 @@ export const CoachData = () => {
 
   const editing = () => {
     setisPhoneEdit(false);
-    setisBirthEdit(false);
+    setisExperienceEdit(false);
     setisCityEdit(false);
     setisEmailEdit(false);
     setisNameEdit(false);
@@ -128,7 +130,7 @@ export const CoachData = () => {
     return error;
   }
 
-  function validateBirth(value) {
+  function validateExperience(value) {
     let error;
     if (!value) {
       error = 'Required';
@@ -139,12 +141,12 @@ export const CoachData = () => {
     ) {
       error = 'Should be in format 00.00.0000';
     }
-    setisAllowedBirth(true);
+    setisAllowedExperience(true);
     if (!error) {
-      setBirthEdit(value);
+      setExperienceEdit(value);
     }
     if (error) {
-      setisAllowedBirth(false);
+      setisAllowedExperience(false);
     }
 
     return error;
@@ -325,33 +327,33 @@ export const CoachData = () => {
             </DataItemContainer>
             <Error name="email" component="div" />
             <DataItemContainer>
-              <Label>День народження:</Label>
+              <Label>Досвід:</Label>
               <InputContainer>
                 <Input
                   type="text"
-                  name="birthday"
-                  readOnly={!isBirthEdit}
+                  name="experience"
+                  readOnly={!isExperienceEdit}
                   autoComplete="off"
-                  validate={validateBirth}
+                  validate={validateExperience}
                 />
-                {!isBirthEdit && (
+                {!isExperienceEdit && (
                   <ButtonEdit
                     type="button"
                     onClick={() => {
                       editing();
-                      setisBirthEdit(true);
+                      setisExperienceEdit(true);
                     }}
                   >
                     <TbPencilMinus style={{ width: '18px', height: '18px' }} />{' '}
                   </ButtonEdit>
                 )}
-                {isBirthEdit && isAllowedBIrth && (
+                {isExperienceEdit && isAllowedExperience && (
                   <ButtonEdit
                     type="button"
                     onClick={() => {
                       editing();
-                      setisBirthEdit(false);
-                      handleUpdateUser({ birthday: BirthEdit });
+                      setisExperienceEdit(false);
+                      handleUpdateUser({ experience: ExperienceEdit });
                     }}
                   >
                     <AiOutlineCheck
@@ -365,7 +367,7 @@ export const CoachData = () => {
                 )}
               </InputContainer>
             </DataItemContainer>
-            <Error name="birthday" component="div" />
+            <Error name="experience" component="div" />
 
             <DataItemContainer>
               <Label>Телефон:</Label>

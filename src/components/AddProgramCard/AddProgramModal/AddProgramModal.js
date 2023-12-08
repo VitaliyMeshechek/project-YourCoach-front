@@ -25,7 +25,7 @@ const AddProgramModal = ({ backLink, category }) => {
   const path = category === 'fitnes for women' ? '/user' : '/notices/my-pets';
   return (
     <AddFormModalWrapper>
-      <p>'Program was successfully added!'</p>
+      <p>'Програма була успішно додана!'</p>
       <AddFormButtonWrapper>
         <AddFormButtonNext
           type="button"

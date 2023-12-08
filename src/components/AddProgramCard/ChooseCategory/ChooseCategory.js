@@ -11,13 +11,7 @@ import {
   CategoryWrapper,
 } from './ChooseCategory.styled.js';
 
-const ChooseCategory = ({
-  formData,
-  setFormData,
-  nextStep,
-  cancel,
-  setValues,
-}) => {
+const ChooseCategory = ({ formData, setFormData, nextStep, cancel }) => {
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
@@ -45,18 +39,18 @@ const ChooseCategory = ({
         checked={formData.category === 'fitnes for women'}
       />
       <RadioCategoryLabel htmlFor="fitnes for women">
-        Fitnes for women
+        Фітнес для жінок
       </RadioCategoryLabel>
       <AddFormRadioButton
         type="radio"
         name="category"
-        value="weight loss program"
-        id="weight loss program"
-        checked={formData.category === 'weight loss program'}
+        value="weigth"
+        id="weigth"
+        checked={formData.category === 'weigth'}
         onChange={handleCategoryChange}
       />
-      <RadioCategoryLabel htmlFor="Add program for weight loss">
-        Weight loss program
+      <RadioCategoryLabel htmlFor="weigth">
+        Програма схуднення
       </RadioCategoryLabel>
       <AddFormRadioButton
         type="radio"
@@ -67,18 +61,18 @@ const ChooseCategory = ({
         onChange={handleCategoryChange}
       />
       <RadioCategoryLabel htmlFor="strength fitness">
-        Strength fitness
+        Силовий фітнес
       </RadioCategoryLabel>
       <AddFormRadioButton
         type="radio"
         name="category"
-        value="flexibility and wellnes"
-        id="flexibility and wellnes"
-        checked={formData.category === 'flexibility and wellnes'}
+        value="flexibility and wellness"
+        id="flexibility and wellness"
+        checked={formData.category === 'flexibility and wellness'}
         onChange={handleCategoryChange}
       />
-      <RadioCategoryLabel htmlFor="flexibility and wellnes">
-        Flexibility and wellnes
+      <RadioCategoryLabel htmlFor="flexibility and wellness">
+        Гнучкість та оздоровлення
       </RadioCategoryLabel>
       <AddFormButtonWrapper>
         <AddFormButtonNext
@@ -87,7 +81,7 @@ const ChooseCategory = ({
           text="Next"
           icon={
             <MdOutlineFitnessCenter
-              style={{ stroke: '#FEF9F9', width: '24px', height: '24px' }}
+              style={{ fill: '#ffff00', width: '24px', height: '24px' }}
             />
           }
           clickHandler={nextStep}

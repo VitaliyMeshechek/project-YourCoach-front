@@ -29,7 +29,7 @@ export const Header = styled.h2`
   }
   @media screen and (min-width: 1280px) {
   }
-  /* margin-bottom: 18px; */
+  margin-bottom: 18px;
 `;
 export const CoachPageContainer = styled.div`
   margin: auto;

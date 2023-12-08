@@ -3,14 +3,14 @@ import * as Yup from 'yup';
 export const ValidateProgramSchema = Yup.object().shape({
   title: Yup.string()
     .required('Title is required')
-    .min(2, 'Name must be at least 2 characters')
-    .max(16, 'Name must not exceed 16 characters'),
+    .min(2, 'Title must be at least 2 characters')
+    .max(16, 'Title must not exceed 16 characters'),
   category: Yup.string()
     .required('Field category is required')
     .oneOf(
       [
-        'fitnes for women',
-        'weight Loss Program',
+        'Фітнес для жінок',
+        'Програма схуднення',
         'strength fitness',
         'flexibility and wellnes',
       ],
@@ -18,8 +18,6 @@ export const ValidateProgramSchema = Yup.object().shape({
     ),
   name: Yup.string()
     .required('Field name is required')
-    .min(2, 'Name must be at least 2 characters')
-    .max(26, 'Name must not exceed 26 characters')
     .oneOf(
       [
         'Аеробні програми',
@@ -37,7 +35,7 @@ export const ValidateProgramSchema = Yup.object().shape({
         'Pilates',
         'Stretching',
       ],
-      'Invalid training'
+      'Invalid name'
     ),
   description: Yup.string()
     .required('Field description is required')

@@ -63,13 +63,11 @@ export const CoachPageInfo = () => {
           </ContainerCoach>
         </CoachBlock>
         <ProgramBlock>
+          <ProgramData />
           <MyProgramHeaderContainer>
             <Header>Моя програма:</Header>
-
-            <AddProgramBtn text="Add program" path="/add-program" />
+            <AddProgramBtn text="Додати програму" path="/add-program" />
           </MyProgramHeaderContainer>
-
-          <ProgramData />
         </ProgramBlock>
       </CoachPageContainer>
     </div>
