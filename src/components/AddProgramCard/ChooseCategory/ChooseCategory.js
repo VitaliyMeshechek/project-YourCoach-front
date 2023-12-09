@@ -81,7 +81,7 @@ const ChooseCategory = ({ formData, setFormData, nextStep, cancel }) => {
           text="Next"
           icon={
             <MdOutlineFitnessCenter
-              style={{ fill: '#ffff00', width: '24px', height: '24px' }}
+              style={{ fill: '#ffff00', width: '20px', height: '20px' }}
             />
           }
           clickHandler={nextStep}

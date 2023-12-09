@@ -24,14 +24,14 @@ import AddProgramModal from '../AddProgramModal/AddProgramModal';
 import AdditionalInfo from '../AdditionalInfo/AdditionalInfo';
 import ChooseCategory from '../ChooseCategory/ChooseCategory';
 import ProgramDetails from '../ProgramDetails/ProgramDetails';
-import ProgramDetailsForWeigth from '../ProgramDetailsForWeigth/ProgramDetailsForWeigth';
 
 const AddProgramForm = () => {
   const [formData, setFormData] = useState({
     category: '',
     name: '',
-    nameWeightloss: '',
-    // name2: '',
+    fitnessWeigth: '',
+    fitnessStrength: '',
+    fitnessWellness: '',
     description: '',
     training: '',
     location: '',
@@ -69,9 +69,9 @@ const AddProgramForm = () => {
   }, [getPageTitle]);
 
   const steps = [
-    'Виберіть категорію',
+    'Вибрати категорію',
     'Деталі програми',
-    'Додаткова информація',
+    'Додаткова інформація',
   ];
 
   const toggleModal = () => {

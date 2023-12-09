@@ -24,27 +24,25 @@ export const ValidateProgramSchema = Yup.object().shape({
         'Силові програми',
         'Оздоровчі програми',
         'Функціональний фітнес',
-        'Аеробіка',
-        'Аеробний фітнес',
-        'Body Up',
-        'Body Low',
-        'Body Pump',
-        'Body Sculpt',
-        'ABS',
-        'Yoga',
-        'Pilates',
-        'Stretching',
       ],
       'Invalid name'
     ),
+  fitnessWeigth: Yup.string()
+    .required('Field name is required')
+    .oneOf(['Аеробіка', 'Аеробний фітнес'], 'Invalid name'),
+  fitnessStrength: Yup.string()
+    .required('Field name is required')
+    .oneOf(
+      ['Body Up', 'Body Low', 'Body Pump', 'Body Sculpt', 'ABS'],
+      'Invalid name'
+    ),
+  fitnessWellness: Yup.string()
+    .required('Field name is required')
+    .oneOf(['Yoga', 'Pilates', 'Stretching'], 'Invalid name'),
   description: Yup.string()
     .required('Field description is required')
-    .test(value => {
-      if (!value) {
-        return true;
-      }
-      return value.length >= 10 && value.length <= 320;
-    }),
+    .min(10, 'Title must be at least 10 characters')
+    .max(500, 'Title must not exceed 500 characters'),
   training: Yup.string()
     .required('Field training is required')
     .oneOf(
