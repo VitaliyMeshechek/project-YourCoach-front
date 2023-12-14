@@ -28,9 +28,7 @@ export const ValidateProgramSchema = Yup.object().shape({
     )
     .required('Field name is required'),
   fitnessWeigth: Yup.string()
-    .oneOf(['Аеробіка', 'Аеробний фітнес'], 
-    'Поле не може бути пустим'
-    )
+    .oneOf(['Аеробіка', 'Аеробний фітнес'], 'Поле не може бути пустим')
     .required('Field name is required'),
   fitnessStrength: Yup.string()
     .oneOf(
@@ -51,22 +49,20 @@ export const ValidateProgramSchema = Yup.object().shape({
       return value.length >= 10 && value.length <= 500;
     })
     .required('Поле необхідно заповнити'),
-      duration: Yup.string().oneOf(
-    [
-      '1-4 тижнів',
-      '5-8 тижнів',
-      '9-12 тижнів',
-      '12-15 тижнів',
-      'більше 15 тижнів',
-    ],
-    'Поле не може бути пустим'
-  )
-  .required('Field duration is required'),
-  training: Yup.string()
+  duration: Yup.string()
     .oneOf(
-      ['Персональні тренування', 'Групові тренування'],
-      'Поле не може бути пустим'
+      [
+        '1-4 тижнів',
+        '5-8 тижнів',
+        '9-12 тижнів',
+        '12-15 тижнів',
+        'більше 15 тижнів',
+      ],
+      'duration'
     )
+    .required('Field duration is required'),
+  training: Yup.string()
+    .oneOf(['Персональні тренування', 'Групові тренування'], 'training')
     .required('Field training is required'),
   location: Yup.string()
     .matches(/^[A-Za-z\s]+$/i, 'Невірний формат')

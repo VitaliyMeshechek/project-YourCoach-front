@@ -32,7 +32,6 @@ import { validateField } from '../ValidateProgramSchema';
 const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [personName, setPersonName] = useState([]);
-  // const [named, setNamed] = useState('');
   const [errors, setErrors] = useState({});
 
   const isNameFieldValid = Boolean(!!formData.name && !errors.name);
@@ -118,9 +117,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
   const names = ['Персональні тренування', 'Групові тренування'];
 
   const onInputChange = event => {
-    const {
-      target: { value },
-    } = event;
+    const { value } = event.target;
+
     setPersonName(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
@@ -143,7 +141,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
 
   return (
     <ProgramFormWrapper>
-      <Formik>
+      <Formik initialValues={[personName]}>
         {({ touched }) => (
           <Form sx={{ minWidth: 594 }}>
             <Box
@@ -352,14 +350,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                   name="duration"
                   onChange={handleInputChange}
                   value={formData.duration}
-                  helperText={'Заповніть це поле'}
-                  onBlur={() => validateField('duration', formData, setErrors)}
+                  // onBlur={() => validateField('duration', formData, setErrors)}
                 >
-                  {!!formData.duration &&
-                  !errors.duration &&
-                  !touched.duration ? (
-                    <ErrorMessage message={errors.duration} />
-                  ) : null}
                   <FormControlLabel
                     value="one week"
                     control={<Radio />}
@@ -385,6 +377,11 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                     control={<Radio />}
                     label="більше 15 тижнів"
                   />
+                  {!!formData.duration &&
+                  !errors.duration &&
+                  !touched.duration ? (
+                    <ErrorMessage message={errors.duration} />
+                  ) : null}
                 </Field>
               </FormControl>
               <FormControl
@@ -418,9 +415,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                   renderValue={selected => selected.join(', ')}
                   MenuProps={MenuProps}
                   sx={{ borderRadius: 40 }}
-                  onBlur={() =>
-                    validateField('training', personName, setErrors)
-                  }
+                  onBlur={() => validateField('training', formData, setErrors)}
                 >
                   {names.map(name => (
                     <MenuItem key={name} value={name}>
