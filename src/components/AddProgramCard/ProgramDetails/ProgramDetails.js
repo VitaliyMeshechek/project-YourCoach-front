@@ -32,37 +32,24 @@ import { validateField } from '../ValidateProgramSchema';
 const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [personName, setPersonName] = useState([]);
-  const [name, setName] = useState('');
+  // const [named, setNamed] = useState('');
   const [errors, setErrors] = useState({});
 
-  const isNameFieldValid = Boolean(!errors.name && !!formData.name);
+  const isNameFieldValid = Boolean(!!formData.name && !errors.name);
   const isFitnessWeigthFieldValid = Boolean(
-    !errors.fitnessWeigth && !!formData.fitnessWeigth
+    !!formData.fitnessWeigth && !errors.fitnessWeigth
   );
   const isFitnessStrengthFieldValid = Boolean(
-    !errors.fitnessStrength && !!formData.fitnessStrength
+    !!formData.fitnessStrength && !errors.fitnessStrength
   );
   const isFitnessWellnessFieldValid = Boolean(
-    !errors.fitnessWellness && !!formData.fitnessWellness
+    !!formData.fitnessWellness && !errors.fitnessWellness
   );
   const isDescriptionFieldValid = Boolean(
-    !errors.description && !!formData.description
+    !!formData.description && !errors.description
   );
-  const isDurationFieldValid = Boolean(!errors.duration && !!formData.duration);
-  const isTrainingFieldValid = Boolean(!errors.training && !!formData.training);
-
-  // const initialValues = {
-  //   name: '',
-  //   description: '',
-  //   training: '',
-  //   location: '',
-  //   comments: '',
-  //   sell: '',
-  //   food: '',
-  //   special: '',
-  //   avatar: null,
-  //   duration: 0,
-  // };
+  const isDurationFieldValid = Boolean(!!formData.duration && !errors.duration);
+  const isTrainingFieldValid = Boolean(!!personName && !errors.personName);
 
   useEffect(() => {
     if (formData.category === 'fitnes for women') {
@@ -130,7 +117,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
 
   const names = ['Персональні тренування', 'Групові тренування'];
 
-  const handleChange = event => {
+  const onInputChange = event => {
     const {
       target: { value },
     } = event;
@@ -138,300 +125,221 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
     );
-    console.log(value);
+    // console.log('handleChange', value);
   };
 
-  const handleChangeName = event => {
-    setName(event.target.value);
-  };
-
-  const handleInputChange = e => {
-    const { name, value } = e.target;
+  const handleInputChange = event => {
+    const { name, value } = event.target;
 
     setErrors(prevState => ({ ...prevState, [name]: '' }));
-
-    // const inputValue = name === value;
 
     setFormData(prevState => ({
       ...prevState,
       [name]: value,
     }));
+
     console.log(value);
   };
 
   return (
     <ProgramFormWrapper>
-      {/* <Box
-        component="form"
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          minWidth: 494,
-        }}
-      >
-        <FormControl fullWidth>
-          <InputLabel id="name-label">Назва програми</InputLabel>
-          <Select
-            labelId="name-label"
-            id="name-select"
-            placeholder="Фітнес для жінок"
-            type="text"
-            name="name"
-            onChange={handleInputChange}
-            value={formData.name}
-            category={formData.category}
-            // onBlur={() => validateField('name', formData, setErrors)}
-            // className={errors.name ? 'invalid' : ''}
-          >
-            <MenuItem value={1}>Аеробні програми</MenuItem>
-            <MenuItem value={2}>Силові програми</MenuItem>
-            <MenuItem value={3}>Оздоровчі програми</MenuItem>
-            <MenuItem value={4}>Функціональний фітнес</MenuItem>
-          </Select>
-          {!!errors.name && <ErrorMessage message={errors.name} />}
-        </FormControl>
-              </Box> */}
-      {/* <FormControl fullWidth>
-            <InputLabel id="name-label-weight loss program">
-              Назва програми
-            </InputLabel>
-            <Select
-              labelId="name-label-weight loss program"
-              id="name-select-weight loss program"
-              placeholder="Програма схуднення"
-              type="text"
-              name="nameWeightloss"
-              onChange={handleInputChange}
-              value={formData.nameWeightloss}
-            >
-              <MenuItem value={1}>Аеробіка</MenuItem>
-              <MenuItem value={2}>Аеробний фітнес</MenuItem>
-            </Select>
-            {!!errors.name && <ErrorMessage message={errors.name} />}
-          </FormControl> */}
-
-      {/* <FormControl fullWidth>
-                <InputLabel id="name-label-strength fitness">
-                  Назва програми
-                </InputLabel>
-                <Select
-                  labelId="name-label-strength fitness"
-                  id="name-select-strength fitness"
-                  placeholder="Силовий фітнес"
-                  type="text"
-                  name="name2"
-                  onChange={handleInputChange}
-                  value={formData.name2}
-                  // onBlur={() => validateField('name', formData, setErrors)}
-                  // className={errors.name ? 'invalid' : ''}
-                >
-                  <MenuItem value={1}>Body Up</MenuItem>
-                  <MenuItem value={2}>Body Low</MenuItem>
-                  <MenuItem value={3}>Body Pump</MenuItem>
-                  <MenuItem value={4}>Body Sculpt</MenuItem>
-                  <MenuItem value={5}>ABS</MenuItem>
-                </Select>
-                {!!errors.name && <ErrorMessage message={errors.name} />}
-              </FormControl>  */}
-      <Formik
-      // initialValues={initialValues}
-      // validationSchema={validateField}
-      // onSubmit={handleSubmit}
-      >
-        {props => (
-          <Form>
+      <Formik>
+        {({ touched }) => (
+          <Form sx={{ minWidth: 594 }}>
             <Box
               sx={{
                 display: 'flex',
                 alignItems: 'center',
                 flexDirection: 'column',
-                minWidth: 594,
               }}
             >
               {formData.category === 'fitnes for women' && (
-                <FormControl fullWidth htmlFor="name">
-                  <InputLabel id="name-label">Назва програми</InputLabel>
+                <FormControl
+                  fullWidth
+                  htmlFor="name"
+                  sx={{ minWidth: 594, display: 'flex' }}
+                  variant="outlined"
+                >
+                  <InputLabel
+                    id="name-label"
+                    sx={{
+                      fontSize: 16,
+                      textAline: 'center',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    Назва програми
+                  </InputLabel>
                   <Field
                     as={Select}
                     labelId="name-label"
                     id="name-select"
-                    placeholder="Фітнес для жінок"
-                    type="text"
                     name="name"
+                    type="text"
                     onChange={handleInputChange}
+                    sx={{ borderRadius: 40 }}
                     value={formData.name}
-                    category={formData.category}
-                    onBlur={() =>
-                      validateField('name', formData.name, setErrors)
-                    }
-                    // helperText={<ErrorMessage message={errors.name} />}
+                    // onBlur={() => validateField('name', formData, setErrors)}
                   >
+                    {!!formData.name && !errors.name && !touched.name ? (
+                      <ErrorMessage message={errors.name} />
+                    ) : null}
                     <MenuItem value={1}>Аеробні програми</MenuItem>
                     <MenuItem value={2}>Силові програми</MenuItem>
                     <MenuItem value={3}>Оздоровчі програми</MenuItem>
                     <MenuItem value={4}>Функціональний фітнес</MenuItem>
                   </Field>
-                  {!formData.name ? <ErrorMessage message={errors.name} /> : ''}
                 </FormControl>
               )}
+
               {formData.category === 'weigth' && (
-                <FormControl fullWidth htmlFor="fitnessWeigth">
-                  <InputLabel id="fitnessWeigth-label">
-                    Назва програми
-                  </InputLabel>
-                  <Field
-                    as={Select}
-                    labelId="fitnessWeigth-label"
-                    id="fitnessWeigth-select"
-                    placeholder="Програма схуднення"
-                    type="text"
-                    name="fitnessWeigth"
-                    onChange={handleInputChange}
-                    value={formData.fitnessWeigth}
-                    onBlur={() =>
-                      validateField(
-                        'fitnessWeigth',
-                        formData.fitnessWeigth,
-                        setErrors
-                      )
-                    }
-                  >
-                    <MenuItem value={1}>Аеробіка</MenuItem>
-                    <MenuItem value={2}>Аеробний фітнес</MenuItem>
-                  </Field>
-                  {!formData.fitnessWeigth ? (
-                    <ErrorMessage message={errors.fitnessWeigth} />
-                  ) : (
-                    ''
-                  )}
-                </FormControl>
+                <Box sx={{ minWidth: 594 }}>
+                  <FormControl fullWidth htmlFor="fitnessWeigth">
+                    <InputLabel id="fitnessWeigth-label" sx={{ fontSize: 16 }}>
+                      Назва програми
+                    </InputLabel>
+                    <Field
+                      as={Select}
+                      labelId="fitnessWeigth-label"
+                      id="fitnessWeigth-select"
+                      placeholder="Програма схуднення"
+                      type="text"
+                      name="fitnessWeigth"
+                      onChange={handleInputChange}
+                      value={formData.fitnessWeigth}
+                      sx={{ borderRadius: 40 }}
+                      // onBlur={() =>
+                      //   validateField(
+                      //     'fitnessWeigth',
+                      //     formData.fitnessWeigth,
+                      //     setErrors
+                      //   )
+                      // }
+                    >
+                      {!!formData.fitnessWeigth &&
+                      !errors.fitnessWeigth &&
+                      !touched.fitnessWeigth ? (
+                        <ErrorMessage message={errors.fitnessWeigth} />
+                      ) : null}
+                      <MenuItem value={1}>Аеробіка</MenuItem>
+                      <MenuItem value={2}>Аеробний фітнес</MenuItem>
+                    </Field>
+                  </FormControl>
+                </Box>
               )}
               {formData.category === 'strength fitness' && (
-                <FormControl fullWidth htmlFor="fitnessStrength">
-                  <InputLabel id="fitnessStrength-label">
-                    Назва програми
-                  </InputLabel>
-                  <Field
-                    as={Select}
-                    labelId="fitnessStrength-label"
-                    id="fitnessStrength-select"
-                    placeholder="Силовий фітнес"
-                    type="text"
-                    name="fitnessStrength"
-                    onChange={handleInputChange}
-                    value={formData.fitnessStrength}
-                    onBlur={() =>
-                      validateField(
-                        'fitnessStrength',
-                        formData.fitnessStrength,
-                        setErrors
-                      )
-                    }
-                  >
-                    <MenuItem value={1}>Body Up</MenuItem>
-                    <MenuItem value={2}>Body Low</MenuItem>
-                    <MenuItem value={3}>Body Pump</MenuItem>
-                    <MenuItem value={4}>Body Sculpt</MenuItem>
-                    <MenuItem value={5}>ABS</MenuItem>
-                  </Field>
-                  {!formData.fitnessStrength ? (
-                    <ErrorMessage message={errors.fitnessStrength} />
-                  ) : (
-                    ''
-                  )}
-                </FormControl>
+                <Box sx={{ minWidth: 594 }}>
+                  <FormControl fullWidth htmlFor="fitnessStrength">
+                    <InputLabel
+                      id="fitnessStrength-label"
+                      sx={{ fontSize: 16 }}
+                    >
+                      Назва програми
+                    </InputLabel>
+                    <Field
+                      as={Select}
+                      labelId="fitnessStrength-label"
+                      id="fitnessStrength-select"
+                      placeholder="Силовий фітнес"
+                      type="text"
+                      name="fitnessStrength"
+                      onChange={handleInputChange}
+                      value={formData.fitnessStrength}
+                      sx={{ borderRadius: 40 }}
+                      // onBlur={() =>
+                      //   validateField(
+                      //     'fitnessStrength',
+                      //     formData.fitnessStrength,
+                      //     setErrors
+                      //   )
+                      // }
+                    >
+                      {!!formData.fitnessStrength &&
+                      !errors.fitnessStrength &&
+                      !touched.fitnessStrength ? (
+                        <ErrorMessage message={errors.fitnessStrength} />
+                      ) : null}
+                      <MenuItem value={1}>Body Up</MenuItem>
+                      <MenuItem value={2}>Body Low</MenuItem>
+                      <MenuItem value={3}>Body Pump</MenuItem>
+                      <MenuItem value={4}>Body Sculpt</MenuItem>
+                      <MenuItem value={5}>ABS</MenuItem>
+                    </Field>
+                  </FormControl>
+                </Box>
               )}
               {formData.category === 'flexibility and wellness' && (
-                <FormControl fullWidth htmlFor="fitnessWellness">
-                  <InputLabel id="fitnessWellness-label">
-                    Назва програми
-                  </InputLabel>
-                  <Field
-                    as={Select}
-                    labelId="fitnessWellness-label"
-                    id="fitnessWellness-select"
-                    placeholder="Силовий фітнес"
-                    type="text"
-                    name="fitnessWellness"
-                    onChange={handleInputChange}
-                    value={formData.fitnessWellness}
-                    onBlur={() =>
-                      validateField(
-                        'fitnessWellness',
-                        formData.fitnessWellness,
-                        setErrors
-                      )
-                    }
-                  >
-                    <MenuItem value={1}>Yoga</MenuItem>
-                    <MenuItem value={2}>Pilates</MenuItem>
-                    <MenuItem value={3}>Stretching</MenuItem>
-                  </Field>
-                  {!formData.fitnessWellness ? (
-                    <ErrorMessage message={errors.fitnessWellness} />
-                  ) : (
-                    ''
-                  )}
-                </FormControl>
+                <Box sx={{ minWidth: 594 }}>
+                  <FormControl fullWidth htmlFor="fitnessWellness">
+                    <InputLabel
+                      id="fitnessWellness-label"
+                      sx={{ fontSize: 16 }}
+                    >
+                      Назва програми
+                    </InputLabel>
+                    <Field
+                      as={Select}
+                      labelId="fitnessWellness-label"
+                      id="fitnessWellness-select"
+                      placeholder="Силовий фітнес"
+                      type="text"
+                      name="fitnessWellness"
+                      onChange={handleInputChange}
+                      value={formData.fitnessWellness}
+                      sx={{ borderRadius: 40 }}
+                      // onBlur={() =>
+                      //   validateField(
+                      //     'fitnessWellness',
+                      //     formData.fitnessWellness,
+                      //     setErrors
+                      //   )
+                      // }
+                    >
+                      {!!formData.fitnessWellness &&
+                      !errors.fitnessWellness &&
+                      !touched.fitnessWellness ? (
+                        <ErrorMessage message={errors.fitnessWellness} />
+                      ) : null}
+                      <MenuItem value={1}>Yoga</MenuItem>
+                      <MenuItem value={2}>Pilates</MenuItem>
+                      <MenuItem value={3}>Stretching</MenuItem>
+                    </Field>
+                  </FormControl>
+                </Box>
               )}
-              {/* <AddFormLabelWrapper>
-              <AddFormLabel htmlFor="title">
-                Назва програми
-                <AddFormInput
-                  placeholder="Fitness for women"
-                  type="text"
-                  name="title"
-                  onChange={handleInputChange}
-                  value={formData.title}
-                  onBlur={() => validateField('title', formData, setErrors)}
-                  className={errors.title ? 'invalid' : ''}
-                />
-              </AddFormLabel>
-              {!!errors.title && <ErrorMessage message={errors.title} />}
-            </AddFormLabelWrapper> */}
-              <Field
-                as={TextField}
-                htmlFor="description"
-                id="outlined-basic"
-                label="Опис"
-                variant="outlined"
-                type="text"
-                name="description"
-                onChange={handleInputChange}
-                value={formData.description}
-                sx={{
-                  marginTop: 4,
-                  minWidth: 494,
-                }}
-                onBlur={() => validateField('description', formData, setErrors)}
-                helperText={<ErrorMessage message={errors.description} />}
-              />
-
-              {/* <AddFormLabelWrapper>
-              <AddFormLabel htmlFor="description">
-                Опис
-                <AddFormInput
+              <Box
+                component="form"
+                sx={{ '& > :not(style)': { marginTop: 4, width: 594 } }}
+              >
+                <Field
+                  as={TextField}
+                  htmlFor="description"
+                  id="outlined-basic"
+                  label="Опис"
+                  variant="outlined"
                   type="text"
                   name="description"
                   onChange={handleInputChange}
                   value={formData.description}
+                  InputProps={{ sx: { borderRadius: 40, minWidth: 594 } }}
                   onBlur={() =>
                     validateField('description', formData, setErrors)
                   }
-                  className={errors.description ? 'invalid' : ''}
                 />
-              </AddFormLabel>
-              {!!errors.description && (
-                <ErrorMessage message={errors.description} />
-              )}
-            </AddFormLabelWrapper> */}
+                {!!formData.description &&
+                !errors.description &&
+                !touched.description ? (
+                  <ErrorMessage message={errors.description} />
+                ) : null}
+              </Box>
               <FormControl>
                 <FormLabel
                   id="duration-label"
                   sx={{
                     marginTop: 4,
-                    minWidth: 494,
+                    minWidth: 594,
                   }}
                 >
                   Тривалість
@@ -439,17 +347,19 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 <Field
                   as={RadioGroup}
                   htmlFor="duration"
-                  aria-labelledby="duration-label"
+                  aria-label="duration-label"
                   type="text"
                   name="duration"
                   onChange={handleInputChange}
                   value={formData.duration}
-                  helperText={
-                    !!errors.duration && (
-                      <ErrorMessage message={errors.duration} />
-                    )
-                  }
+                  helperText={'Заповніть це поле'}
+                  onBlur={() => validateField('duration', formData, setErrors)}
                 >
+                  {!!formData.duration &&
+                  !errors.duration &&
+                  !touched.duration ? (
+                    <ErrorMessage message={errors.duration} />
+                  ) : null}
                   <FormControlLabel
                     value="one week"
                     control={<Radio />}
@@ -476,29 +386,25 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                     label="більше 15 тижнів"
                   />
                 </Field>
-                {/* {!!errors.duration && <ErrorMessage message={errors.duration} />} */}
               </FormControl>
-              {/* <AddFormLabelWrapper>
-              <AddFormLabel htmlFor="duration">
-                Тривалість
-                <AddFormInput
-                  type="text"
-                  name="duration"
-                  onChange={handleInputChange}
-                  value={formData.duration}
-                  onBlur={() => validateField('duration', formData, setErrors)}
-                  className={errors.duration ? 'invalid' : ''}
-                />
-              </AddFormLabel>
-              {!!errors.duration && <ErrorMessage message={errors.duration} />}
-            </AddFormLabelWrapper> */}
               <FormControl
                 sx={{
                   marginTop: 4,
-                  minWidth: 494,
+                  minWidth: 594,
                 }}
               >
-                <InputLabel id="training-label">Тренування</InputLabel>
+                <InputLabel
+                  id="training-label"
+                  sx={{
+                    fontSize: 16,
+                    textAline: 'center',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  Тренування
+                </InputLabel>
                 <Field
                   as={Select}
                   htmlFor="training"
@@ -507,14 +413,13 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                   multiple
                   name="training"
                   value={personName}
-                  onChange={handleChange}
+                  onChange={onInputChange}
                   input={<OutlinedInput label="Тренування" />}
                   renderValue={selected => selected.join(', ')}
                   MenuProps={MenuProps}
-                  helperText={
-                    !!errors.training && (
-                      <ErrorMessage message={errors.training} />
-                    )
+                  sx={{ borderRadius: 40 }}
+                  onBlur={() =>
+                    validateField('training', personName, setErrors)
                   }
                 >
                   {names.map(name => (
@@ -523,24 +428,11 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                       <ListItemText primary={name} />
                     </MenuItem>
                   ))}
+                  {!!personName && !errors.personName && !touched.personName ? (
+                    <ErrorMessage message={errors.personName} />
+                  ) : null}
                 </Field>
-                {/* {!!errors.training && <ErrorMessage message={errors.training} />} */}
               </FormControl>
-
-              {/* <AddFormLabelWrapper>
-              <AddFormLabel htmlFor="training">
-                Тренування
-                <AddFormInput
-                  type="text"
-                  name="training"
-                  onChange={handleInputChange}
-                  value={formData.training}
-                  onBlur={() => validateField('training', formData, setErrors)}
-                  className={errors.training ? 'invalid' : ''}
-                />
-              </AddFormLabel>
-              {!!errors.training && <ErrorMessage message={errors.training} />}
-            </AddFormLabelWrapper> */}
               <AddFormButtonWrapper>
                 <AddFormButtonNext
                   type="button"

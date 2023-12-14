@@ -78,7 +78,7 @@ const ChooseCategory = ({ formData, setFormData, nextStep, cancel }) => {
         <AddFormButtonNext
           isDisabled={isDisabled}
           type="button"
-          text="Next"
+          text="Далі"
           icon={
             <MdOutlineFitnessCenter
               style={{ fill: '#ffff00', width: '20px', height: '20px' }}

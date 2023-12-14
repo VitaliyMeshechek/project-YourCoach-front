@@ -2,11 +2,10 @@ import * as Yup from 'yup';
 
 export const ValidateProgramSchema = Yup.object().shape({
   title: Yup.string()
-    .required('Title is required')
     .min(2, 'Title must be at least 2 characters')
-    .max(16, 'Title must not exceed 16 characters'),
+    .max(16, 'Title must not exceed 16 characters')
+    .required('Title is required'),
   category: Yup.string()
-    .required('Field category is required')
     .oneOf(
       [
         'Фітнес для жінок',
@@ -15,9 +14,9 @@ export const ValidateProgramSchema = Yup.object().shape({
         'flexibility and wellnes',
       ],
       'Invalid category'
-    ),
+    )
+    .required('Field category is required'),
   name: Yup.string()
-    .required('Field name is required')
     .oneOf(
       [
         'Аеробні програми',
@@ -26,32 +25,52 @@ export const ValidateProgramSchema = Yup.object().shape({
         'Функціональний фітнес',
       ],
       'Invalid name'
-    ),
+    )
+    .required('Field name is required'),
   fitnessWeigth: Yup.string()
-    .required('Field name is required')
-    .oneOf(['Аеробіка', 'Аеробний фітнес'], 'Invalid name'),
+    .oneOf(['Аеробіка', 'Аеробний фітнес'], 
+    'Поле не може бути пустим'
+    )
+    .required('Field name is required'),
   fitnessStrength: Yup.string()
-    .required('Field name is required')
     .oneOf(
       ['Body Up', 'Body Low', 'Body Pump', 'Body Sculpt', 'ABS'],
-      'Invalid name'
-    ),
+      'Поле не може бути пустим'
+    )
+    .required('Field name is required'),
   fitnessWellness: Yup.string()
-    .required('Field name is required')
-    .oneOf(['Yoga', 'Pilates', 'Stretching'], 'Invalid name'),
+    .oneOf(['Yoga', 'Pilates', 'Stretching'], 'Поле не може бути пустим')
+    .required('Field name is required'),
   description: Yup.string()
-    .required('Field description is required')
-    .min(10, 'Title must be at least 10 characters')
-    .max(500, 'Title must not exceed 500 characters'),
+    .min(10, 'Description must be at least 10 characters')
+    .max(500, 'Description must not exceed 500 characters')
+    .test(value => {
+      if (!value) {
+        return true;
+      }
+      return value.length >= 10 && value.length <= 500;
+    })
+    .required('Поле необхідно заповнити'),
+      duration: Yup.string().oneOf(
+    [
+      '1-4 тижнів',
+      '5-8 тижнів',
+      '9-12 тижнів',
+      '12-15 тижнів',
+      'більше 15 тижнів',
+    ],
+    'Поле не може бути пустим'
+  )
+  .required('Field duration is required'),
   training: Yup.string()
-    .required('Field training is required')
     .oneOf(
       ['Персональні тренування', 'Групові тренування'],
-      'Invalid training'
-    ),
+      'Поле не може бути пустим'
+    )
+    .required('Field training is required'),
   location: Yup.string()
-    .required('Location is required')
-    .matches(/^[A-Za-z\s]+$/i, 'Invalid location format'),
+    .matches(/^[A-Za-z\s]+$/i, 'Невірний формат')
+    .required('Location is required'),
   comments: Yup.string().test(
     'comments',
     'Comments must be between 10 and 120 characters',
@@ -63,35 +82,25 @@ export const ValidateProgramSchema = Yup.object().shape({
     }
   ),
   food: Yup.string()
-    .required('Field food is required')
     .oneOf(
       ['Продукти тваринного походження', 'Продукти рослиного походження'],
-      'Invalid food'
-    ),
+      'Поле не може бути пустим'
+    )
+    .required('Field food is required'),
   special: Yup.string()
-    .required('Field special is required')
     .oneOf(
       [
         'Підбір раціонального харчування',
         'Консультації або поради дієтолога',
         'Можливість тренування старших груп',
       ],
-      'Invalid special'
-    ),
+      'Поле не може бути пустим'
+    )
+    .required('Field special is required'),
   avatar: Yup.mixed().test(
     'fileSize',
     'File size must not exceed 3MB',
     value => value && value.size <= 3 * 1024 * 1024
-  ),
-  duration: Yup.string().oneOf(
-    [
-      '1-4 тижнів',
-      '5-8 тижнів',
-      '9-12 тижнів',
-      '12-15 тижнів',
-      'більше 15 тижнів',
-    ],
-    'Invalid special'
   ),
 });
 

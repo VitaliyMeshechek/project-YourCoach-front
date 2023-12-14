@@ -36,11 +36,12 @@ const AddProgramForm = () => {
     training: '',
     location: '',
     comments: '',
-    sell: '',
+    weigth: '',
     food: '',
     special: '',
     avatar: null,
     duration: 0,
+    price: 0,
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [step, setStep] = useState(0);
@@ -98,8 +99,6 @@ const AddProgramForm = () => {
     const newFormData = new FormData();
     newFormData.append('category', formData.category);
     newFormData.append('name', formData.name);
-
-    // newFormData.append('name2', formData.name2);
     newFormData.append('description', formData.description);
     newFormData.append('training', formData.training);
     newFormData.append('duration', formData.duration);
@@ -115,6 +114,9 @@ const AddProgramForm = () => {
       newFormData.append('comments', formData.comments);
     }
 
+        newFormData.append('category', formData.category);
+        newFormData.append('fitnessWellness', formData.fitnessWellness);
+
     if (formData.category === 'flexibility and wellness') {
       dispatch(
         addNotice({ category: 'flexibility and wellness', newFormData })
@@ -122,18 +124,18 @@ const AddProgramForm = () => {
       toggleModal();
     }
 
-    newFormData.append('nameWeightloss', formData.nameWeightloss);
     newFormData.append('category', formData.category);
-    newFormData.append('special', formData.special);
-
-    newFormData.append('category', formData.category);
-    newFormData.append('food', formData.food);
+    newFormData.append('fitnessStrength', formData.fitnessStrength);
 
     if (formData.category === 'strength fitness') {
       dispatch(addNotice({ category: 'strength fitness', newFormData }));
       toggleModal();
       return;
     }
+
+    newFormData.append('category', formData.category);
+    newFormData.append('fitnessWeigth', formData.fitnessWeigth);
+    newFormData.append('special', formData.special);
 
     if (formData.category === 'weigth') {
       dispatch(addNotice({ category: formData.category, newFormData }));
@@ -176,14 +178,14 @@ const AddProgramForm = () => {
                 backStep={handlePrevClick}
               />
             )}
-            {/* {step === 2 && (
+            {step === 2 && (
               <AdditionalInfo
                 formData={formData}
                 setFormData={setFormData}
                 backStep={handlePrevClick}
                 submit={handleSubmit}
               />
-            )} */}
+            )}
           </AddForm>
         )}
       </Formik>
