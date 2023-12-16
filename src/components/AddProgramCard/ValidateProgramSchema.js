@@ -27,6 +27,9 @@ export const ValidateProgramSchema = Yup.object().shape({
       'Invalid name'
     )
     .required('Field name is required'),
+  aerobic: Yup.string()
+    .oneOf(['Step Aerobics', 'Fitball Aerobics', 'Інше'], 'aerobic')
+    .required('Field aerobic is required'),
   fitnessWeigth: Yup.string()
     .oneOf(['Аеробіка', 'Аеробний фітнес'], 'Поле не може бути пустим')
     .required('Field name is required'),

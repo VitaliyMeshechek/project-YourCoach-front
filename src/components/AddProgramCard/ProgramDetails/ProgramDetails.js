@@ -35,6 +35,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
   const [errors, setErrors] = useState({});
 
   const isNameFieldValid = Boolean(!!formData.name && !errors.name);
+  const isAerobicFieldValid = Boolean(!!formData.aerobic && !errors.aerobic);
+  const isStrongFieldValid = Boolean(!!formData.strong && !errors.strong);
   const isFitnessWeigthFieldValid = Boolean(
     !!formData.fitnessWeigth && !errors.fitnessWeigth
   );
@@ -55,6 +57,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
       setIsDisabled(
         !(
           isNameFieldValid &&
+          isAerobicFieldValid &&
+          isStrongFieldValid &&
           isDescriptionFieldValid &&
           isDurationFieldValid &&
           isTrainingFieldValid
@@ -94,9 +98,12 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
   }, [
     errors,
     formData.category,
+    formData.aerobic,
     isDescriptionFieldValid,
     isDurationFieldValid,
     isNameFieldValid,
+    isAerobicFieldValid,
+    isStrongFieldValid,
     isTrainingFieldValid,
     isFitnessWeigthFieldValid,
     isFitnessStrengthFieldValid,
@@ -137,6 +144,110 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
     }));
 
     console.log(value);
+  };
+
+  const TypeProgramAerobic = () => {
+    const aerobicsProgram = {
+      typeCategory: 'аеробні програми',
+    };
+    if (aerobicsProgram.typeCategory) {
+      return <Aerobic />;
+    }
+    return;
+  };
+
+  const TypeProgramStrong = () => {
+    const strongsProgram = {
+      typeCategory: 'силові програми',
+    };
+    if (strongsProgram.typeCategory) {
+      return <Strong />;
+    }
+    return;
+  };
+
+  const Aerobic = () => {
+    return (
+      <FormControl>
+        <FormLabel
+          id="aerobic-label"
+          sx={{
+            marginTop: 4,
+            minWidth: 594,
+          }}
+        >
+          Тип програми
+        </FormLabel>
+        <Field
+          as={RadioGroup}
+          htmlFor="aerobic"
+          aria-label="aerobic-label"
+          type="text"
+          name="aerobic"
+          onChange={handleInputChange}
+          value={formData.aerobic}
+        >
+          <FormControlLabel
+            value="step aerobics"
+            control={<Radio />}
+            label="Step Aerobics"
+          />
+          <FormControlLabel
+            value="fitball aerobics"
+            control={<Radio />}
+            label="Fitball Aerobics"
+          />
+          <FormControlLabel value="another" control={<Radio />} label="Інше" />
+          {!!formData.aerobic && !errors.aerobic ? (
+            <ErrorMessage message={errors.aerobic} />
+          ) : null}
+        </Field>
+      </FormControl>
+    );
+  };
+
+  const Strong = () => {
+    return (
+      <FormControl>
+        <FormLabel
+          id="strong-label"
+          sx={{
+            marginTop: 4,
+            minWidth: 594,
+          }}
+        >
+          Тип програми
+        </FormLabel>
+        <Field
+          as={RadioGroup}
+          htmlFor="strong"
+          aria-label="strong-label"
+          type="text"
+          name="strong"
+          onChange={handleInputChange}
+          value={formData.strong}
+        >
+          <FormControlLabel
+            value="body up"
+            control={<Radio />}
+            label="Body Up"
+          />
+          <FormControlLabel
+            value="body pump"
+            control={<Radio />}
+            label="Body Pump"
+          />
+          <FormControlLabel
+            value="abs"
+            control={<Radio />}
+            label="Тренування ABS"
+          />
+          {!!formData.strong && !errors.strong ? (
+            <ErrorMessage message={errors.strong} />
+          ) : null}
+        </Field>
+      </FormControl>
+    );
   };
 
   return (
@@ -191,6 +302,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                   </Field>
                 </FormControl>
               )}
+              {formData.name === 'аеробні програми' && <TypeProgramAerobic />}
+              {formData.name !== 'силові програми' && <TypeProgramStrong />}
 
               {formData.category === 'weigth' && (
                 <Box sx={{ minWidth: 594 }}>
@@ -307,6 +420,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                   </FormControl>
                 </Box>
               )}
+
               <Box
                 component="form"
                 sx={{ '& > :not(style)': { marginTop: 4, width: 594 } }}

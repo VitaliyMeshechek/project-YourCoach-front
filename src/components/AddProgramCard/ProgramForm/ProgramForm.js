@@ -28,7 +28,7 @@ import ProgramDetails from '../ProgramDetails/ProgramDetails';
 const AddProgramForm = () => {
   const [formData, setFormData] = useState({
     category: '',
-    name: '',
+    name: 'аеробні програми',
     fitnessWeigth: '',
     fitnessStrength: '',
     fitnessWellness: '',
@@ -37,6 +37,8 @@ const AddProgramForm = () => {
     location: '',
     comments: '',
     weigth: '',
+    aerobic: '',
+    strong: '',
     food: '',
     special: '',
     avatar: null,
@@ -62,6 +64,7 @@ const AddProgramForm = () => {
         'Додавання програми гнучкості та оздоровлення',
       '': 'Додавання програми',
     };
+
     return titles[formData.category] || 'Додавання програми';
   }, [formData.category, step]);
 
@@ -99,6 +102,7 @@ const AddProgramForm = () => {
     const newFormData = new FormData();
     newFormData.append('category', formData.category);
     newFormData.append('name', formData.name);
+    newFormData.append('aerobic', formData.aerobic);
     newFormData.append('description', formData.description);
     newFormData.append('training', formData.training);
     newFormData.append('duration', formData.duration);
@@ -114,8 +118,8 @@ const AddProgramForm = () => {
       newFormData.append('comments', formData.comments);
     }
 
-        newFormData.append('category', formData.category);
-        newFormData.append('fitnessWellness', formData.fitnessWellness);
+    newFormData.append('category', formData.category);
+    newFormData.append('fitnessWellness', formData.fitnessWellness);
 
     if (formData.category === 'flexibility and wellness') {
       dispatch(
