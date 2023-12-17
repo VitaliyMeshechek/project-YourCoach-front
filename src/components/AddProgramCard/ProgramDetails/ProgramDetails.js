@@ -37,6 +37,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
   const isNameFieldValid = Boolean(!!formData.name && !errors.name);
   const isAerobicFieldValid = Boolean(!!formData.aerobic && !errors.aerobic);
   const isStrongFieldValid = Boolean(!!formData.strong && !errors.strong);
+  const isHealthFieldValid = Boolean(!!formData.health && !errors.health);
+  const isFunctionFieldValid = Boolean(!!formData.function && !errors.function);
   const isFitnessWeigthFieldValid = Boolean(
     !!formData.fitnessWeigth && !errors.fitnessWeigth
   );
@@ -59,6 +61,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
           isNameFieldValid &&
           isAerobicFieldValid &&
           isStrongFieldValid &&
+          isHealthFieldValid &&
+          isFunctionFieldValid &&
           isDescriptionFieldValid &&
           isDurationFieldValid &&
           isTrainingFieldValid
@@ -104,6 +108,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
     isNameFieldValid,
     isAerobicFieldValid,
     isStrongFieldValid,
+    isHealthFieldValid,
+    isFunctionFieldValid,
     isTrainingFieldValid,
     isFitnessWeigthFieldValid,
     isFitnessStrengthFieldValid,
@@ -162,6 +168,26 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
     };
     if (strongsProgram.typeCategory) {
       return <Strong />;
+    }
+    return;
+  };
+
+  const TypeProgramHealth = () => {
+    const healthProgram = {
+      typeCategory: 'оздоровчі програми',
+    };
+    if (healthProgram.typeCategory) {
+      return <Health />;
+    }
+    return;
+  };
+
+  const TypeFunctionFitness = () => {
+    const functionFitness = {
+      typeCategory: 'функціональний фітнес',
+    };
+    if (functionFitness.typeCategory) {
+      return <Function />;
     }
     return;
   };
@@ -250,6 +276,98 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
     );
   };
 
+  const Health = () => {
+    return (
+      <FormControl>
+        <FormLabel
+          id="health-label"
+          sx={{
+            marginTop: 4,
+            minWidth: 594,
+          }}
+        >
+          Тип програми
+        </FormLabel>
+        <Field
+          as={RadioGroup}
+          htmlFor="health"
+          aria-label="health-label"
+          type="text"
+          name="health"
+          onChange={handleInputChange}
+          value={formData.health}
+        >
+          <FormControlLabel value="йога" control={<Radio />} label="Йога" />
+          <FormControlLabel
+            value="пілатес"
+            control={<Radio />}
+            label="Пілатес"
+          />
+          <FormControlLabel value="ци-гун" control={<Radio />} label="Ци-гун" />
+          <FormControlLabel
+            value="стретчінг"
+            control={<Radio />}
+            label="Стретчінг"
+          />
+          <FormControlLabel
+            value="калланетіка"
+            control={<Radio />}
+            label="Калланетіка"
+          />
+          {!!formData.health && !errors.health ? (
+            <ErrorMessage message={errors.health} />
+          ) : null}
+        </Field>
+      </FormControl>
+    );
+  };
+
+  const Function = () => {
+    return (
+      <FormControl>
+        <FormLabel
+          id="function-label"
+          sx={{
+            marginTop: 4,
+            minWidth: 594,
+          }}
+        >
+          Тип програми
+        </FormLabel>
+        <Field
+          as={RadioGroup}
+          htmlFor="function"
+          aria-label="function-label"
+          type="text"
+          name="function"
+          onChange={handleInputChange}
+          value={formData.function}
+        >
+          <FormControlLabel value="zumba" control={<Radio />} label="Zumba" />
+          <FormControlLabel
+            value="dance fitness"
+            control={<Radio />}
+            label="Dance Fitness"
+          />
+          <FormControlLabel
+            value="belly dance"
+            control={<Radio />}
+            label="Belly Dance"
+          />
+          <FormControlLabel
+            value="strip dance"
+            control={<Radio />}
+            label="Strip Dance"
+          />
+          <FormControlLabel value="another" control={<Radio />} label="Інше" />
+          {!!formData.function && !errors.function ? (
+            <ErrorMessage message={errors.function} />
+          ) : null}
+        </Field>
+      </FormControl>
+    );
+  };
+
   return (
     <ProgramFormWrapper>
       <Formik initialValues={[personName]}>
@@ -302,8 +420,17 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                   </Field>
                 </FormControl>
               )}
-              {formData.name === 'аеробні програми' && <TypeProgramAerobic />}
-              {formData.name !== 'силові програми' && <TypeProgramStrong />}
+              {formData.name !== 'аеробні програми' &&
+                formData.name === 'силові програми' &&
+                formData.name === 'оздоровчі програми' &&
+                formData.name === 'функціональний фітнес' && (
+                  <TypeProgramAerobic />
+                )}
+              {formData.name === 'силові програми' && <TypeProgramStrong />}
+              {formData.name === 'оздоровчі програми' && <TypeProgramHealth />}
+              {formData.name === 'функціональний фітнес' && (
+                <TypeFunctionFitness />
+              )}
 
               {formData.category === 'weigth' && (
                 <Box sx={{ minWidth: 594 }}>
