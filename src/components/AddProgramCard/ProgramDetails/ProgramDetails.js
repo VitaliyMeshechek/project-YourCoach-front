@@ -33,6 +33,10 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [personName, setPersonName] = useState([]);
   const [errors, setErrors] = useState({});
+  const [isActiveAerobic, setIsActiveAerobic] = useState(false);
+  const [isActiveStrong, setIsActiveStrong] = useState(false);
+  const [isActiveHealth, setIsActiveHealth] = useState(false);
+  const [isActiveFunction, setIsActiveFunction] = useState(false);
 
   const isNameFieldValid = Boolean(!!formData.name && !errors.name);
   const isAerobicFieldValid = Boolean(!!formData.aerobic && !errors.aerobic);
@@ -152,221 +156,252 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
     console.log(value);
   };
 
+  const addTypeProgram = () => {};
+  const programList = [
+    { item: 'аеробні програми' },
+    { item: 'силові програми' },
+    { item: 'оздоровчі програми' },
+    { item: 'функціональний фітнес' },
+  ];
+
+  const aerobicProgram = programList.filter(
+    result => result.item === 'аеробні програми'
+  );
+
+  // const Aerobic = () => {
+  //   return (
+  //     <FormControl>
+  //       <FormLabel
+  //         id="aerobic-label"
+  //         sx={{
+  //           marginTop: 4,
+  //           minWidth: 594,
+  //         }}
+  //       >
+  //         Тип програми
+  //       </FormLabel>
+  //       <Field
+  //         as={RadioGroup}
+  //         htmlFor="aerobic"
+  //         aria-label="aerobic-label"
+  //         type="text"
+  //         name="aerobic"
+  //         onChange={handleInputChange}
+  //         value={formData.aerobic}
+  //       >
+  //         <FormControlLabel
+  //           value="step aerobics"
+  //           control={<Radio />}
+  //           label="Step Aerobics"
+  //         />
+  //         <FormControlLabel
+  //           value="fitball aerobics"
+  //           control={<Radio />}
+  //           label="Fitball Aerobics"
+  //         />
+  //         <FormControlLabel value="another" control={<Radio />} label="Інше" />
+  //         {!!formData.aerobic && !errors.aerobic ? (
+  //           <ErrorMessage message={errors.aerobic} />
+  //         ) : null}
+  //       </Field>
+  //     </FormControl>
+  //   );
+  // };
+
+  // const listItems = aerobicProgram.map(result => (
+  //   <Aerobic>key={result}</Aerobic>
+  // ));
+  // const [isProgram, setIsProgram] = useState(true);
   const TypeProgramAerobic = () => {
-    const aerobicsProgram = {
-      typeCategory: 'аеробні програми',
-    };
-    if (aerobicsProgram.typeCategory) {
-      return <Aerobic />;
-    }
-    return;
+    // setIsProgram(prevState => !prevState);
+    // const aerobicsProgram = {
+    //   typeCategory: 'аеробні програми',
+    // };
+    // const strongsProgram = {
+    //   typeCategory: 'силові програми',
+    // };
+    // const healthProgram = {
+    //   typeCategory: 'оздоровчі програми',
+    // };
+    // const functionFitness = {
+    //   typeCategory: 'функціональний фітнес',
+    // };
+    // if (strongsProgram.typeCategory) {
+    //   return <Strong />;
+    // }
+    // if (healthProgram.typeCategory) {
+    //   return <Health />;
+    // }
+    // if (functionFitness.typeCategory) {
+    //   return <Function />;
+    // }
   };
 
   const TypeProgramStrong = () => {
     const strongsProgram = {
       typeCategory: 'силові програми',
     };
-    if (strongsProgram.typeCategory) {
-      return <Strong />;
-    }
-    return;
+    // if (strongsProgram.typeCategory) {
+    //   return <Strong />;
+    // }
+    // return null;
   };
 
   const TypeProgramHealth = () => {
     const healthProgram = {
       typeCategory: 'оздоровчі програми',
     };
-    if (healthProgram.typeCategory) {
-      return <Health />;
-    }
-    return;
+    // if (healthProgram.typeCategory) {
+    //   return <Health />;
+    // }
+    // return null;
   };
 
   const TypeFunctionFitness = () => {
     const functionFitness = {
       typeCategory: 'функціональний фітнес',
     };
-    if (functionFitness.typeCategory) {
-      return <Function />;
-    }
-    return;
+    // if (functionFitness.typeCategory) {
+    //   return <Function />;
+    // }
+    // return null;
   };
 
-  const Aerobic = () => {
-    return (
-      <FormControl>
-        <FormLabel
-          id="aerobic-label"
-          sx={{
-            marginTop: 4,
-            minWidth: 594,
-          }}
-        >
-          Тип програми
-        </FormLabel>
-        <Field
-          as={RadioGroup}
-          htmlFor="aerobic"
-          aria-label="aerobic-label"
-          type="text"
-          name="aerobic"
-          onChange={handleInputChange}
-          value={formData.aerobic}
-        >
-          <FormControlLabel
-            value="step aerobics"
-            control={<Radio />}
-            label="Step Aerobics"
-          />
-          <FormControlLabel
-            value="fitball aerobics"
-            control={<Radio />}
-            label="Fitball Aerobics"
-          />
-          <FormControlLabel value="another" control={<Radio />} label="Інше" />
-          {!!formData.aerobic && !errors.aerobic ? (
-            <ErrorMessage message={errors.aerobic} />
-          ) : null}
-        </Field>
-      </FormControl>
-    );
-  };
+  // const Strong = () => {
+  //   return (
+  //     <FormControl>
+  //       <FormLabel
+  //         id="strong-label"
+  //         sx={{
+  //           marginTop: 4,
+  //           minWidth: 594,
+  //         }}
+  //       >
+  //         Тип програми
+  //       </FormLabel>
+  //       <Field
+  //         as={RadioGroup}
+  //         htmlFor="strong"
+  //         aria-label="strong-label"
+  //         type="text"
+  //         name="strong"
+  //         onChange={handleInputChange}
+  //         value={formData.strong}
+  //       >
+  //         <FormControlLabel
+  //           value="body up"
+  //           control={<Radio />}
+  //           label="Body Up"
+  //         />
+  //         <FormControlLabel
+  //           value="body pump"
+  //           control={<Radio />}
+  //           label="Body Pump"
+  //         />
+  //         <FormControlLabel
+  //           value="abs"
+  //           control={<Radio />}
+  //           label="Тренування ABS"
+  //         />
+  //         {!!formData.strong && !errors.strong ? (
+  //           <ErrorMessage message={errors.strong} />
+  //         ) : null}
+  //       </Field>
+  //     </FormControl>
+  //   );
+  // };
 
-  const Strong = () => {
-    return (
-      <FormControl>
-        <FormLabel
-          id="strong-label"
-          sx={{
-            marginTop: 4,
-            minWidth: 594,
-          }}
-        >
-          Тип програми
-        </FormLabel>
-        <Field
-          as={RadioGroup}
-          htmlFor="strong"
-          aria-label="strong-label"
-          type="text"
-          name="strong"
-          onChange={handleInputChange}
-          value={formData.strong}
-        >
-          <FormControlLabel
-            value="body up"
-            control={<Radio />}
-            label="Body Up"
-          />
-          <FormControlLabel
-            value="body pump"
-            control={<Radio />}
-            label="Body Pump"
-          />
-          <FormControlLabel
-            value="abs"
-            control={<Radio />}
-            label="Тренування ABS"
-          />
-          {!!formData.strong && !errors.strong ? (
-            <ErrorMessage message={errors.strong} />
-          ) : null}
-        </Field>
-      </FormControl>
-    );
-  };
+  // const Health = () => {
+  //   return (
+  //     <FormControl>
+  //       <FormLabel
+  //         id="health-label"
+  //         sx={{
+  //           marginTop: 4,
+  //           minWidth: 594,
+  //         }}
+  //       >
+  //         Тип програми
+  //       </FormLabel>
+  //       <Field
+  //         as={RadioGroup}
+  //         htmlFor="health"
+  //         aria-label="health-label"
+  //         type="text"
+  //         name="health"
+  //         onChange={handleInputChange}
+  //         value={formData.health}
+  //       >
+  //         <FormControlLabel value="йога" control={<Radio />} label="Йога" />
+  //         <FormControlLabel
+  //           value="пілатес"
+  //           control={<Radio />}
+  //           label="Пілатес"
+  //         />
+  //         <FormControlLabel value="ци-гун" control={<Radio />} label="Ци-гун" />
+  //         <FormControlLabel
+  //           value="стретчінг"
+  //           control={<Radio />}
+  //           label="Стретчінг"
+  //         />
+  //         <FormControlLabel
+  //           value="калланетіка"
+  //           control={<Radio />}
+  //           label="Калланетіка"
+  //         />
+  //         {!!formData.health && !errors.health ? (
+  //           <ErrorMessage message={errors.health} />
+  //         ) : null}
+  //       </Field>
+  //     </FormControl>
+  //   );
+  // };
 
-  const Health = () => {
-    return (
-      <FormControl>
-        <FormLabel
-          id="health-label"
-          sx={{
-            marginTop: 4,
-            minWidth: 594,
-          }}
-        >
-          Тип програми
-        </FormLabel>
-        <Field
-          as={RadioGroup}
-          htmlFor="health"
-          aria-label="health-label"
-          type="text"
-          name="health"
-          onChange={handleInputChange}
-          value={formData.health}
-        >
-          <FormControlLabel value="йога" control={<Radio />} label="Йога" />
-          <FormControlLabel
-            value="пілатес"
-            control={<Radio />}
-            label="Пілатес"
-          />
-          <FormControlLabel value="ци-гун" control={<Radio />} label="Ци-гун" />
-          <FormControlLabel
-            value="стретчінг"
-            control={<Radio />}
-            label="Стретчінг"
-          />
-          <FormControlLabel
-            value="калланетіка"
-            control={<Radio />}
-            label="Калланетіка"
-          />
-          {!!formData.health && !errors.health ? (
-            <ErrorMessage message={errors.health} />
-          ) : null}
-        </Field>
-      </FormControl>
-    );
-  };
-
-  const Function = () => {
-    return (
-      <FormControl>
-        <FormLabel
-          id="function-label"
-          sx={{
-            marginTop: 4,
-            minWidth: 594,
-          }}
-        >
-          Тип програми
-        </FormLabel>
-        <Field
-          as={RadioGroup}
-          htmlFor="function"
-          aria-label="function-label"
-          type="text"
-          name="function"
-          onChange={handleInputChange}
-          value={formData.function}
-        >
-          <FormControlLabel value="zumba" control={<Radio />} label="Zumba" />
-          <FormControlLabel
-            value="dance fitness"
-            control={<Radio />}
-            label="Dance Fitness"
-          />
-          <FormControlLabel
-            value="belly dance"
-            control={<Radio />}
-            label="Belly Dance"
-          />
-          <FormControlLabel
-            value="strip dance"
-            control={<Radio />}
-            label="Strip Dance"
-          />
-          <FormControlLabel value="another" control={<Radio />} label="Інше" />
-          {!!formData.function && !errors.function ? (
-            <ErrorMessage message={errors.function} />
-          ) : null}
-        </Field>
-      </FormControl>
-    );
-  };
+  // const Function = () => {
+  //   return (
+  //     <FormControl>
+  //       <FormLabel
+  //         id="function-label"
+  //         sx={{
+  //           marginTop: 4,
+  //           minWidth: 594,
+  //         }}
+  //       >
+  //         Тип програми
+  //       </FormLabel>
+  //       <Field
+  //         as={RadioGroup}
+  //         htmlFor="function"
+  //         aria-label="function-label"
+  //         type="text"
+  //         name="function"
+  //         onChange={handleInputChange}
+  //         value={formData.function}
+  //       >
+  //         <FormControlLabel value="zumba" control={<Radio />} label="Zumba" />
+  //         <FormControlLabel
+  //           value="dance fitness"
+  //           control={<Radio />}
+  //           label="Dance Fitness"
+  //         />
+  //         <FormControlLabel
+  //           value="belly dance"
+  //           control={<Radio />}
+  //           label="Belly Dance"
+  //         />
+  //         <FormControlLabel
+  //           value="strip dance"
+  //           control={<Radio />}
+  //           label="Strip Dance"
+  //         />
+  //         <FormControlLabel value="another" control={<Radio />} label="Інше" />
+  //         {!!formData.function && !errors.function ? (
+  //           <ErrorMessage message={errors.function} />
+  //         ) : null}
+  //       </Field>
+  //     </FormControl>
+  //   );
+  // };
 
   return (
     <ProgramFormWrapper>
@@ -404,7 +439,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                     labelId="name-label"
                     id="name-select"
                     name="name"
-                    type="text"
+                    // type="text"
                     onChange={handleInputChange}
                     sx={{ borderRadius: 40 }}
                     value={formData.name}
@@ -413,25 +448,250 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                     {!!formData.name && !errors.name && !touched.name ? (
                       <ErrorMessage message={errors.name} />
                     ) : null}
-                    <MenuItem value={1}>Аеробні програми</MenuItem>
-                    <MenuItem value={2}>Силові програми</MenuItem>
-                    <MenuItem value={3}>Оздоровчі програми</MenuItem>
-                    <MenuItem value={4}>Функціональний фітнес</MenuItem>
+                    <MenuItem
+                      value={'аеробні програми'}
+                      onClick={() => setIsActiveAerobic(true)}
+                    >
+                      Аеробні програми
+                    </MenuItem>
+                    <MenuItem
+                      value={'силові програми'}
+                      onClick={() => setIsActiveStrong(true)}
+                      // onClick={() => setIsActiveAerobic(false)}
+                    >
+                      Силові програми
+                    </MenuItem>
+                    <MenuItem
+                      value={'оздоровчі програми'}
+                      onClick={() => setIsActiveHealth(true)}
+                    >
+                      Оздоровчі програми
+                    </MenuItem>
+                    <MenuItem
+                      value={'функціональний фітнес'}
+                      onClick={() => setIsActiveFunction(true)}
+                    >
+                      Функціональний фітнес
+                    </MenuItem>
                   </Field>
+                  {isActiveAerobic ? (
+                    <FormControl>
+                      <FormLabel
+                        id="aerobic-label"
+                        sx={{
+                          marginTop: 4,
+                          minWidth: 594,
+                        }}
+                      >
+                        Тип програми
+                      </FormLabel>
+                      <Field
+                        as={RadioGroup}
+                        htmlFor="aerobic"
+                        aria-label="aerobic-label"
+                        type="text"
+                        name="aerobic"
+                        onChange={handleInputChange}
+                        value={formData.aerobic}
+                      >
+                        <FormControlLabel
+                          value="step aerobics"
+                          control={<Radio />}
+                          label="Step Aerobics"
+                        />
+                        <FormControlLabel
+                          value="fitball aerobics"
+                          control={<Radio />}
+                          label="Fitball Aerobics"
+                        />
+                        <FormControlLabel
+                          value="another"
+                          control={<Radio />}
+                          label="Інше"
+                        />
+                        {!!formData.aerobic && !errors.aerobic ? (
+                          <ErrorMessage message={errors.aerobic} />
+                        ) : null}
+                      </Field>
+                    </FormControl>
+                  ) : null}
+                  {isActiveStrong ? (
+                    <FormControl>
+                      <FormLabel
+                        id="strong-label"
+                        sx={{
+                          marginTop: 4,
+                          minWidth: 594,
+                        }}
+                      >
+                        Тип програми
+                      </FormLabel>
+                      <Field
+                        as={RadioGroup}
+                        htmlFor="strong"
+                        aria-label="strong-label"
+                        type="text"
+                        name="strong"
+                        onChange={handleInputChange}
+                        value={formData.strong}
+                      >
+                        <FormControlLabel
+                          value="body up"
+                          control={<Radio />}
+                          label="Body Up"
+                        />
+                        <FormControlLabel
+                          value="body pump"
+                          control={<Radio />}
+                          label="Body Pump"
+                        />
+                        <FormControlLabel
+                          value="abs"
+                          control={<Radio />}
+                          label="Тренування ABS"
+                        />
+                        {!!formData.strong && !errors.strong ? (
+                          <ErrorMessage message={errors.strong} />
+                        ) : null}
+                      </Field>
+                    </FormControl>
+                  ) : null}
+                  {isActiveHealth ? (
+                    <FormControl>
+                      <FormLabel
+                        id="health-label"
+                        sx={{
+                          marginTop: 4,
+                          minWidth: 594,
+                        }}
+                      >
+                        Тип програми
+                      </FormLabel>
+                      <Field
+                        as={RadioGroup}
+                        htmlFor="health"
+                        aria-label="health-label"
+                        type="text"
+                        name="health"
+                        onChange={handleInputChange}
+                        value={formData.health}
+                      >
+                        <FormControlLabel
+                          value="йога"
+                          control={<Radio />}
+                          label="Йога"
+                        />
+                        <FormControlLabel
+                          value="пілатес"
+                          control={<Radio />}
+                          label="Пілатес"
+                        />
+                        <FormControlLabel
+                          value="ци-гун"
+                          control={<Radio />}
+                          label="Ци-гун"
+                        />
+                        <FormControlLabel
+                          value="стретчінг"
+                          control={<Radio />}
+                          label="Стретчінг"
+                        />
+                        <FormControlLabel
+                          value="калланетіка"
+                          control={<Radio />}
+                          label="Калланетіка"
+                        />
+                        {!!formData.health && !errors.health ? (
+                          <ErrorMessage message={errors.health} />
+                        ) : null}
+                      </Field>
+                    </FormControl>
+                  ) : null}
+                  {isActiveFunction ? (
+                    <FormControl>
+                      <FormLabel
+                        id="function-label"
+                        sx={{
+                          marginTop: 4,
+                          minWidth: 594,
+                        }}
+                      >
+                        Тип програми
+                      </FormLabel>
+                      <Field
+                        as={RadioGroup}
+                        htmlFor="function"
+                        aria-label="function-label"
+                        type="text"
+                        name="function"
+                        onChange={handleInputChange}
+                        value={formData.function}
+                      >
+                        <FormControlLabel
+                          value="zumba"
+                          control={<Radio />}
+                          label="Zumba"
+                        />
+                        <FormControlLabel
+                          value="dance fitness"
+                          control={<Radio />}
+                          label="Dance Fitness"
+                        />
+                        <FormControlLabel
+                          value="belly dance"
+                          control={<Radio />}
+                          label="Belly Dance"
+                        />
+                        <FormControlLabel
+                          value="strip dance"
+                          control={<Radio />}
+                          label="Strip Dance"
+                        />
+                        <FormControlLabel
+                          value="another"
+                          control={<Radio />}
+                          label="Інше"
+                        />
+                        {!!formData.function && !errors.function ? (
+                          <ErrorMessage message={errors.function} />
+                        ) : null}
+                      </Field>
+                    </FormControl>
+                  ) : null}
                 </FormControl>
               )}
-              {formData.name !== 'аеробні програми' &&
-                formData.name === 'силові програми' &&
-                formData.name === 'оздоровчі програми' &&
-                formData.name === 'функціональний фітнес' && (
-                  <TypeProgramAerobic />
-                )}
-              {formData.name === 'силові програми' && <TypeProgramStrong />}
-              {formData.name === 'оздоровчі програми' && <TypeProgramHealth />}
-              {formData.name === 'функціональний фітнес' && (
+              {/* {names.map(name => (
+                <MenuItem key={name} value={name}>
+                  <Checkbox checked={personName.indexOf(name) > -1} />
+                  <ListItemText primary={name} />
+                </MenuItem>
+              ))} */}
+              {/* <TypeProgramAerobic
+                key={type}
+                value={onChange}
+              ></TypeProgramAerobic>
+              {formData.name !== 'силові програми' && <TypeProgramStrong />} */}
+              {/* <TypeProgramAerobic
+                isProgram={isProgram}
+                type="Силові програми"
+              />
+              <TypeProgramAerobic
+                isProgram={isProgram}
+                type="Оздоровчі програми"
+              />
+              <TypeProgramAerobic
+                isProgram={isProgram}
+                type="Функціональний фітнес"
+              /> */}
+              {/* {formData.name !== 'силові програми' ? (
+                <TypeProgramStrong isStrong={true} />
+              ) : null} */}
+              {/* {formData.name !== 'оздоровчі програми' ? (
+                <TypeProgramHealth />
+              ) : null} */}
+              {/* {formData.name !== 'функціональний фітнес' ? (
                 <TypeFunctionFitness />
-              )}
-
+              ) : null}  */}
               {formData.category === 'weigth' && (
                 <Box sx={{ minWidth: 594 }}>
                   <FormControl fullWidth htmlFor="fitnessWeigth">
@@ -547,7 +807,6 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                   </FormControl>
                 </Box>
               )}
-
               <Box
                 component="form"
                 sx={{ '& > :not(style)': { marginTop: 4, width: 594 } }}

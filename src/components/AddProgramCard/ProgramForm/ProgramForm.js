@@ -28,7 +28,12 @@ import ProgramDetails from '../ProgramDetails/ProgramDetails';
 const AddProgramForm = () => {
   const [formData, setFormData] = useState({
     category: '',
-    name: 'аеробні програми',
+    name: [
+      { item: 'Аеробні програми' },
+      { item: 'Силові програми' },
+      { item: 'Оздоровчі програми' },
+      { item: 'Функціональний фітнес' },
+    ],
     fitnessWeigth: '',
     fitnessStrength: '',
     fitnessWellness: '',
