@@ -41,6 +41,8 @@ const AddProgramForm = () => {
     strong: '',
     health: '',
     function: '',
+    step: '',
+    impact: '',
     food: '',
     special: '',
     avatar: null,

@@ -37,12 +37,16 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
   const [isActiveStrong, setIsActiveStrong] = useState(false);
   const [isActiveHealth, setIsActiveHealth] = useState(false);
   const [isActiveFunction, setIsActiveFunction] = useState(false);
+  const [isActiveStep, setIsActiveStep] = useState(false);
+  const [isActiveImpact, setIsActiveImpact] = useState(false);
 
   const isNameFieldValid = Boolean(!!formData.name && !errors.name);
   const isAerobicFieldValid = Boolean(!!formData.aerobic && !errors.aerobic);
   const isStrongFieldValid = Boolean(!!formData.strong && !errors.strong);
   const isHealthFieldValid = Boolean(!!formData.health && !errors.health);
   const isFunctionFieldValid = Boolean(!!formData.function && !errors.function);
+  const isStepFieldValid = Boolean(!!formData.step && !errors.step);
+  const isImpactFieldValid = Boolean(!!formData.impact && !errors.impact);
   const isFitnessWeigthFieldValid = Boolean(
     !!formData.fitnessWeigth && !errors.fitnessWeigth
   );
@@ -77,6 +81,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
       setIsDisabled(
         !(
           isFitnessWeigthFieldValid &&
+          isStepFieldValid &&
+          isImpactFieldValid &&
           isDescriptionFieldValid &&
           isDurationFieldValid &&
           isTrainingFieldValid
@@ -114,6 +120,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
     isStrongFieldValid,
     isHealthFieldValid,
     isFunctionFieldValid,
+    isStepFieldValid,
+    isImpactFieldValid,
     isTrainingFieldValid,
     isFitnessWeigthFieldValid,
     isFitnessStrengthFieldValid,
@@ -413,38 +421,6 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                   )}
                 </FormControl>
               )}
-              {/* {names.map(name => (
-                <MenuItem key={name} value={name}>
-                  <Checkbox checked={personName.indexOf(name) > -1} />
-                  <ListItemText primary={name} />
-                </MenuItem>
-              ))} */}
-              {/* <TypeProgramAerobic
-                key={type}
-                value={onChange}
-              ></TypeProgramAerobic>
-              {formData.name !== 'силові програми' && <TypeProgramStrong />} */}
-              {/* <TypeProgramAerobic
-                isProgram={isProgram}
-                type="Силові програми"
-              />
-              <TypeProgramAerobic
-                isProgram={isProgram}
-                type="Оздоровчі програми"
-              />
-              <TypeProgramAerobic
-                isProgram={isProgram}
-                type="Функціональний фітнес"
-              /> */}
-              {/* {formData.name !== 'силові програми' ? (
-                <TypeProgramStrong isStrong={true} />
-              ) : null} */}
-              {/* {formData.name !== 'оздоровчі програми' ? (
-                <TypeProgramHealth />
-              ) : null} */}
-              {/* {formData.name !== 'функціональний фітнес' ? (
-                <TypeFunctionFitness />
-              ) : null}  */}
               {formData.category === 'weigth' && (
                 <Box sx={{ minWidth: 594 }}>
                   <FormControl fullWidth htmlFor="fitnessWeigth">
@@ -474,9 +450,106 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                       !touched.fitnessWeigth ? (
                         <ErrorMessage message={errors.fitnessWeigth} />
                       ) : null}
-                      <MenuItem value={1}>Аеробіка</MenuItem>
-                      <MenuItem value={2}>Аеробний фітнес</MenuItem>
+                      <MenuItem
+                        value={'аеробіка'}
+                        onClick={() => setIsActiveStep(true)}
+                      >
+                        Аеробіка
+                      </MenuItem>
+                      <MenuItem
+                        value={'аеробний фітнес'}
+                        onClick={() => setIsActiveImpact(true)}
+                      >
+                        Аеробний фітнес
+                      </MenuItem>
                     </Field>
+                    {isActiveStep && !isActiveImpact ? (
+                      <FormControl>
+                        <FormLabel
+                          id="step-label"
+                          sx={{
+                            marginTop: 4,
+                            minWidth: 594,
+                          }}
+                        >
+                          Тип програми
+                        </FormLabel>
+                        <Field
+                          as={RadioGroup}
+                          htmlFor="step"
+                          aria-label="step-label"
+                          type="text"
+                          name="step"
+                          onChange={handleInputChange}
+                          value={formData.step}
+                        >
+                          <FormControlLabel
+                            value="step-intro"
+                            control={<Radio />}
+                            label="Step-Intro"
+                          />
+                          <FormControlLabel
+                            value="step-b"
+                            control={<Radio />}
+                            label="Step-B"
+                          />
+                          <FormControlLabel
+                            value="power-step"
+                            control={<Radio />}
+                            label="Power-Step"
+                          />
+                          {!!formData.step && !errors.step ? (
+                            <ErrorMessage message={errors.step} />
+                          ) : null}
+                        </Field>
+                      </FormControl>
+                    ) : null}
+                    {isActiveImpact && (
+                      <FormControl>
+                        <FormLabel
+                          id="impact-label"
+                          sx={{
+                            marginTop: 4,
+                            minWidth: 594,
+                          }}
+                        >
+                          Тип програми
+                        </FormLabel>
+                        <Field
+                          as={RadioGroup}
+                          htmlFor="impact"
+                          aria-label="impact-label"
+                          type="text"
+                          name="impact"
+                          onChange={handleInputChange}
+                          value={formData.impact}
+                        >
+                          <FormControlLabel
+                            value="low-impact aerobics"
+                            control={<Radio />}
+                            label="Low-Impact Aerobics"
+                          />
+                          <FormControlLabel
+                            value="low-a"
+                            control={<Radio />}
+                            label="Low-A"
+                          />
+                          <FormControlLabel
+                            value="middle-impact"
+                            control={<Radio />}
+                            label="Middle-Impact"
+                          />
+                          <FormControlLabel
+                            value="high-impact"
+                            control={<Radio />}
+                            label="High-Impact"
+                          />
+                          {!!formData.impact && !errors.impact ? (
+                            <ErrorMessage message={errors.impact} />
+                          ) : null}
+                        </Field>
+                      </FormControl>
+                    )}
                   </FormControl>
                 </Box>
               )}
