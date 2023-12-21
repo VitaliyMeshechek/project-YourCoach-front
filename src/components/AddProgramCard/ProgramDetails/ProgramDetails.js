@@ -32,6 +32,7 @@ import { validateField } from '../ValidateProgramSchema';
 const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [personName, setPersonName] = useState([]);
+  const [dietName, setDietName] = useState([]);
   const [errors, setErrors] = useState({});
   const [isActiveAerobic, setIsActiveAerobic] = useState(false);
   const [isActiveStrong, setIsActiveStrong] = useState(false);
@@ -61,6 +62,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
   );
   const isDurationFieldValid = Boolean(!!formData.duration && !errors.duration);
   const isTrainingFieldValid = Boolean(!!personName && !errors.personName);
+  const isDietFieldValid = Boolean(!!dietName && !errors.dietName);
+  const isFoodFieldValid = Boolean(!!formData.food && !errors.food);
 
   useEffect(() => {
     if (formData.category === 'fitnes for women') {
@@ -85,7 +88,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
           isImpactFieldValid &&
           isDescriptionFieldValid &&
           isDurationFieldValid &&
-          isTrainingFieldValid
+          isTrainingFieldValid &&
+          isDietFieldValid
         )
       );
     }
@@ -95,7 +99,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
           isFitnessStrengthFieldValid &&
           isDescriptionFieldValid &&
           isDurationFieldValid &&
-          isTrainingFieldValid
+          isTrainingFieldValid &&
+          isFoodFieldValid
         )
       );
     }
@@ -123,9 +128,11 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
     isStepFieldValid,
     isImpactFieldValid,
     isTrainingFieldValid,
+    isDietFieldValid,
     isFitnessWeigthFieldValid,
     isFitnessStrengthFieldValid,
     isFitnessWellnessFieldValid,
+    isFoodFieldValid,
   ]);
 
   const ITEM_HEIGHT = 48;
@@ -140,15 +147,26 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
   };
 
   const names = ['Персональні тренування', 'Групові тренування'];
+  const specialDiet = [
+    'Підбір раціонального харчування',
+    'Консультація або порада дієтолога',
+    'Можливість тренування старших груп',
+  ];
 
-  const onInputChange = event => {
+  const onInputChangeTraining = event => {
     const { value } = event.target;
 
     setPersonName(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
     );
+  };
+
+  const onInputChangeDiet = event => {
+    const { value } = event.target;
+
     // console.log('handleChange', value);
+    setDietName(typeof value === 'string' ? value.split(',') : value);
   };
 
   const handleInputChange = event => {
@@ -166,7 +184,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
 
   return (
     <ProgramFormWrapper>
-      <Formik initialValues={[personName]}>
+      <Formik>
         {({ touched }) => (
           <Form sx={{ minWidth: 594 }}>
             <Box
@@ -550,6 +568,52 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                         </Field>
                       </FormControl>
                     )}
+                    <FormControl
+                      sx={{
+                        marginTop: 4,
+                        minWidth: 594,
+                      }}
+                    >
+                      <InputLabel
+                        id="special-label"
+                        sx={{
+                          fontSize: 16,
+                          textAline: 'center',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}
+                      >
+                        Особливості програми
+                      </InputLabel>
+                      <Field
+                        as={Select}
+                        htmlFor="special"
+                        labelId="special-label"
+                        id="special-select"
+                        multiple
+                        name="special"
+                        value={dietName}
+                        onChange={onInputChangeDiet}
+                        input={<OutlinedInput label="Особливості програми" />}
+                        renderValue={selected => selected.join(', ')}
+                        MenuProps={MenuProps}
+                        sx={{ borderRadius: 40 }}
+                        onBlur={() =>
+                          validateField('special', formData, setErrors)
+                        }
+                      >
+                        {specialDiet.map(diet => (
+                          <MenuItem key={diet} value={diet}>
+                            <Checkbox checked={dietName.indexOf(diet) > -1} />
+                            <ListItemText primary={diet} />
+                          </MenuItem>
+                        ))}
+                        {!!dietName && !errors.dietName && !touched.dietName ? (
+                          <ErrorMessage message={errors.dietName} />
+                        ) : null}
+                      </Field>
+                    </FormControl>
                   </FormControl>
                 </Box>
               )}
@@ -591,6 +655,40 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                       <MenuItem value={4}>Body Sculpt</MenuItem>
                       <MenuItem value={5}>ABS</MenuItem>
                     </Field>
+                    <FormControl>
+                      <FormLabel
+                        id="food-label"
+                        sx={{
+                          marginTop: 4,
+                          minWidth: 594,
+                        }}
+                      >
+                        Підбір харчування
+                      </FormLabel>
+                      <Field
+                        as={RadioGroup}
+                        htmlFor="food"
+                        aria-label="food-label"
+                        type="text"
+                        name="food"
+                        onChange={handleInputChange}
+                        value={formData.food}
+                      >
+                        <FormControlLabel
+                          value="продукти тваринного походження"
+                          control={<Radio />}
+                          label="Продукти тваринного походження"
+                        />
+                        <FormControlLabel
+                          value="продукти рослинного походження"
+                          control={<Radio />}
+                          label="Продукти рослинного походження"
+                        />
+                        {!!formData.food && !errors.food ? (
+                          <ErrorMessage message={errors.food} />
+                        ) : null}
+                      </Field>
+                    </FormControl>
                   </FormControl>
                 </Box>
               )}
@@ -736,7 +834,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                   multiple
                   name="training"
                   value={personName}
-                  onChange={onInputChange}
+                  onChange={onInputChangeTraining}
                   input={<OutlinedInput label="Тренування" />}
                   renderValue={selected => selected.join(', ')}
                   MenuProps={MenuProps}
