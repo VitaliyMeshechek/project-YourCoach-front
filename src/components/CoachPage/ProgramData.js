@@ -52,7 +52,18 @@ const ProgramList = props => {
 };
 
 const ProgramItem = ({ item }) => {
-  const { photo, name, dateOfBirth, breed, comments, _id } = item;
+  const {
+    photo,
+    category,
+    name,
+    aerobic,
+    special,
+    food,
+    duration,
+    training,
+    comments,
+    _id,
+  } = item;
 
   const dispatch = useDispatch();
 
@@ -66,22 +77,38 @@ const ProgramItem = ({ item }) => {
 
       <InfoProgram>
         <InfoProgramItem>
-          <LabelProgram>Назва:</LabelProgram>
-          <InfoProgramText>{name}</InfoProgramText>
+          <LabelProgram>Категорія:</LabelProgram>
+          <InfoProgramText>{category}</InfoProgramText>
           <ButtonDeleteProgram onClick={HandleDeleteProgram}>
             <FiTrash2 style={{ width: '18px', height: '26px' }} />
           </ButtonDeleteProgram>
         </InfoProgramItem>
         <InfoProgramItem>
-          <LabelProgram>Date of birth:</LabelProgram>
-          <InfoProgramText>{dateOfBirth}</InfoProgramText>
+          <LabelProgram>Назва програми:</LabelProgram>
+          <InfoProgramText>{name}</InfoProgramText>
         </InfoProgramItem>
         <InfoProgramItem>
-          <LabelProgram>Breed:</LabelProgram>
-          <InfoProgramText>{breed}</InfoProgramText>
+          <LabelProgram>Тип програми:</LabelProgram>
+          <InfoProgramText>{aerobic}</InfoProgramText>
         </InfoProgramItem>
         <InfoProgramItem>
-          <LabelProgram>Comments:</LabelProgram>
+          <LabelProgram>Особливості програми:</LabelProgram>
+          <InfoProgramText>{special}</InfoProgramText>
+        </InfoProgramItem>
+        <InfoProgramItem>
+          <LabelProgram>Підбір харчування:</LabelProgram>
+          <InfoProgramText>{food}</InfoProgramText>
+        </InfoProgramItem>
+        <InfoProgramItem>
+          <LabelProgram>Тривалість:</LabelProgram>
+          <InfoProgramText>{duration}</InfoProgramText>
+        </InfoProgramItem>
+        <InfoProgramItem>
+          <LabelProgram>Тренування:</LabelProgram>
+          <InfoProgramText>{training}</InfoProgramText>
+        </InfoProgramItem>
+        <InfoProgramItem>
+          <LabelProgram>Коментарі:</LabelProgram>
           <InfoProgramText>{comments}</InfoProgramText>
         </InfoProgramItem>
       </InfoProgram>
