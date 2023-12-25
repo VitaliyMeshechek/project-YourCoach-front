@@ -31,7 +31,7 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
   const isAvatarURLFieldValid = Boolean(!errors.avatar && !!formData.avatar);
-  const isCommentsFieldValid = Boolean(!errors.comments);
+  const isCommentsFieldValid = Boolean(!errors.comments && !!formData.coments);
   const isLocationFieldValid = Boolean(!errors.location && !!formData.location);
   const isPriceFieldValid = Boolean(!errors.price && !!formData.price);
 
@@ -53,6 +53,15 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
       formData.category === 'strength fitness' &&
       formData.category === 'flexibility and wellness'
     ) {
+      setIsDisabled(
+        !(
+          isAvatarURLFieldValid &&
+          isLocationFieldValid &&
+          isPriceFieldValid &&
+          isCommentsFieldValid
+        )
+      );
+    } else {
       setIsDisabled(
         !(
           isAvatarURLFieldValid &&
@@ -93,15 +102,15 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
             htmlFor="program-image"
             category={formData.category}
           >
-            {(formData.category === 'fitnes for women' &&
-              formData.category === 'weigth' &&
-              formData.category === 'strength fitness' &&
-              formData.category === 'flexibility and wellness') ||
+            {formData.category === 'fitnes for women' &&
+            formData.category === 'weigth' &&
+            formData.category === 'strength fitness' &&
+            formData.category === 'flexibility and wellness' &&
             viewportWidth < 768
               ? 'Add photo'
-              : 'Load the pet’s image:'}
+              : 'Load the program is image:'}
             <AddFormImageWrapper>
-              {!formData.avatar && <BsPlus width="30" height="30" />}
+              {!formData.avatar && <BsPlus size="90" />}
               {!!formData.avatar && (
                 <img
                   id="image"
@@ -176,7 +185,7 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
           icon={<MdOutlineFitnessCenter />}
           filled={true}
           clickHandler={submit}
-          isDisabled={isDisabled}
+          // isDisabled={isDisabled}
         />
         <AddFormButtonBack
           type="button"

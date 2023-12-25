@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Container } from 'components/ReusableComponents/MainContainer/MainContainer.styled';
-import { OurCoaches } from 'components/Notices/CategoriesNav/CategoriesNav';
 import { Title, Wrapper } from './CustomerPage.styled';
+import { OurCoachesByCategoriesNav } from 'components/OurCoaches/OurCoachesByCategoriesNav';
 
 const CustomerPage = () => {
   return (
@@ -10,9 +10,7 @@ const CustomerPage = () => {
       <Title>Наші тренери</Title>
       {/* <CoachSearch /> */}
       <Wrapper>
-        <OurCoaches />
-        {/* <TabletWrapper>
-        </TabletWrapper> */}
+        <OurCoachesByCategoriesNav />
       </Wrapper>
       <Suspense fallback={null}>
         <Outlet />

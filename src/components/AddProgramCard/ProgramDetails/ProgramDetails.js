@@ -45,7 +45,9 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
   const isAerobicFieldValid = Boolean(!!formData.aerobic && !errors.aerobic);
   const isStrongFieldValid = Boolean(!!formData.strong && !errors.strong);
   const isHealthFieldValid = Boolean(!!formData.health && !errors.health);
-  const isFunctionFieldValid = Boolean(!!formData.function && !errors.function);
+  const isFunctionFieldValid = Boolean(
+    !!formData.functions && !errors.functions
+  );
   const isStepFieldValid = Boolean(!!formData.step && !errors.step);
   const isImpactFieldValid = Boolean(!!formData.impact && !errors.impact);
   const isFitnessWeigthFieldValid = Boolean(
@@ -389,7 +391,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                   {isActiveFunction && (
                     <FormControl>
                       <FormLabel
-                        id="function-label"
+                        id="functions-label"
                         sx={{
                           marginTop: 4,
                           minWidth: 594,
@@ -399,12 +401,12 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                       </FormLabel>
                       <Field
                         as={RadioGroup}
-                        htmlFor="function"
-                        aria-label="function-label"
+                        htmlFor="functions"
+                        aria-label="functions-label"
                         type="text"
-                        name="function"
+                        name="functions"
                         onChange={handleInputChange}
-                        value={formData.function}
+                        value={formData.functions}
                       >
                         <FormControlLabel
                           value="zumba"
@@ -431,8 +433,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                           control={<Radio />}
                           label="Інше"
                         />
-                        {!!formData.function && !errors.function ? (
-                          <ErrorMessage message={errors.function} />
+                        {!!formData.functions && !errors.functions ? (
+                          <ErrorMessage message={errors.functions} />
                         ) : null}
                       </Field>
                     </FormControl>
@@ -739,7 +741,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                   as={TextField}
                   htmlFor="description"
                   id="outlined-basic"
-                  label="Опис"
+                  label="Опис програми"
                   variant="outlined"
                   type="text"
                   name="description"

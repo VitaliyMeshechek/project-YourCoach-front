@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 // import { selectNoticesError } from 'redux/notices/selectors';
 // import { selectError } from 'redux/auth/selectors';
 
-import AddFormButtonBack from '../AddFormButton/AddFormButtonBack';
-import AddFormButtonNext from '../AddFormButton/AddFormButtonNext';
+import AddFormButtonBack from '../../../AddProgramCard/AddFormButton/AddFormButtonBack';
+import AddFormButtonNext from '../../../AddProgramCard/AddFormButton/AddFormButtonNext';
 // import { PawPrintIcon } from 'shared/utils/icons';
 import { MdOutlineFitnessCenter } from 'react-icons/md';
-import { AddFormButtonWrapper } from '../ProgramForm/ProgramForm.styled';
+import { AddFormButtonWrapper } from '../../../AddProgramCard/ProgramForm/ProgramForm.styled';
 import { AddFormModalWrapper } from './AddProgramModal.styled';
 
 const AddProgramModal = ({ backLink, category }) => {

@@ -67,7 +67,7 @@ const ProgramItem = ({ item }) => {
 
   const dispatch = useDispatch();
 
-  const HandleDeleteProgram = () => {
+  const handleDeleteProgram = () => {
     dispatch(deleteProgram(_id));
   };
 
@@ -79,7 +79,7 @@ const ProgramItem = ({ item }) => {
         <InfoProgramItem>
           <LabelProgram>Категорія:</LabelProgram>
           <InfoProgramText>{category}</InfoProgramText>
-          <ButtonDeleteProgram onClick={HandleDeleteProgram}>
+          <ButtonDeleteProgram onClick={handleDeleteProgram}>
             <FiTrash2 style={{ width: '18px', height: '26px' }} />
           </ButtonDeleteProgram>
         </InfoProgramItem>

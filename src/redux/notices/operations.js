@@ -2,10 +2,10 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setAuthHeader } from 'redux/auth/operations';
 
-axios.defaults.baseURL = 'https://project-yourfavorite-back.onrender.com/api';
+axios.defaults.baseURL = 'https://project-yourcoach-back.onrender.com/api';
 
 export const fetchAll = createAsyncThunk(
-  'noticesPage/fetchAll',
+  'notices/fetchAll',
   async (_, thunkAPI) => {
     try {
       const response = await axios.get(`/notices`);
@@ -17,8 +17,8 @@ export const fetchAll = createAsyncThunk(
 );
 
 export const fetchNotices = createAsyncThunk(
-  'noticesPage/fetchNotices',
-  async ({ categoryName = 'sell', query }, thunkAPI) => {
+  'notices/fetchNotices',
+  async ({ categoryName = 'weigth', query }, thunkAPI) => {
     try {
       const response = await axios.get(`/notices/${categoryName}`, {
         params: { query: query ? query : null },
@@ -30,13 +30,11 @@ export const fetchNotices = createAsyncThunk(
   }
 );
 
-export const fetchFavorites = createAsyncThunk(
-  'notices/fetchFavorites',
+export const fetchLike = createAsyncThunk(
+  'notices/fetchLike',
   async (query, thunkAPI) => {
-    const { token } = thunkAPI.getState().auth;
     try {
-      setAuthHeader(token);
-      const response = await axios.get(`/notices/favorite`, {
+      const response = await axios.get(`/notices/like`, {
         params: { query: query ? query : null },
       });
       return response.data;
@@ -46,13 +44,25 @@ export const fetchFavorites = createAsyncThunk(
   }
 );
 
-export const addToFavorite = createAsyncThunk(
-  'notices/addToFavorite',
-  async (id, thunkAPI) => {
-    const { token } = thunkAPI.getState().auth;
+export const fetchDislike = createAsyncThunk(
+  'notices/fetchDislike',
+  async (query, thunkAPI) => {
     try {
-      setAuthHeader(token);
-      const response = await axios.post(`/notices/favorite/${id}`);
+      const response = await axios.get(`/notices/dislike`, {
+        params: { query: query ? query : null },
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const addToLike = createAsyncThunk(
+  'notices/addToLike',
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.post(`/notices/like/${id}`);
       const result = response.data.favorite[0];
       return result;
     } catch (error) {
@@ -61,13 +71,36 @@ export const addToFavorite = createAsyncThunk(
   }
 );
 
-export const deleteFromFavorite = createAsyncThunk(
-  'notices/deleteFromFavorite',
+export const addToDislike = createAsyncThunk(
+  'notices/addToDislike',
   async (id, thunkAPI) => {
-    const { token } = thunkAPI.getState().auth;
     try {
-      setAuthHeader(token);
-      const response = await axios.delete(`/notices/favorite/${id}`);
+      const response = await axios.post(`/notices/dislike/${id}`);
+      const result = response.data.favorite[0];
+      return result;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteFromLike = createAsyncThunk(
+  'notices/deleteFromLike',
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.delete(`/notices/like/${id}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteFromDislike = createAsyncThunk(
+  'notices/deleteFromDislike',
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.delete(`/notices/dislike/${id}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -81,7 +114,7 @@ export const fetchUsersNotices = createAsyncThunk(
     const { token } = thunkAPI.getState().auth;
     try {
       setAuthHeader(token);
-      const response = await axios.get(`/notices/own`, {
+      const response = await axios.get(`/notices/forCoach`, {
         params: { query: query ? query : null },
       });
       return response.data;
@@ -108,7 +141,9 @@ export const deleteUserNotice = createAsyncThunk(
 export const addNotice = createAsyncThunk(
   'notices/addNotice',
   async ({ category, newFormData }, thunkAPI) => {
+    const { token } = thunkAPI.getState().auth;
     try {
+      setAuthHeader(token);
       await axios.post(`/notices/${category}`, newFormData);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

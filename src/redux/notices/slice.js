@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  addToFavorite,
-  deleteFromFavorite,
+  addToLike,
+  addToDislike,
+  deleteFromLike,
+  deleteFromDislike,
   fetchAll,
-  fetchFavorites,
+  fetchLike,
+  fetchDislike,
   fetchNotices,
   addNotice,
   fetchUsersNotices,
@@ -20,13 +23,14 @@ const handleRejected = (state, action) => {
 };
 
 const noticesPageSlice = createSlice({
-  name: 'noticesPage',
+  name: 'notices',
   initialState: {
     items: [],
     isLoading: false,
     error: null,
-    favorite: [],
-    own: [],
+    like: [],
+    dislike: [],
+    forCoach: [],
     user: {},
   },
 
@@ -55,38 +59,65 @@ const noticesPageSlice = createSlice({
     },
     [fetchNotices.rejected]: handleRejected,
 
-    [fetchFavorites.pending]: handlePending,
-    [fetchFavorites.fulfilled](state, action) {
+    [fetchLike.pending]: handlePending,
+    [fetchLike.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.favorite = action.payload;
+      state.like = action.payload;
     },
-    [fetchFavorites.rejected]: handleRejected,
+    [fetchLike.rejected]: handleRejected,
 
-    [addToFavorite.pending]: handlePending,
-    [addToFavorite.fulfilled](state, action) {
+    [fetchDislike.pending]: handlePending,
+    [fetchDislike.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.favorite.push(action.payload);
+      state.dislike = action.payload;
     },
-    [addToFavorite.rejected]: handleRejected,
+    [fetchDislike.rejected]: handleRejected,
 
-    [deleteFromFavorite.pending]: handlePending,
-    [deleteFromFavorite.fulfilled](state, action) {
+    [addToLike.pending]: handlePending,
+    [addToLike.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      const index = state.favorite.findIndex(
+      state.like.push(action.payload);
+    },
+    [addToLike.rejected]: handleRejected,
+
+    [addToDislike.pending]: handlePending,
+    [addToDislike.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.dislike.push(action.payload);
+    },
+    [addToDislike.rejected]: handleRejected,
+
+    [deleteFromLike.pending]: handlePending,
+    [deleteFromLike.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      const index = state.like.findIndex(
         contact => contact.id === action.payload.id
       );
-      state.favorite.splice(index, 1);
+      state.like.splice(index, 1);
     },
-    [deleteFromFavorite.rejected]: handleRejected,
+    [deleteFromLike.rejected]: handleRejected,
+
+    [deleteFromDislike.pending]: handlePending,
+    [deleteFromDislike.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      const index = state.dislike.findIndex(
+        contact => contact.id === action.payload.id
+      );
+      state.dislike.splice(index, 1);
+    },
+    [deleteFromDislike.rejected]: handleRejected,
 
     [fetchUsersNotices.pending]: handlePending,
     [fetchUsersNotices.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.own = action.payload;
+      state.forCoach = action.payload;
     },
     [fetchUsersNotices.rejected]: handleRejected,
 
@@ -94,10 +125,10 @@ const noticesPageSlice = createSlice({
     [deleteUserNotice.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      const index = state.own.findIndex(
+      const index = state.forCoach.findIndex(
         contact => contact.id === action.payload.id
       );
-      state.own.splice(index, 1);
+      state.forCoach.splice(index, 1);
     },
     [deleteUserNotice.rejected]: handleRejected,
 
@@ -110,7 +141,6 @@ const noticesPageSlice = createSlice({
     [fetchUserById.rejected]: handleRejected,
   },
 });
-
 
 const queryInitialState = '';
 

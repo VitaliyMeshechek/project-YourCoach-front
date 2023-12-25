@@ -70,6 +70,9 @@ export const ValidateProgramSchema = Yup.object().shape({
   location: Yup.string()
     .matches(/^[A-Za-z\s]+$/i, 'Невірний формат')
     .required('Location is required'),
+  price: Yup.number()
+    .positive('Price must be greater than 0')
+    .required('Price is required'),
   comments: Yup.string().test(
     'comments',
     'Comments must be between 10 and 120 characters',

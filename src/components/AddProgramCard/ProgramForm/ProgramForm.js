@@ -17,8 +17,8 @@ import { addNotice } from 'redux/notices/operations';
 import { addProgram } from 'redux/user/operations';
 
 import { ValidateProgramSchema } from '../ValidateProgramSchema';
-import Modal from '../../ModalMenu/ModalMenu';
-import AddProgramModal from '../AddProgramModal/AddProgramModal';
+import Modal from '../../ReusableComponents/ModalWindows/ModalMenu/ModalMenu';
+import AddProgramModal from '../../ReusableComponents/ModalWindows/AddProgramModal/AddProgramModal';
 // import AddModal from 'components/ReusableComponents/Modal/AddModal';
 
 import AdditionalInfo from '../AdditionalInfo/AdditionalInfo';
@@ -40,7 +40,7 @@ const AddProgramForm = () => {
     aerobic: '',
     strong: '',
     health: '',
-    function: '',
+    functions: '',
     step: '',
     impact: '',
     food: '',
