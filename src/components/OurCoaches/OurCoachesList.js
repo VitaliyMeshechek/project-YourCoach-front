@@ -18,14 +18,15 @@ import {
   fetchDislike,
   fetchNotices,
   fetchUsersNotices,
-} from 'redux/noticesPage/operations';
+} from 'redux/notices/operations';
 import { OurCoachesItems } from '../OurCoaches/OurCoachesItems';
 import { CategoriesList } from './OurCoachesList.styled';
 import { useAuth } from 'hooks';
 // import { toast } from 'react-toastify';
-import RemoveModal from 'components/ReusableComponents/Modal/RemoveModal/RemoveModal';
-import { ParkedPage } from '../ParkedPage/ParkedPage';
+// import { ParkedPage } from '../ParkedPage/ParkedPage';
 import CoachProgramDetailsModal from 'components/ReusableComponents/ModalWindows/CoachProgramDetailsModal/CoachProgramDetailsModal';
+import RemoveCoachProgramDetailsModal from 'components/ReusableComponents/ModalWindows/RemoveCoachProgramDetailsModal/RemoveCoachProgramDetailsModal';
+import { PageError } from './PageError/PageError';
 
 const OurCoachesList = () => {
   const { isLoggedIn } = useAuth();
@@ -150,14 +151,14 @@ const OurCoachesList = () => {
             ></CoachProgramDetailsModal>
           )}
           {modal === 'remove' && (
-            <RemoveModal
+            <RemoveCoachProgramDetailsModal
               approveHandle={onDeleteOwn}
               title={activeNotice[0].title}
-            ></RemoveModal>
+            ></RemoveCoachProgramDetailsModal>
           )}
         </CategoriesList>
       ) : (
-        <ParkedPage />
+        <PageError />
       )}
     </>
   );

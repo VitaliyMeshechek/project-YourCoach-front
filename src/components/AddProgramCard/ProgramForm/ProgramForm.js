@@ -45,7 +45,7 @@ const AddProgramForm = () => {
     impact: '',
     food: '',
     special: '',
-    avatar: null,
+    avatarUrl: null,
     duration: 0,
     price: 0,
   });

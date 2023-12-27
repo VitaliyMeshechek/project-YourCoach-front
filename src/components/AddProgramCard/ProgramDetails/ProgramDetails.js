@@ -230,26 +230,26 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                       <ErrorMessage message={errors.name} />
                     ) : null}
                     <MenuItem
-                      value={'аеробні програми'}
+                      value={'Аеробні програми'}
                       onClick={() => setIsActiveAerobic(true)}
                     >
                       Аеробні програми
                     </MenuItem>
                     <MenuItem
-                      value={'силові програми'}
+                      value={'Силові програми'}
                       onClick={() => setIsActiveStrong(true)}
                       // onClick={() => setIsActiveAerobic(false)}
                     >
                       Силові програми
                     </MenuItem>
                     <MenuItem
-                      value={'оздоровчі програми'}
+                      value={'Оздоровчі програми'}
                       onClick={() => setIsActiveHealth(true)}
                     >
                       Оздоровчі програми
                     </MenuItem>
                     <MenuItem
-                      value={'функціональний фітнес'}
+                      value={'Функціональний фітнес'}
                       onClick={() => setIsActiveFunction(true)}
                     >
                       Функціональний фітнес
@@ -276,17 +276,17 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                         value={formData.aerobic}
                       >
                         <FormControlLabel
-                          value="step aerobics"
+                          value="Step aerobics"
                           control={<Radio />}
                           label="Step Aerobics"
                         />
                         <FormControlLabel
-                          value="fitball aerobics"
+                          value="Fitball Aerobics"
                           control={<Radio />}
                           label="Fitball Aerobics"
                         />
                         <FormControlLabel
-                          value="another"
+                          value="Another"
                           control={<Radio />}
                           label="Інше"
                         />
@@ -317,17 +317,17 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                         value={formData.strong}
                       >
                         <FormControlLabel
-                          value="body up"
+                          value="Body up"
                           control={<Radio />}
                           label="Body Up"
                         />
                         <FormControlLabel
-                          value="body pump"
+                          value="Body pump"
                           control={<Radio />}
                           label="Body Pump"
                         />
                         <FormControlLabel
-                          value="abs"
+                          value="Тренування ABS"
                           control={<Radio />}
                           label="Тренування ABS"
                         />
@@ -358,27 +358,27 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                         value={formData.health}
                       >
                         <FormControlLabel
-                          value="йога"
+                          value="Йога"
                           control={<Radio />}
                           label="Йога"
                         />
                         <FormControlLabel
-                          value="пілатес"
+                          value="Пілатес"
                           control={<Radio />}
                           label="Пілатес"
                         />
                         <FormControlLabel
-                          value="ци-гун"
+                          value="Ци-гун"
                           control={<Radio />}
                           label="Ци-гун"
                         />
                         <FormControlLabel
-                          value="стретчінг"
+                          value="Стретчінг"
                           control={<Radio />}
                           label="Стретчінг"
                         />
                         <FormControlLabel
-                          value="калланетіка"
+                          value="Калланетіка"
                           control={<Radio />}
                           label="Калланетіка"
                         />
@@ -409,27 +409,27 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                         value={formData.functions}
                       >
                         <FormControlLabel
-                          value="zumba"
+                          value="Zumba"
                           control={<Radio />}
                           label="Zumba"
                         />
                         <FormControlLabel
-                          value="dance fitness"
+                          value="Dance Fitness"
                           control={<Radio />}
                           label="Dance Fitness"
                         />
                         <FormControlLabel
-                          value="belly dance"
+                          value="Belly Dance"
                           control={<Radio />}
                           label="Belly Dance"
                         />
                         <FormControlLabel
-                          value="strip dance"
+                          value="Strip Dance"
                           control={<Radio />}
                           label="Strip Dance"
                         />
                         <FormControlLabel
-                          value="another"
+                          value="Інше"
                           control={<Radio />}
                           label="Інше"
                         />
@@ -471,13 +471,13 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                         <ErrorMessage message={errors.fitnessWeigth} />
                       ) : null}
                       <MenuItem
-                        value={'аеробіка'}
+                        value={'Аеробіка'}
                         onClick={() => setIsActiveStep(true)}
                       >
                         Аеробіка
                       </MenuItem>
                       <MenuItem
-                        value={'аеробний фітнес'}
+                        value={'Аеробний фітнес'}
                         onClick={() => setIsActiveImpact(true)}
                       >
                         Аеробний фітнес
@@ -504,17 +504,17 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                           value={formData.step}
                         >
                           <FormControlLabel
-                            value="step-intro"
+                            value="Step-Intro"
                             control={<Radio />}
                             label="Step-Intro"
                           />
                           <FormControlLabel
-                            value="step-b"
+                            value="Step-B"
                             control={<Radio />}
                             label="Step-B"
                           />
                           <FormControlLabel
-                            value="power-step"
+                            value="Power-Step"
                             control={<Radio />}
                             label="Power-Step"
                           />
@@ -545,22 +545,22 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                           value={formData.impact}
                         >
                           <FormControlLabel
-                            value="low-impact aerobics"
+                            value="Low-Impact Aerobics"
                             control={<Radio />}
                             label="Low-Impact Aerobics"
                           />
                           <FormControlLabel
-                            value="low-a"
+                            value="Low-A"
                             control={<Radio />}
                             label="Low-A"
                           />
                           <FormControlLabel
-                            value="middle-impact"
+                            value="Middle-Impact"
                             control={<Radio />}
                             label="Middle-Impact"
                           />
                           <FormControlLabel
-                            value="high-impact"
+                            value="High-Impact"
                             control={<Radio />}
                             label="High-Impact"
                           />
@@ -651,11 +651,11 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                       !touched.fitnessStrength ? (
                         <ErrorMessage message={errors.fitnessStrength} />
                       ) : null}
-                      <MenuItem value={1}>Body Up</MenuItem>
-                      <MenuItem value={2}>Body Low</MenuItem>
-                      <MenuItem value={3}>Body Pump</MenuItem>
-                      <MenuItem value={4}>Body Sculpt</MenuItem>
-                      <MenuItem value={5}>ABS</MenuItem>
+                      <MenuItem value={'Body Up'}>Body Up</MenuItem>
+                      <MenuItem value={'Body Low'}>Body Low</MenuItem>
+                      <MenuItem value={'Body Pump'}>Body Pump</MenuItem>
+                      <MenuItem value={'Body Sculpt'}>Body Sculpt</MenuItem>
+                      <MenuItem value={'ABS'}>ABS</MenuItem>
                     </Field>
                     <FormControl>
                       <FormLabel
@@ -677,12 +677,12 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                         value={formData.food}
                       >
                         <FormControlLabel
-                          value="продукти тваринного походження"
+                          value="Продукти тваринного походження"
                           control={<Radio />}
                           label="Продукти тваринного походження"
                         />
                         <FormControlLabel
-                          value="продукти рослинного походження"
+                          value="Продукти рослинного походження"
                           control={<Radio />}
                           label="Продукти рослинного походження"
                         />
@@ -726,9 +726,9 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                       !touched.fitnessWellness ? (
                         <ErrorMessage message={errors.fitnessWellness} />
                       ) : null}
-                      <MenuItem value={1}>Yoga</MenuItem>
-                      <MenuItem value={2}>Pilates</MenuItem>
-                      <MenuItem value={3}>Stretching</MenuItem>
+                      <MenuItem value={'Yoga'}>Yoga</MenuItem>
+                      <MenuItem value={'Pilates'}>Pilates</MenuItem>
+                      <MenuItem value={'Stretching'}>Stretching</MenuItem>
                     </Field>
                   </FormControl>
                 </Box>
@@ -779,27 +779,27 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                   // onBlur={() => validateField('duration', formData, setErrors)}
                 >
                   <FormControlLabel
-                    value="one week"
+                    value="1-4 тижнів"
                     control={<Radio />}
                     label="1-4 тижнів"
                   />
                   <FormControlLabel
-                    value="five weeks"
+                    value="5-8 тижнів"
                     control={<Radio />}
                     label="5-8 тижнів"
                   />
                   <FormControlLabel
-                    value="nine weeks"
+                    value="9-12 тижнів"
                     control={<Radio />}
                     label="9-12 тижнів"
                   />
                   <FormControlLabel
-                    value="twelve weeks"
+                    value="12-15 тижнів"
                     control={<Radio />}
                     label="12-15 тижнів"
                   />
                   <FormControlLabel
-                    value="more than twelve weeks"
+                    value="більше 15 тижнів"
                     control={<Radio />}
                     label="більше 15 тижнів"
                   />

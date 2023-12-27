@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Container } from 'components/ReusableComponents/MainContainer/MainContainer.styled';
+import { Container } from 'components/ReusableComponents/MainContainer.styled';
 import { Title, Wrapper } from './CustomerPage.styled';
 import { OurCoachesByCategoriesNav } from 'components/OurCoaches/OurCoachesByCategoriesNav';
 

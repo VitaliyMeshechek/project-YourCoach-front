@@ -30,7 +30,7 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
   const [imageValue, setImageValue] = useState('');
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
-  const isAvatarURLFieldValid = Boolean(!errors.avatar && !!formData.avatar);
+  const isAvatarURLFieldValid = Boolean(!errors.avatar && !!formData.avatarUrl);
   const isCommentsFieldValid = Boolean(!errors.comments && !!formData.coments);
   const isLocationFieldValid = Boolean(!errors.location && !!formData.location);
   const isPriceFieldValid = Boolean(!errors.price && !!formData.price);
@@ -110,23 +110,23 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
               ? 'Add photo'
               : 'Load the program is image:'}
             <AddFormImageWrapper>
-              {!formData.avatar && <BsPlus size="90" />}
-              {!!formData.avatar && (
+              {!formData.avatarUrl && <BsPlus size="90" />}
+              {!!formData.avatarUrl && (
                 <img
                   id="image"
-                  src={URL.createObjectURL(formData.avatar)}
-                  alt={formData.avatar.name}
+                  src={URL.createObjectURL(formData.avatarUrl)}
+                  alt={formData.avatarUrl.name}
                 />
               )}
             </AddFormImageWrapper>
             <FileInput
               type="file"
               id="program-image"
-              name="avatar"
+              name="avatarUrl"
               accept=".png, .jpg, .jpeg, .webp"
               onChange={handleInputChange}
               value={imageValue}
-              onBlur={() => validateField('avatar', formData, setErrors)}
+              onBlur={() => validateField('avatarUrl', formData, setErrors)}
             />
           </AddFormImageLabel>
         </FirstPartFormWrapper>

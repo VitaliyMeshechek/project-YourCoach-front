@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
-
+import { breakPoints, colors } from 'base-styles/variables';
 import { BsSuitHeart } from 'react-icons/bs';
 
-import {
-  Img as NewsImg,
-  Title as NewsTitle,
-  Desc as NewsDesc,
-  DescWrapper as NewsDescWrapper,
-} from 'components/News/NewsItem/NewsItem.styled';
+// import {
+//   Img as NewsImg,
+//   Title as NewsTitle,
+//   Desc as NewsDesc,
+//   DescWrapper as NewsDescWrapper,
+// } from 'components/News/NewsItem/NewsItem.styled';
 
 import {
   ButtonFlexWrapper as ApproveButtonFlexWrapper,
@@ -15,8 +15,7 @@ import {
   CancelButtonText as ApproveCancelButtonText,
   ApproveButton as ApproveButtonCopy,
   ApproveButtonText as ApproveButtonTextCopy,
-} from '../ModalApproveAction/ModalApproveAction.styled';
-import { breakPoints, colors } from 'base-styles/variables';
+} from '../ModalApproveAction/ModalApproveAction.styled.js';
 
 export const ButtonFlexWrapper = styled(ApproveButtonFlexWrapper)`
   @media screen and (min-width: ${breakPoints.tablet}) {
@@ -65,7 +64,7 @@ export const Category = styled.div`
   background: #cce4fb;
 `;
 
-export const Img = styled(NewsImg)`
+export const Img = styled.img`
   position: relative;
   display: block;
 
@@ -81,7 +80,7 @@ export const Img = styled(NewsImg)`
   }
 `;
 
-export const Title = styled(NewsTitle)`
+export const Title = styled.h1`
   margin-bottom: 20px;
 
   @media screen and (min-width: ${breakPoints.tablet}) {
@@ -91,7 +90,7 @@ export const Title = styled(NewsTitle)`
   }
 `;
 
-export const Desc = styled(NewsDesc)`
+export const Desc = styled.p`
   text-align: start;
   font-weight: 600;
   font-size: 14px;
@@ -161,7 +160,7 @@ export const InfoValue = styled.li`
   }
 `;
 
-export const DescWrapper = styled(NewsDescWrapper)`
+export const DescWrapper = styled.div`
   padding: 0;
   text-align: start;
   @media screen and (min-width: ${breakPoints.tablet}) {

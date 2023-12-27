@@ -24,7 +24,7 @@ import {
   Thumb,
   Title,
   TrashBtn,
-} from './CategoriesItems.styled';
+} from './OurCoachesItems.styled.js';
 import { showModal } from 'redux/modal/slice';
 
 export const OurCoachesItems = coaches => {
