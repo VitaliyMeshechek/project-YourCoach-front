@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
-import { Backdrop, ModalWindow, CloseBtn, CloseIcon } from './ModalMenu.styled';
+import { Backdrop, ModalWindow, CloseBtn, CloseIcon } from './Modal.styled';
 
 const modalContainer = document.getElementById('modal-root');
 

@@ -17,7 +17,8 @@ export const AuthWrapper = styled.div`
     padding: 0;
   }
 `;
-export const AuthLink = styled(NavLink)`
+
+export const AuthLinkLogin = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,6 +37,47 @@ export const AuthLink = styled(NavLink)`
   border-radius: 40px;
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   @media screen and (min-width: ${breakPoints.tablet}) {
+    position: absolute;
+    top: 150px;
+    right: 230px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  :hover,
+  :focus {
+    color: ${colors.background};
+    background-color: ${colors.yellow};
+  }
+
+  &.active {
+    color: ${colors.background};
+    background-color: ${colors.yellow};
+  }
+`;
+
+export const AuthLinkRegister = styled(NavLink)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  min-width: 165px;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.38;
+  color: ${colors.yellow};
+  text-decoration: none;
+  border: 2px solid ${colors.yellow};
+  border-radius: 40px;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  @media screen and (min-width: ${breakPoints.tablet}) {
+    position: absolute;
+    top: 100px;
+    right: 50px;
     padding-top: 7px;
     padding-bottom: 7px;
   }

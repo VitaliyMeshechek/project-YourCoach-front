@@ -1,13 +1,18 @@
-import { AuthWrapper, AuthLink, Icon } from './AuthNav.styled';
+import {
+  AuthWrapper,
+  AuthLinkLogin,
+  AuthLinkRegister,
+  Icon,
+} from './AuthNav.styled';
 
 export const AuthNav = () => {
   return (
     <AuthWrapper>
-      <AuthLink to="/login">
-        Log IN
+      <AuthLinkLogin to="/login">
+        Увійти
         <Icon />
-      </AuthLink>
-      <AuthLink to="/register">Registration</AuthLink>
+      </AuthLinkLogin>
+      <AuthLinkRegister to="/register">Зареєструватися</AuthLinkRegister>
     </AuthWrapper>
   );
 };

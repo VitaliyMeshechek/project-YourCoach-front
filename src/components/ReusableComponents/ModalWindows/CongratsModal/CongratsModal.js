@@ -6,9 +6,9 @@ import {
   PrimaryButtonText,
 } from '../CongratsModal/CongratsModal.styled';
 
-import ModalWrapper from '../ModalWrapper';
 import { useDispatch } from 'react-redux';
 import { showModal } from 'redux/modal/slice';
+import ModalWrapper from '../ModalWrapper/ModalWrapper';
 
 const CongratsModal = ({ func }) => {
   const dispatch = useDispatch();
@@ -21,10 +21,10 @@ const CongratsModal = ({ func }) => {
   return (
     <>
       <ModalWrapper>
-        <Title>Congrats!</Title>
-        <Description>You`re registration is success</Description>
+        <Title>Вітаю!</Title>
+        <Description>Ви успішно зареєструвалися</Description>
         <PrimaryButton onClick={handleClose}>
-          <PrimaryButtonText>Go to profile</PrimaryButtonText>
+          <PrimaryButtonText>Перейти в профіль</PrimaryButtonText>
           <IconPaw />
         </PrimaryButton>
       </ModalWrapper>

@@ -20,6 +20,9 @@ export const NavLinkStyled = styled(NavLink)`
 `;
 
 export const Header = styled.h2`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 500;
   font-size: 20px;
   margin: 0;

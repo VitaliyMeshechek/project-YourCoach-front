@@ -44,7 +44,7 @@ export const CoachData = () => {
   const initialValues = {
     avatarUrl: user.avatarUrl ? user.avatarUrl : PhotoDef,
     name: user.name ? user.name : defaultName,
-    email: user.email ? user.email : 'user@pets.com',
+    email: user.email ? user.email : 'user@programs.com',
     experience: user.experience ? user.experience : '00.00.0000',
     phone: user.phone ? user.phone : '+380000000000',
     city: user.city ? user.city : 'City',

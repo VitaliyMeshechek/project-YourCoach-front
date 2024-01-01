@@ -10,7 +10,7 @@ export const AdditionalInfoFormWrapper = styled.div`
   gap: 20px;
   /* @media screen and (min-width: ${breakPoints.tablet}) {
     ${({ category }) =>
-      category !== 'your pet' ? 'flex-direction: row; column-gap:44px' : ''};
+    category !== 'your pet' ? 'flex-direction: row; column-gap:44px' : ''};
   } */
 `;
 
@@ -89,6 +89,8 @@ export const AddFormTextArea = styled(Field)`
 export const AddFormImageLabel = styled.label`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 4px;
   font-weight: 500;
   font-size: 14px;
@@ -100,7 +102,7 @@ export const AddFormImageLabel = styled.label`
     font-size: 20px;
     line-height: 1.3;
     ${({ category }) =>
-      category !== 'your pet' ? 'flex-direction: column' : ''};
+    category !== 'your pet' ? 'flex-direction: column' : ''};
   } */
   display: flex;
   flex-direction: row;

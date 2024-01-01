@@ -1,4 +1,4 @@
-import { selectProgram } from 'redux/auth/selectors';
+import { selectProgram } from 'redux/user/selectors';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiTrash2 } from 'react-icons/fi';
@@ -25,9 +25,11 @@ export const ProgramData = () => {
   }, [dispatch]);
 
   const visiblePrograms = program
-    ? program.filter(program => program.category.includes('fitnes for women'))
+    ? program.filter(program =>
+        program.formData.category.includes('your program')
+      )
     : [];
-
+  console.log('visiblePrograms', visiblePrograms);
   return (
     <div>
       {visiblePrograms.length === 0 && <Header>У Вас ще немає програми</Header>}
@@ -55,10 +57,9 @@ const ProgramItem = ({ item }) => {
   const {
     photo,
     category,
-    name,
-    aerobic,
-    special,
-    food,
+    nameYourProgram,
+    typeYourProgram,
+    description,
     duration,
     training,
     comments,
@@ -73,7 +74,7 @@ const ProgramItem = ({ item }) => {
 
   return (
     <ContainerProgram>
-      <MyImg src={photo} alt={name} />
+      <MyImg src={photo} alt={nameYourProgram} />
 
       <InfoProgram>
         <InfoProgramItem>
@@ -85,22 +86,18 @@ const ProgramItem = ({ item }) => {
         </InfoProgramItem>
         <InfoProgramItem>
           <LabelProgram>Назва програми:</LabelProgram>
-          <InfoProgramText>{name}</InfoProgramText>
+          <InfoProgramText>{nameYourProgram}</InfoProgramText>
         </InfoProgramItem>
         <InfoProgramItem>
           <LabelProgram>Тип програми:</LabelProgram>
-          <InfoProgramText>{aerobic}</InfoProgramText>
+          <InfoProgramText>{typeYourProgram}</InfoProgramText>
         </InfoProgramItem>
         <InfoProgramItem>
-          <LabelProgram>Особливості програми:</LabelProgram>
-          <InfoProgramText>{special}</InfoProgramText>
+          <LabelProgram>Опис програми:</LabelProgram>
+          <InfoProgramText>{description}</InfoProgramText>
         </InfoProgramItem>
         <InfoProgramItem>
-          <LabelProgram>Підбір харчування:</LabelProgram>
-          <InfoProgramText>{food}</InfoProgramText>
-        </InfoProgramItem>
-        <InfoProgramItem>
-          <LabelProgram>Тривалість:</LabelProgram>
+          <LabelProgram>Тривалість програми:</LabelProgram>
           <InfoProgramText>{duration}</InfoProgramText>
         </InfoProgramItem>
         <InfoProgramItem>

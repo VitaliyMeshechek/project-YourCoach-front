@@ -5,6 +5,7 @@ import {
   selectLike,
   selectDislike,
   selectNotices,
+  selectRating,
   selectOwn,
   selectQuery,
 } from 'redux/notices/selectors';
@@ -18,15 +19,18 @@ import {
   fetchDislike,
   fetchNotices,
   fetchUsersNotices,
+  fetchFavorites,
+  addToFavorite,
+  deleteFromFavorite,
 } from 'redux/notices/operations';
-import { OurCoachesItems } from '../OurCoaches/OurCoachesItems';
+import { OurCoachesItems } from '../OurCoachesItems/OurCoachesItems';
 import { CategoriesList } from './OurCoachesList.styled';
 import { useAuth } from 'hooks';
 // import { toast } from 'react-toastify';
 // import { ParkedPage } from '../ParkedPage/ParkedPage';
 import CoachProgramDetailsModal from 'components/ReusableComponents/ModalWindows/CoachProgramDetailsModal/CoachProgramDetailsModal';
 import RemoveCoachProgramDetailsModal from 'components/ReusableComponents/ModalWindows/RemoveCoachProgramDetailsModal/RemoveCoachProgramDetailsModal';
-import { PageError } from './PageError/PageError';
+import { PageError } from '../PageError/PageError';
 
 const OurCoachesList = () => {
   const { isLoggedIn } = useAuth();
@@ -38,6 +42,7 @@ const OurCoachesList = () => {
 
   const [assessment, setAssessment] = useState(null);
   const coachLike = useSelector(selectLike);
+  const ratings = useSelector(selectRating);
   const coachDislike = useSelector(selectDislike);
   const own = useSelector(selectOwn);
   const notices = useSelector(selectNotices);
@@ -46,6 +51,7 @@ const OurCoachesList = () => {
   const dispatch = useDispatch();
   const [, setSearchParams] = useSearchParams();
   //   const favorits = useSelector(selectFavorite);
+  const ratinges = useSelector(selectRating);
 
   useEffect(() => {
     if (!query) {
@@ -59,16 +65,18 @@ const OurCoachesList = () => {
     if (!activeNotice) {
       return;
     }
-    setAssessment(coachLike.find(item => item._id === activeNotice[0]._id)) ||
-      setAssessment(
-        coachDislike.find(item => item._id === activeNotice[0]._id)
-      );
-  }, [activeNotice, coachLike, coachDislike]);
+    // setAssessment(coachLike.find(item => item._id === activeNotice[0]._id)) ||
+    //   setAssessment(
+    //     coachDislike.find(item => item._id === activeNotice[0]._id)
+    //   );
+    setAssessment(ratinges.find(item => item._id === activeNotice[0]._id));
+  }, [activeNotice, coachLike, ratinges, coachDislike]);
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(fetchLike(query));
-      dispatch(fetchDislike(query));
+      // dispatch(fetchLike(query));
+      // dispatch(fetchDislike(query));
+      dispatch(fetchFavorites(query));
       dispatch(fetchUsersNotices(query));
     }
     dispatch(fetchNotices({ categoryName, query }));
@@ -77,9 +85,11 @@ const OurCoachesList = () => {
   useEffect(() => {
     switch (categoryName) {
       case 'rating':
-        setAllCoaches(coachLike) || setAllCoaches(coachDislike);
+        setAllCoaches(ratings);
+        // setAllCoaches(coachLike);
+        // || setAllCoaches(coachDislike);
         break;
-      case 'forCoach':
+      case 'own':
         setAllCoaches(own);
         break;
 
@@ -87,7 +97,7 @@ const OurCoachesList = () => {
         setAllCoaches(notices);
         break;
     }
-  }, [categoryName, coachLike, coachDislike, notices, own]);
+  }, [categoryName, coachLike, coachDislike, ratings, notices, own]);
 
   if (!allCoaches) {
     return null;
@@ -123,13 +133,20 @@ const OurCoachesList = () => {
     //   toast('Sorry, this option is available only for authorized users');
     //   return;
     // }
+    // if (assessment) {
+    //   dispatch(deleteFromLike(activeNotice[0]._id));
+    //   // ||
+    //   // dispatch(deleteFromDislike(activeNotice[0]._id));
+    //   return;
+    // }
+    // dispatch(addToLike(activeNotice[0]._id));
+    // ||
+    // dispatch(addToDislike(activeNotice[0]._id));
     if (assessment) {
-      dispatch(deleteFromLike(activeNotice[0]._id)) ||
-        dispatch(deleteFromDislike(activeNotice[0]._id));
+      dispatch(deleteFromFavorite(activeNotice[0]._id));
       return;
     }
-    dispatch(addToLike(activeNotice[0]._id)) ||
-      dispatch(addToDislike(activeNotice[0]._id));
+    dispatch(addToFavorite(activeNotice[0]._id));
   };
 
   return (

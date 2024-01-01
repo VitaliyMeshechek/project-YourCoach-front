@@ -94,12 +94,18 @@ const CoachProgramDetailsModal = ({ details, handleFavorite }) => {
             </InfoNameList>
             <InfoValueList>
               <InfoValue>
-                {name} || {fitnessWeigth} || {fitnessStrength} ||{' '}
-                {fitnessWellness}
+                {name}
+                {/* || {fitnessWeigth}
+                              || {fitnessStrength}
+                              || {fitnessWellness} */}
               </InfoValue>
               <InfoValue>
-                {aerobic} || {strong} || {health} || {functions} || {step} ||{' '}
-                {impact}
+                {aerobic}
+                {/* || {strong}
+                              || {health}
+                              || {functions}
+                              || {step}
+                              || {impact} */}
               </InfoValue>
               <InfoValue>{description}</InfoValue>
               <InfoValue>{special}</InfoValue>

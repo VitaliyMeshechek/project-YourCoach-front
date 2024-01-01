@@ -74,6 +74,17 @@ const ChooseCategory = ({ formData, setFormData, nextStep, cancel }) => {
       <RadioCategoryLabel htmlFor="flexibility and wellness">
         Гнучкість та оздоровлення
       </RadioCategoryLabel>
+      <AddFormRadioButton
+        type="radio"
+        name="category"
+        value="your program"
+        id="your program"
+        checked={formData.category === 'your program'}
+        onChange={handleCategoryChange}
+      />
+      <RadioCategoryLabel htmlFor="your program">
+        Індивідуальна програма
+      </RadioCategoryLabel>
       <AddFormButtonWrapper>
         <AddFormButtonNext
           isDisabled={isDisabled}

@@ -6,13 +6,20 @@ import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import { TbGenderFemale, TbGenderMale } from 'react-icons/tb';
 // import { getAge } from 'utils/getAge';
 import { useAuth } from 'hooks';
-import { selectLike, selectDislike, selectOwn } from 'redux/notices/selectors';
+import {
+  selectLike,
+  selectDislike,
+  selectRating,
+  selectOwn,
+} from 'redux/notices/selectors';
 
 import {
   addToLike,
   addToDislike,
   deleteFromLike,
   deleteFromDislike,
+  addToFavorite,
+  deleteFromFavorite,
 } from 'redux/notices/operations';
 import {
   Category,
@@ -46,6 +53,7 @@ export const OurCoachesItems = coaches => {
   const coachDislike = useSelector(selectDislike).find(
     item => item._id === _id
   );
+  const ratingItem = useSelector(selectRating).find(item => item._id === _id);
   const ownCoach = useSelector(selectOwn).find(item => item._id === _id);
 
   useEffect(() => {
@@ -71,13 +79,16 @@ export const OurCoachesItems = coaches => {
     if (ownCoach) {
       setOwn(true);
     }
-    if (coachLike) {
+    if (ratingItem) {
       setFavStyle(true);
     }
-    if (coachDislike) {
-      setFavStyle(true);
-    }
-  }, [coachLike, coachDislike, ownCoach]);
+    // if (coachLike) {
+    //   setFavStyle(true);
+    // }
+    // if (coachDislike) {
+    //   setFavStyle(true);
+    // }
+  }, [coachLike, coachDislike, ratingItem, ownCoach]);
 
   const handleAssessment = e => {
     e.preventDefault();
@@ -85,19 +96,27 @@ export const OurCoachesItems = coaches => {
       setFavStyle(false);
       return;
     }
-    if (coachLike) {
-      dispatch(deleteFromLike(_id));
+    if (ratingItem) {
+      dispatch(deleteFromFavorite(_id));
       setFavStyle(false);
 
       return;
     }
-    if (coachDislike) {
-      dispatch(deleteFromDislike(_id));
-      setFavStyle(false);
+    dispatch(addToFavorite(_id));
+    // if (coachLike) {
+    //   dispatch(deleteFromLike(_id));
+    //   setFavStyle(false);
 
-      return;
-    }
-    dispatch(addToLike(_id)) || dispatch(addToDislike(_id));
+    //   return;
+    // }
+    // if (coachDislike) {
+    //   dispatch(deleteFromDislike(_id));
+    //   setFavStyle(false);
+
+    //   return;
+    // }
+    // dispatch(addToLike(_id));
+    // || dispatch(addToDislike(_id));
   };
 
   const handleDeleteOwnCoach = e => {

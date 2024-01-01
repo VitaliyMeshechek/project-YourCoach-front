@@ -28,7 +28,7 @@ export const store = configureStore({
     showModal: modalReducer,
     program: programReducer,
     user: userDataReducer,
-    noticesPage: noticesPageReducer,
+    notices: noticesPageReducer,
     query: queryReducer,
   },
   middleware: getDefaultMiddleware =>

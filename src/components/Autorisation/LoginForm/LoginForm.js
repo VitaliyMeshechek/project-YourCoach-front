@@ -72,7 +72,7 @@ export const LoginForm = () => {
     >
       {({ errors, touched }) => (
         <Forms autoComplete="off">
-          <FormTitle>Login </FormTitle>
+          <FormTitle>Увійти </FormTitle>
           <Label>
             <Input
               type="email"
@@ -123,15 +123,15 @@ export const LoginForm = () => {
             )}
           </Label>
 
-          <Button type="submit">Login</Button>
+          <Button type="submit">Вхід</Button>
 
           <Subtitle>
-            Don't have an account?
+            Немає облікового запису?
             <NavLink
               to="/register"
               style={{ color: '#54ADFF', marginLeft: '4px' }}
             >
-              Register
+              Зареєструватися
             </NavLink>
           </Subtitle>
         </Forms>

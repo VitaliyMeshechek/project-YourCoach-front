@@ -3,11 +3,15 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://project-yourcoach-back.onrender.com/api';
 
+export const setAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
 export const updateUser = createAsyncThunk(
-  'users/updateUser',
+  'user/updateUser',
   async (values, thunkAPI) => {
     try {
-      const response = await axios.patch('/cardProgram', values);
+      const response = await axios.patch('/cardPrograms', values);
 
       return response.data;
     } catch (e) {
@@ -16,13 +20,13 @@ export const updateUser = createAsyncThunk(
   }
 );
 export const updateUserPhoto = createAsyncThunk(
-  'users/updateUserPhoto',
+  'user/updateUserPhoto',
   async (values, thunkAPI) => {
     try {
       const formData = new FormData();
       formData.append('file', values);
 
-      const response = await axios.patch('/cardProgram', formData);
+      const response = await axios.patch('/cardPrograms', formData);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -31,10 +35,10 @@ export const updateUserPhoto = createAsyncThunk(
 );
 
 export const fetchPrograms = createAsyncThunk(
-  'program/fetchAll',
+  'programs/fetchPrograms',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get('/cardProgram');
+      const response = await axios.get('/cardPrograms');
 
       return response.data.user.programs;
     } catch (e) {
@@ -46,8 +50,11 @@ export const fetchPrograms = createAsyncThunk(
 export const addProgram = createAsyncThunk(
   'programs/addProgram',
   async (program, thunkAPI) => {
+    const { token } = thunkAPI.getState().auth;
     try {
-      const response = await axios.post('/cardProgram/program', program);
+      setAuthHeader(token);
+      const response = await axios.post('/cardPrograms/program', program);
+      console.log('addProgram', response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -56,10 +63,10 @@ export const addProgram = createAsyncThunk(
 );
 
 export const deleteProgram = createAsyncThunk(
-  'program/deleteProgram',
+  'programs/deleteProgram',
   async (id, thunkAPI) => {
     try {
-      const response = await axios.delete(`/cardProgram/program/${id}`);
+      const response = await axios.delete(`/cardPrograms/program/${id}`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

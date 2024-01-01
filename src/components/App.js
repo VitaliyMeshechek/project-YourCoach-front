@@ -1,5 +1,9 @@
 import { MainBackground } from './App.styled';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useAuth } from 'hooks/useAuth';
+import { refreshUser } from 'redux/auth/operations';
 import SharedLayout from './SharedLayout/SharedLayout';
 import RegisterPage from 'pages/RegisterPage/RegisterPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
@@ -8,10 +12,19 @@ import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
 import AddProgramPage from 'pages/AddProgramPage/AddProgramPage';
 import CustomerPage from 'pages/CustomerPage/CustomerPage';
-import OurCoachesList from './OurCoaches/OurCoachesList';
+import OurCoachesList from './OurCoaches/OurCoachesList/OurCoachesList';
+import { Loader } from 'Loader/Loader';
 
 export const App = () => {
-  return (
+  const { isRefreshing } = useAuth();
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+  return isRefreshing ? (
+    <Loader />
+  ) : (
     <MainBackground>
       <Routes>
         <Route path="/" element={<SharedLayout />}></Route>

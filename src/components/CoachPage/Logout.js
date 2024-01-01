@@ -12,7 +12,7 @@ export const Logout = ({ toggleModal }) => {
           marginRight: '16px',
         }}
       />
-      Log Out
+      Вийти
     </ButtonLogout>
   );
 };

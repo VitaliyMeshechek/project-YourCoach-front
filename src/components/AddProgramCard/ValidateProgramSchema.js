@@ -3,8 +3,8 @@ import * as Yup from 'yup';
 export const ValidateProgramSchema = Yup.object().shape({
   title: Yup.string()
     .min(2, 'Title must be at least 2 characters')
-    .max(16, 'Title must not exceed 16 characters')
-    .required('Title is required'),
+    .max(16, 'Title must not exceed 16 characters'),
+  // .required('Title is required'),
   category: Yup.string()
     .oneOf(
       [
@@ -67,12 +67,10 @@ export const ValidateProgramSchema = Yup.object().shape({
   training: Yup.string()
     .oneOf(['Персональні тренування', 'Групові тренування'], 'training')
     .required('Field training is required'),
-  location: Yup.string()
-    .matches(/^[A-Za-z\s]+$/i, 'Невірний формат')
-    .required('Location is required'),
-  price: Yup.number()
-    .positive('Price must be greater than 0')
-    .required('Price is required'),
+  location: Yup.string().matches(/^[A-Za-z\s]+$/i, 'Невірний формат'),
+  // .required('Location is required'),
+  price: Yup.number().positive('Price must be greater than 0'),
+  // .required('Price is required'),
   comments: Yup.string().test(
     'comments',
     'Comments must be between 10 and 120 characters',

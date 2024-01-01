@@ -13,49 +13,49 @@ import { useDispatch } from 'react-redux';
 import { logOut } from '../../redux/auth/operations';
 
 import { useState, useEffect } from 'react';
-// import CongratsModal from 'components/ReusableComponents/Modal/CongratsModal';
-// import LeavingModal from 'components/ReusableComponents/Modal/LeavingModal';
 import { showModal } from '../../redux/modal/slice';
 import { updateUser } from '../../redux/user/operations';
 import { useAuth } from '../../hooks/useAuth';
 import { ProgramData } from './ProgramData';
 import AddProgramBtn from 'components/AddProgramBtn/AddProgramBtn';
+import CongratsModal from 'components/ReusableComponents/ModalWindows/CongratsModal/CongratsModal';
+import LeavingModal from 'components/ReusableComponents/ModalWindows/LeavingModal/LeavingModal';
 
 export const CoachPageInfo = () => {
   const { user } = useAuth();
-  const [firstLog, setfirstLog] = useState(user.firstLogin);
+  const [isfirstLogin, setIsFirstLogin] = useState(user.firstLogin);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!firstLog) {
+    if (!isfirstLogin) {
       dispatch(showModal(false));
     } else {
       dispatch(showModal(true));
     }
-  }, [firstLog, dispatch]);
+  }, [isfirstLogin, dispatch]);
 
   const toggleModal = () => {
     dispatch(showModal(true));
   };
 
-  //   const approveLogOut = async () => {
-  //     await dispatch(logOut());
-  //   };
+  const approveLogOut = async () => {
+    await dispatch(logOut());
+  };
 
-  //   const toggleFirstLogin = () => {
-  //     setfirstLog(false);
-  //     dispatch(updateUser({ firstLogin: 'false' }));
-  //   };
+  const toggleFirstLogin = () => {
+    setIsFirstLogin(false);
+    dispatch(updateUser({ firstLogin: 'false' }));
+  };
 
   return (
     <div>
-      {/* {firstLog && <CongratsModal func={toggleFirstLogin} />}
-      {!firstLog && <LeavingModal approveHandle={approveLogOut} />} */}
+      {isfirstLogin && <CongratsModal func={toggleFirstLogin} />}
+      {!isfirstLogin && <LeavingModal approveHandle={approveLogOut} />}
 
       <CoachPageContainer>
         <CoachBlock>
-          <Header>Моя інформація:</Header>
+          <Header>Моя інформація</Header>
 
           <ContainerCoach>
             <CoachData />
@@ -63,11 +63,11 @@ export const CoachPageInfo = () => {
           </ContainerCoach>
         </CoachBlock>
         <ProgramBlock>
-          <ProgramData />
           <MyProgramHeaderContainer>
             <Header>Моя програма:</Header>
             <AddProgramBtn text="Додати програму" path="/add-program" />
           </MyProgramHeaderContainer>
+          <ProgramData />
         </ProgramBlock>
       </CoachPageContainer>
     </div>

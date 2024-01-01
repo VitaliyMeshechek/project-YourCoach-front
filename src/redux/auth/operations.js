@@ -73,11 +73,11 @@ export const refreshUser = createAsyncThunk(
   }
 );
 
-export const addMyPet = createAsyncThunk(
-  'user/addMyPet',
+export const addMyProgram = createAsyncThunk(
+  'user/addMyProgram',
   async (credentials, thunkAPI) => {
     try {
-      await axios.post('/pets', credentials);
+      await axios.post('/programs', credentials);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

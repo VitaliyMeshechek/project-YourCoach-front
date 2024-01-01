@@ -8,6 +8,7 @@ export const userDataSlice = createSlice({
     items: [],
     isLoading: false,
     error: null,
+    avatarUrl: null,
   },
   extraReducers: builder => {
     builder
@@ -16,11 +17,13 @@ export const userDataSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
+        state.avatarUrl = action.payload;
       })
       .addCase(updateUserPhoto.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
+        state.avatarUrl = action.payload;
       })
 
       .addMatcher(
@@ -52,9 +55,7 @@ export const programsSlice = createSlice({
       .addCase(fetchPrograms.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        // console.log(action.payload);
         state.program = action.payload;
-        // console.log( state.pet);
       })
       .addCase(addProgram.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -65,7 +66,7 @@ export const programsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         console.log(action.payload.id);
-        console.log(state.program);
+        console.log('state.program', state.program);
         state.program = state.program.filter(
           program => program._id !== action.payload.id
         );

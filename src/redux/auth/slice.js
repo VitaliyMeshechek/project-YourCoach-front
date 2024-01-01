@@ -9,7 +9,7 @@ const authSlice = createSlice({
       name: null,
       email: null,
       avatar: null,
-      birthday: null,
+      experience: null,
       phone: null,
       city: null,
     },

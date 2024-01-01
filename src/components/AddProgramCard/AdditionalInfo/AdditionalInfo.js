@@ -51,7 +51,8 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
       formData.category === 'fitnes for women' &&
       formData.category === 'weigth' &&
       formData.category === 'strength fitness' &&
-      formData.category === 'flexibility and wellness'
+      formData.category === 'flexibility and wellness' &&
+      formData.category === 'your program'
     ) {
       setIsDisabled(
         !(
@@ -102,13 +103,6 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
             htmlFor="program-image"
             category={formData.category}
           >
-            {formData.category === 'fitnes for women' &&
-            formData.category === 'weigth' &&
-            formData.category === 'strength fitness' &&
-            formData.category === 'flexibility and wellness' &&
-            viewportWidth < 768
-              ? 'Add photo'
-              : 'Load the program is image:'}
             <AddFormImageWrapper>
               {!formData.avatarUrl && <BsPlus size="90" />}
               {!!formData.avatarUrl && (

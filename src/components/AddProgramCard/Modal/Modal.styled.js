@@ -15,7 +15,7 @@ export const Backdrop = styled.div`
   height: 100vh;
 
   background: rgba(87, 86, 86, 0.6);
-  /* z-index: 1200000000000000000000000000000000000000000; */
+  z-index: 1200000000000000000000000000000000000000000;
 `;
 
 export const ModalWindow = styled.div`
@@ -31,7 +31,7 @@ export const ModalWindow = styled.div`
   border-radius: 20px;
   background-color: ${colors.white};
 
-  /* z-index: 100000000; */
+  z-index: 100000000;
 
   @media screen and (min-width: ${breakPoints.tablet}) {
     justify-content: center;

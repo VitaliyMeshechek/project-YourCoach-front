@@ -13,17 +13,17 @@ import {
 } from './ProgramForm.styled';
 
 import { addNotice } from 'redux/notices/operations';
-// import { addMyPet } from 'redux/auth/operations';
 import { addProgram } from 'redux/user/operations';
 
 import { ValidateProgramSchema } from '../ValidateProgramSchema';
-import Modal from '../../ReusableComponents/ModalWindows/ModalMenu/ModalMenu';
+import Modal from '../Modal/Modal';
 import AddProgramModal from '../../ReusableComponents/ModalWindows/AddProgramModal/AddProgramModal';
 // import AddModal from 'components/ReusableComponents/Modal/AddModal';
 
 import AdditionalInfo from '../AdditionalInfo/AdditionalInfo';
 import ChooseCategory from '../ChooseCategory/ChooseCategory';
 import ProgramDetails from '../ProgramDetails/ProgramDetails';
+import CongratsModal from 'components/ReusableComponents/ModalWindows/CongratsModal/CongratsModal';
 
 const AddProgramForm = () => {
   const [formData, setFormData] = useState({
@@ -48,6 +48,11 @@ const AddProgramForm = () => {
     avatarUrl: null,
     duration: 0,
     price: 0,
+    nameYourProgram: '',
+    typeYourProgram: '',
+    descriptionYourProgram: '',
+    durationYourProgram: '',
+    trainingYourProgram: '',
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [step, setStep] = useState(0);
@@ -66,6 +71,7 @@ const AddProgramForm = () => {
       'strength fitness': 'Додавання програми для силового фітнесу',
       'flexibility and wellness':
         'Додавання програми гнучкості та оздоровлення',
+      'your program': 'Додавання своєї програми',
       '': 'Додавання програми',
     };
 
@@ -105,24 +111,36 @@ const AddProgramForm = () => {
 
     const newFormData = new FormData();
     newFormData.append('category', formData.category);
-    newFormData.append('name', formData.name);
-    newFormData.append('aerobic', formData.aerobic);
+    newFormData.append('nameYourProgram', formData.nameYourProgram);
+    newFormData.append('typeYourProgram', formData.typeYourProgram);
     newFormData.append('description', formData.description);
-    newFormData.append('training', formData.training);
     newFormData.append('duration', formData.duration);
+    newFormData.append('training', formData.training);
     newFormData.append('avatar', formData.avatar);
-
-    if (formData.category === 'fitnes for women') {
-      dispatch(addProgram(newFormData));
-      toggleModal();
-      return;
-    }
+    newFormData.append('location', formData.location);
+    newFormData.append('price', formData.price);
 
     if (formData.comments) {
       newFormData.append('comments', formData.comments);
     }
 
-    newFormData.append('category', formData.category);
+    if (formData.category === 'your program') {
+      dispatch(addProgram(newFormData));
+      toggleModal();
+      return;
+    }
+
+    newFormData.delete('category', formData.category);
+    newFormData.append('name', formData.name);
+    newFormData.append('strong', formData.strong);
+    newFormData.append('health', formData.health);
+    newFormData.append('functions', formData.functions);
+
+    if (formData.category === 'fitnes for women') {
+      dispatch(addNotice({ category: 'fitnes for women', newFormData }));
+      toggleModal();
+    }
+
     newFormData.append('fitnessWellness', formData.fitnessWellness);
 
     if (formData.category === 'flexibility and wellness') {
@@ -132,8 +150,10 @@ const AddProgramForm = () => {
       toggleModal();
     }
 
-    newFormData.append('category', formData.category);
     newFormData.append('fitnessStrength', formData.fitnessStrength);
+    newFormData.append('step', formData.step);
+    newFormData.append('impact', formData.impact);
+    newFormData.append('special', formData.special);
 
     if (formData.category === 'strength fitness') {
       dispatch(addNotice({ category: 'strength fitness', newFormData }));
@@ -141,9 +161,8 @@ const AddProgramForm = () => {
       return;
     }
 
-    newFormData.append('category', formData.category);
     newFormData.append('fitnessWeigth', formData.fitnessWeigth);
-    newFormData.append('special', formData.special);
+    newFormData.append('food', formData.food);
 
     if (formData.category === 'weigth') {
       dispatch(addNotice({ category: formData.category, newFormData }));

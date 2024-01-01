@@ -12,6 +12,9 @@ import {
   fetchUsersNotices,
   deleteUserNotice,
   fetchUserById,
+  fetchFavorites,
+  addToFavorite,
+  deleteFromFavorite,
 } from './operations';
 
 const handlePending = state => {
@@ -28,9 +31,10 @@ const noticesPageSlice = createSlice({
     items: [],
     isLoading: false,
     error: null,
-    like: [],
-    dislike: [],
-    forCoach: [],
+    // like: [],
+    // dislike: [],
+    rating: [],
+    own: [],
     user: {},
   },
 
@@ -58,66 +62,92 @@ const noticesPageSlice = createSlice({
       state.items = action.payload;
     },
     [fetchNotices.rejected]: handleRejected,
-
-    [fetchLike.pending]: handlePending,
-    [fetchLike.fulfilled](state, action) {
+    [fetchFavorites.pending]: handlePending,
+    [fetchFavorites.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.like = action.payload;
+      state.rating = action.payload;
     },
-    [fetchLike.rejected]: handleRejected,
+    [fetchFavorites.rejected]: handleRejected,
 
-    [fetchDislike.pending]: handlePending,
-    [fetchDislike.fulfilled](state, action) {
+    [addToFavorite.pending]: handlePending,
+    [addToFavorite.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.dislike = action.payload;
+      state.rating.push(action.payload);
     },
-    [fetchDislike.rejected]: handleRejected,
+    [addToFavorite.rejected]: handleRejected,
 
-    [addToLike.pending]: handlePending,
-    [addToLike.fulfilled](state, action) {
+    [deleteFromFavorite.pending]: handlePending,
+    [deleteFromFavorite.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.like.push(action.payload);
-    },
-    [addToLike.rejected]: handleRejected,
-
-    [addToDislike.pending]: handlePending,
-    [addToDislike.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.dislike.push(action.payload);
-    },
-    [addToDislike.rejected]: handleRejected,
-
-    [deleteFromLike.pending]: handlePending,
-    [deleteFromLike.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      const index = state.like.findIndex(
+      const index = state.rating.findIndex(
         contact => contact.id === action.payload.id
       );
-      state.like.splice(index, 1);
+      state.rating.splice(index, 1);
     },
-    [deleteFromLike.rejected]: handleRejected,
+    [deleteFromFavorite.rejected]: handleRejected,
 
-    [deleteFromDislike.pending]: handlePending,
-    [deleteFromDislike.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      const index = state.dislike.findIndex(
-        contact => contact.id === action.payload.id
-      );
-      state.dislike.splice(index, 1);
-    },
-    [deleteFromDislike.rejected]: handleRejected,
+    // [fetchLike.pending]: handlePending,
+    // [fetchLike.fulfilled](state, action) {
+    //   state.isLoading = false;
+    //   state.error = null;
+    //   state.like = action.payload;
+    // },
+    // [fetchLike.rejected]: handleRejected,
+
+    // [fetchDislike.pending]: handlePending,
+    // [fetchDislike.fulfilled](state, action) {
+    //   state.isLoading = false;
+    //   state.error = null;
+    //   state.dislike = action.payload;
+    // },
+    // [fetchDislike.rejected]: handleRejected,
+
+    // [addToLike.pending]: handlePending,
+    // [addToLike.fulfilled](state, action) {
+    //   state.isLoading = false;
+    //   state.error = null;
+    //   state.like.push(action.payload);
+    // },
+    // [addToLike.rejected]: handleRejected,
+
+    // [addToDislike.pending]: handlePending,
+    // [addToDislike.fulfilled](state, action) {
+    //   state.isLoading = false;
+    //   state.error = null;
+    //   state.dislike.push(action.payload);
+    // },
+    // [addToDislike.rejected]: handleRejected,
+
+    // [deleteFromLike.pending]: handlePending,
+    // [deleteFromLike.fulfilled](state, action) {
+    //   state.isLoading = false;
+    //   state.error = null;
+    //   const index = state.like.findIndex(
+    //     contact => contact.id === action.payload.id
+    //   );
+    //   state.like.splice(index, 1);
+    // },
+    // [deleteFromLike.rejected]: handleRejected,
+
+    // [deleteFromDislike.pending]: handlePending,
+    // [deleteFromDislike.fulfilled](state, action) {
+    //   state.isLoading = false;
+    //   state.error = null;
+    //   const index = state.dislike.findIndex(
+    //     contact => contact.id === action.payload.id
+    //   );
+    //   state.dislike.splice(index, 1);
+    // },
+    // [deleteFromDislike.rejected]: handleRejected,
 
     [fetchUsersNotices.pending]: handlePending,
     [fetchUsersNotices.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.forCoach = action.payload;
+      state.own = action.payload;
     },
     [fetchUsersNotices.rejected]: handleRejected,
 
@@ -125,10 +155,10 @@ const noticesPageSlice = createSlice({
     [deleteUserNotice.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      const index = state.forCoach.findIndex(
+      const index = state.own.findIndex(
         contact => contact.id === action.payload.id
       );
-      state.forCoach.splice(index, 1);
+      state.own.splice(index, 1);
     },
     [deleteUserNotice.rejected]: handleRejected,
 

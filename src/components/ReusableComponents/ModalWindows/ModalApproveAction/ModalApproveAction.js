@@ -11,7 +11,7 @@ import {
 } from '../ModalApproveAction/ModalApproveAction.styled';
 
 import ModalWrapper from '../ModalWrapper/ModalWrapper';
-// import { IconPaw } from '../CongratsModal/CongratsModal.styled';
+import { IconPaw } from '../CongratsModal/CongratsModal.styled';
 
 const ModalApproveAction = ({
   children,
@@ -41,7 +41,7 @@ const ModalApproveAction = ({
               {approved}
               {icon === 'TrashIcon' && <TrashIcon />}
               {icon === 'ExitIcon' && <ExitIcon />}
-              {/* {icon === 'IconPaw' && <IconPaw />} */}
+              {icon === 'IconPaw' && <IconPaw />}
             </ApproveButtonText>
           </ApproveButton>
         </ButtonFlexWrapper>
