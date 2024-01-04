@@ -25,9 +25,7 @@ export const ProgramData = () => {
   }, [dispatch]);
 
   const visiblePrograms = program
-    ? program.filter(program =>
-        program.formData.category.includes('your program')
-      )
+    ? program.filter(program => program.category.includes('your program'))
     : [];
   console.log('visiblePrograms', visiblePrograms);
   return (
@@ -38,8 +36,7 @@ export const ProgramData = () => {
   );
 };
 
-const ProgramList = props => {
-  const { programs } = props;
+const ProgramList = ({ programs }) => {
   return (
     <div>
       {programs && (
@@ -53,18 +50,28 @@ const ProgramList = props => {
   );
 };
 
-const ProgramItem = ({ item }) => {
-  const {
-    photo,
-    category,
-    nameYourProgram,
-    typeYourProgram,
-    description,
-    duration,
-    training,
-    comments,
-    _id,
-  } = item;
+const ProgramItem = ({
+  photo,
+  category,
+  nameYourProgram,
+  typeYourProgram,
+  description,
+  duration,
+  training,
+  comments,
+  _id,
+}) => {
+  // const {
+  //   photo,
+  //   category,
+  //   nameYourProgram,
+  //   typeYourProgram,
+  //   description,
+  //   duration,
+  //   training,
+  //   comments,
+  //   _id,
+  // } = item;
 
   const dispatch = useDispatch();
 

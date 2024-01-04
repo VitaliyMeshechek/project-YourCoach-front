@@ -67,10 +67,12 @@ export const ValidateProgramSchema = Yup.object().shape({
   training: Yup.string()
     .oneOf(['Персональні тренування', 'Групові тренування'], 'training')
     .required('Field training is required'),
-  location: Yup.string().matches(/^[A-Za-z\s]+$/i, 'Невірний формат'),
-  // .required('Location is required'),
-  price: Yup.number().positive('Price must be greater than 0'),
-  // .required('Price is required'),
+  location: Yup.string()
+    .matches(/^[A-Za-z\s]+$/i, 'Невірний формат')
+    .required('Location is required'),
+  price: Yup.number()
+    .positive('Price must be greater than 0')
+    .required('Price is required'),
   comments: Yup.string().test(
     'comments',
     'Comments must be between 10 and 120 characters',
@@ -97,11 +99,19 @@ export const ValidateProgramSchema = Yup.object().shape({
       'Поле не може бути пустим'
     )
     .required('Field special is required'),
-  avatar: Yup.mixed().test(
+  avatarUrl: Yup.mixed().test(
     'fileSize',
     'File size must not exceed 3MB',
     value => value && value.size <= 3 * 1024 * 1024
   ),
+  nameYourProgram: Yup.string()
+    .min(3, 'Description must be at least 10 characters')
+    .max(30, 'Description must not exceed 30 characters')
+    .required('Поле необхідно заповнити'),
+  typeYourProgram: Yup.string()
+    .min(3, 'Description must be at least 10 characters')
+    .max(30, 'Description must not exceed 30 characters')
+    .required('Поле необхідно заповнити'),
 });
 
 export const validateField = async (fieldName, value, setErrors) => {

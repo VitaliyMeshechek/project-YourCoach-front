@@ -47,14 +47,14 @@ export const fetchPrograms = createAsyncThunk(
   }
 );
 
-export const addProgram = createAsyncThunk(
-  'programs/addProgram',
+export const addCoachProgram = createAsyncThunk(
+  'programs/addCoachProgram',
   async (program, thunkAPI) => {
     const { token } = thunkAPI.getState().auth;
     try {
       setAuthHeader(token);
       const response = await axios.post('/cardPrograms/program', program);
-      console.log('addProgram', response.data);
+      console.log('addCoachProgram', response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

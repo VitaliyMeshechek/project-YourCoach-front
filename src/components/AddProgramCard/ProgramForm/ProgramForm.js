@@ -13,7 +13,7 @@ import {
 } from './ProgramForm.styled';
 
 import { addNotice } from 'redux/notices/operations';
-import { addProgram } from 'redux/user/operations';
+import { addCoachProgram } from 'redux/user/operations';
 
 import { ValidateProgramSchema } from '../ValidateProgramSchema';
 import Modal from '../Modal/Modal';
@@ -125,7 +125,7 @@ const AddProgramForm = () => {
     }
 
     if (formData.category === 'your program') {
-      dispatch(addProgram(newFormData));
+      dispatch(addCoachProgram(newFormData));
       toggleModal();
       return;
     }

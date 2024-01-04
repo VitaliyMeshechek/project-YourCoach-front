@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { deleteProgram, fetchPrograms, addProgram } from './operations';
+import { deleteProgram, fetchPrograms, addCoachProgram } from './operations';
 import { updateUser, updateUserPhoto } from './operations';
 
 export const userDataSlice = createSlice({
@@ -8,7 +8,6 @@ export const userDataSlice = createSlice({
     items: [],
     isLoading: false,
     error: null,
-    avatarUrl: null,
   },
   extraReducers: builder => {
     builder
@@ -17,13 +16,11 @@ export const userDataSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
-        state.avatarUrl = action.payload;
       })
       .addCase(updateUserPhoto.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
-        state.avatarUrl = action.payload;
       })
 
       .addMatcher(
@@ -57,7 +54,7 @@ export const programsSlice = createSlice({
         state.error = null;
         state.program = action.payload;
       })
-      .addCase(addProgram.fulfilled, (state, action) => {
+      .addCase(addCoachProgram.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
@@ -75,7 +72,7 @@ export const programsSlice = createSlice({
       .addMatcher(
         isAnyOf(
           fetchPrograms.pending,
-          addProgram.pending,
+          addCoachProgram.pending,
           deleteProgram.pending
         ),
         state => {
@@ -85,7 +82,7 @@ export const programsSlice = createSlice({
       .addMatcher(
         isAnyOf(
           fetchPrograms.rejected,
-          addProgram.rejected,
+          addCoachProgram.rejected,
           deleteProgram.rejected
         ),
         (state, action) => {
