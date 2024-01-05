@@ -38,7 +38,7 @@ export const getCurrentPrograms = createAsyncThunk(
   'programs/getCurrentPrograms',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get('/user/programs');
+      const response = await axios.get('/programs');
 
       return response.data.user.programs;
     } catch (e) {
@@ -53,7 +53,7 @@ export const addUserProgram = createAsyncThunk(
     const { token } = thunkAPI.getState().auth;
     try {
       setAuthHeader(token);
-      const response = await axios.post('/user/program', program);
+      const response = await axios.post('/user/programs', program);
       console.log('addUserProgram', response.data);
       return response.data;
     } catch (e) {
