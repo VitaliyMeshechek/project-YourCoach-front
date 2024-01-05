@@ -53,7 +53,7 @@ export const addUserProgram = createAsyncThunk(
     const { token } = thunkAPI.getState().auth;
     try {
       setAuthHeader(token);
-      const response = await axios.post('/program', program);
+      const response = await axios.post('/programs', program);
       console.log('addUserProgram', response.data);
       return response.data;
     } catch (e) {
@@ -66,7 +66,7 @@ export const deleteUserProgram = createAsyncThunk(
   'programs/deleteUserProgram',
   async (id, thunkAPI) => {
     try {
-      const response = await axios.delete(`/program/${id}`);
+      const response = await axios.delete(`/programs/${id}`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
