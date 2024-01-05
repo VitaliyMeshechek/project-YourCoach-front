@@ -5,7 +5,7 @@ import {
   Input,
   DataItemContainer,
   InputContainer,
-  CoachImg,
+  UserImg,
   ButtonPhoto,
   ButtonEdit,
   Label,
@@ -13,7 +13,7 @@ import {
   PhotoContainer,
   InputPhoto,
   ButtonPhotoEdit,
-} from './CoachPage.styled';
+} from './UserPage.styled';
 import { FiCamera } from 'react-icons/fi';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { TbPencilMinus } from 'react-icons/tb';
@@ -23,7 +23,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { updateUser, updateUserPhoto } from '../../redux/user/operations';
 import PhotoDef from '../../../src/images/UserPhotoDefault.png';
 
-export const CoachData = () => {
+export const UserData = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();
 
@@ -206,7 +206,7 @@ export const CoachData = () => {
               value={''}
             />
 
-            <CoachImg src={previewUrl} alt="" />
+            <UserImg src={previewUrl} alt="" />
 
             {!isPhotoEdit && (
               <ButtonPhotoEdit>

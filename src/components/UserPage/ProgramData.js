@@ -2,7 +2,7 @@ import { selectProgram } from 'redux/user/selectors';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiTrash2 } from 'react-icons/fi';
-import { deleteProgram, fetchPrograms } from '../../redux/user/operations';
+import { deleteUserProgram, fetchPrograms } from '../../redux/user/operations';
 import {
   ContainerProgram,
   LabelProgram,
@@ -13,7 +13,7 @@ import {
   ProgramItemUl,
   MyImg,
   ButtonDeleteProgram,
-} from './CoachPage.styled';
+} from './UserPage.styled';
 
 export const ProgramData = () => {
   const dispatch = useDispatch();
@@ -50,33 +50,23 @@ const ProgramList = ({ programs }) => {
   );
 };
 
-const ProgramItem = ({
-  photo,
-  category,
-  nameYourProgram,
-  typeYourProgram,
-  description,
-  duration,
-  training,
-  comments,
-  _id,
-}) => {
-  // const {
-  //   photo,
-  //   category,
-  //   nameYourProgram,
-  //   typeYourProgram,
-  //   description,
-  //   duration,
-  //   training,
-  //   comments,
-  //   _id,
-  // } = item;
+const ProgramItem = ({ item }) => {
+  const {
+    photo,
+    category,
+    nameYourProgram,
+    typeYourProgram,
+    description,
+    duration,
+    training,
+    comments,
+    _id,
+  } = item;
 
   const dispatch = useDispatch();
 
   const handleDeleteProgram = () => {
-    dispatch(deleteProgram(_id));
+    dispatch(deleteUserProgram(_id));
   };
 
   return (

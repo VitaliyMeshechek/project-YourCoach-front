@@ -1,13 +1,13 @@
 import { Logout } from './Logout';
-import { CoachData } from './CoachData';
+import { UserData } from './UserData';
 import {
-  ContainerCoach,
-  CoachPageContainer,
+  ContainerUser,
+  UserPageContainer,
   Header,
   MyProgramHeaderContainer,
-  CoachBlock,
+  UserBlock,
   ProgramBlock,
-} from './CoachPage.styled';
+} from './UserPage.styled';
 
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../redux/auth/operations';
@@ -21,7 +21,7 @@ import AddProgramBtn from 'components/AddProgramBtn/AddProgramBtn';
 import CongratsModal from 'components/ReusableComponents/ModalWindows/CongratsModal/CongratsModal';
 import LeavingModal from 'components/ReusableComponents/ModalWindows/LeavingModal/LeavingModal';
 
-export const CoachPageInfo = () => {
+export const UserPageInfo = () => {
   const { user } = useAuth();
   const [isfirstLogin, setIsFirstLogin] = useState(user.firstLogin);
 
@@ -53,15 +53,15 @@ export const CoachPageInfo = () => {
       {isfirstLogin && <CongratsModal func={toggleFirstLogin} />}
       {!isfirstLogin && <LeavingModal approveHandle={approveLogOut} />}
 
-      <CoachPageContainer>
-        <CoachBlock>
+      <UserPageContainer>
+        <UserBlock>
           <Header>Моя інформація</Header>
 
-          <ContainerCoach>
-            <CoachData />
+          <ContainerUser>
+            <UserData />
             <Logout toggleModal={toggleModal} />
-          </ContainerCoach>
-        </CoachBlock>
+          </ContainerUser>
+        </UserBlock>
         <ProgramBlock>
           <MyProgramHeaderContainer>
             <Header>Моя програма:</Header>
@@ -69,7 +69,7 @@ export const CoachPageInfo = () => {
           </MyProgramHeaderContainer>
           <ProgramData />
         </ProgramBlock>
-      </CoachPageContainer>
+      </UserPageContainer>
     </div>
   );
 };

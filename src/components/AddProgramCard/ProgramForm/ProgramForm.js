@@ -13,7 +13,7 @@ import {
 } from './ProgramForm.styled';
 
 import { addNotice } from 'redux/notices/operations';
-import { addCoachProgram } from 'redux/user/operations';
+import { addUserProgram } from 'redux/user/operations';
 
 import { ValidateProgramSchema } from '../ValidateProgramSchema';
 import Modal from '../Modal/Modal';
@@ -110,22 +110,22 @@ const AddProgramForm = () => {
     if (!formData.category) return;
 
     const newFormData = new FormData();
-    newFormData.append('category', formData.category);
-    newFormData.append('nameYourProgram', formData.nameYourProgram);
-    newFormData.append('typeYourProgram', formData.typeYourProgram);
-    newFormData.append('description', formData.description);
-    newFormData.append('duration', formData.duration);
-    newFormData.append('training', formData.training);
-    newFormData.append('avatar', formData.avatar);
-    newFormData.append('location', formData.location);
-    newFormData.append('price', formData.price);
 
     if (formData.comments) {
       newFormData.append('comments', formData.comments);
     }
 
     if (formData.category === 'your program') {
-      dispatch(addCoachProgram(newFormData));
+      newFormData.append('category', formData.category);
+      newFormData.append('nameYourProgram', formData.nameYourProgram);
+      newFormData.append('typeYourProgram', formData.typeYourProgram);
+      newFormData.append('description', formData.description);
+      newFormData.append('duration', formData.duration);
+      newFormData.append('training', formData.training);
+      newFormData.append('avatar', formData.avatar);
+      newFormData.append('location', formData.location);
+      newFormData.append('price', formData.price);
+      dispatch(addUserProgram(newFormData));
       toggleModal();
       return;
     }

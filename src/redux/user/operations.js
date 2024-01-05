@@ -11,7 +11,7 @@ export const updateUser = createAsyncThunk(
   'user/updateUser',
   async (values, thunkAPI) => {
     try {
-      const response = await axios.patch('/cardPrograms', values);
+      const response = await axios.patch('/programs', values);
 
       return response.data;
     } catch (e) {
@@ -26,7 +26,7 @@ export const updateUserPhoto = createAsyncThunk(
       const formData = new FormData();
       formData.append('file', values);
 
-      const response = await axios.patch('/cardPrograms', formData);
+      const response = await axios.patch('/programs', formData);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -38,7 +38,7 @@ export const fetchPrograms = createAsyncThunk(
   'programs/fetchPrograms',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get('/cardPrograms');
+      const response = await axios.get('/programs');
 
       return response.data.user.programs;
     } catch (e) {
@@ -47,14 +47,14 @@ export const fetchPrograms = createAsyncThunk(
   }
 );
 
-export const addCoachProgram = createAsyncThunk(
-  'programs/addCoachProgram',
+export const addUserProgram = createAsyncThunk(
+  'programs/addUserProgram',
   async (program, thunkAPI) => {
     const { token } = thunkAPI.getState().auth;
     try {
       setAuthHeader(token);
-      const response = await axios.post('/cardPrograms/program', program);
-      console.log('addCoachProgram', response.data);
+      const response = await axios.post('/user/programs', program);
+      console.log('addUserProgram', response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -62,11 +62,11 @@ export const addCoachProgram = createAsyncThunk(
   }
 );
 
-export const deleteProgram = createAsyncThunk(
-  'programs/deleteProgram',
+export const deleteUserProgram = createAsyncThunk(
+  'programs/deleteUserProgram',
   async (id, thunkAPI) => {
     try {
-      const response = await axios.delete(`/cardPrograms/program/${id}`);
+      const response = await axios.delete(`/user/programs/${id}`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

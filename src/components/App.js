@@ -7,7 +7,7 @@ import { refreshUser } from 'redux/auth/operations';
 import SharedLayout from './SharedLayout/SharedLayout';
 import RegisterPage from 'pages/RegisterPage/RegisterPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
-import CoachPage from 'pages/CoachPage/CoachPage';
+import UserPage from 'pages/UserPage/UserPage';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
 import AddProgramPage from 'pages/AddProgramPage/AddProgramPage';
@@ -47,7 +47,7 @@ export const App = () => {
         <Route
           path="user"
           element={
-            <PrivateRoute redirectTo="/login" component={<CoachPage />} />
+            <PrivateRoute redirectTo="/login" component={<UserPage />} />
           }
         />
         <Route

@@ -73,16 +73,15 @@ export const ValidateProgramSchema = Yup.object().shape({
   price: Yup.number()
     .positive('Price must be greater than 0')
     .required('Price is required'),
-  comments: Yup.string().test(
-    'comments',
-    'Comments must be between 10 and 120 characters',
-    value => {
+  comments: Yup.string()
+    .min(10, 'comments must be at least 10 characters')
+    .max(400, 'comments must not exceed 400 characters')
+    .test(value => {
       if (!value) {
         return true;
       }
-      return value.length >= 10 && value.length <= 120;
-    }
-  ),
+      return value.length >= 10 && value.length <= 400;
+    }),
   food: Yup.string()
     .oneOf(
       ['Продукти тваринного походження', 'Продукти рослиного походження'],

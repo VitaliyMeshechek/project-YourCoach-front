@@ -1,4 +1,4 @@
-import { ButtonLogout } from './CoachPage.styled';
+import { ButtonLogout } from './UserPage.styled';
 import { FiLogOut } from 'react-icons/fi';
 
 export const Logout = ({ toggleModal }) => {

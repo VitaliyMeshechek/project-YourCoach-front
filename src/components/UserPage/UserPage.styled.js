@@ -34,7 +34,7 @@ export const Header = styled.h2`
   }
   margin-bottom: 18px;
 `;
-export const CoachPageContainer = styled.div`
+export const UserPageContainer = styled.div`
   margin: auto;
   width: 280px;
 
@@ -50,7 +50,7 @@ export const CoachPageContainer = styled.div`
   }
 `;
 
-export const ContainerCoach = styled.div`
+export const ContainerUser = styled.div`
   width: 100%;
   /* border: 1px solid red; */
   border-radius: 20px;
@@ -92,7 +92,7 @@ export const ContainerProgram = styled.li`
   }
 `;
 
-export const CoachImg = styled.img`
+export const UserImg = styled.img`
   width: 182px;
   height: 182px;
   border-radius: 40px;
@@ -389,25 +389,10 @@ export const PhotoContainer = styled.div`
 `;
 export const DataContainer = styled.div``;
 
-export const CoachBlock = styled.div`
+export const UserBlock = styled.div`
   @media screen and (min-width: 1280px) {
     margin-right: 32px;
   }
 `;
 
 export const ProgramBlock = styled.div``;
-
-// export const styles = styled. `
-
-// `
-
-// export const styles = styled. `
-
-// `
-// export const styles = styled. `
-
-// `
-
-// export const styles = styled. `
-
-// `

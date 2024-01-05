@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { deleteProgram, fetchPrograms, addCoachProgram } from './operations';
+import { deleteUserProgram, fetchPrograms, addUserProgram } from './operations';
 import { updateUser, updateUserPhoto } from './operations';
 
 export const userDataSlice = createSlice({
@@ -54,12 +54,12 @@ export const programsSlice = createSlice({
         state.error = null;
         state.program = action.payload;
       })
-      .addCase(addCoachProgram.fulfilled, (state, action) => {
+      .addCase(addUserProgram.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
       })
-      .addCase(deleteProgram.fulfilled, (state, action) => {
+      .addCase(deleteUserProgram.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         console.log(action.payload.id);
@@ -72,8 +72,8 @@ export const programsSlice = createSlice({
       .addMatcher(
         isAnyOf(
           fetchPrograms.pending,
-          addCoachProgram.pending,
-          deleteProgram.pending
+          addUserProgram.pending,
+          deleteUserProgram.pending
         ),
         state => {
           state.isLoading = true;
@@ -82,8 +82,8 @@ export const programsSlice = createSlice({
       .addMatcher(
         isAnyOf(
           fetchPrograms.rejected,
-          addCoachProgram.rejected,
-          deleteProgram.rejected
+          addUserProgram.rejected,
+          deleteUserProgram.rejected
         ),
         (state, action) => {
           state.isLoading = false;
