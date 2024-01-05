@@ -2,7 +2,10 @@ import { selectProgram } from 'redux/user/selectors';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiTrash2 } from 'react-icons/fi';
-import { deleteUserProgram, fetchPrograms } from '../../redux/user/operations';
+import {
+  deleteUserProgram,
+  getCurrentPrograms,
+} from '../../redux/user/operations';
 import {
   ContainerProgram,
   LabelProgram,
@@ -21,7 +24,7 @@ export const ProgramData = () => {
   const program = useSelector(selectProgram);
 
   useEffect(() => {
-    dispatch(fetchPrograms());
+    dispatch(getCurrentPrograms());
   }, [dispatch]);
 
   const visiblePrograms = program
