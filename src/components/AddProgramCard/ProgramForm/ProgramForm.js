@@ -106,30 +106,52 @@ const AddProgramForm = () => {
     setStep(prevState => prevState - 1);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async ({
+    category,
+    nameYourProgram,
+    typeYourProgram,
+    description,
+    duration,
+    training,
+    avatarUrl,
+    location,
+    price,
+    comments,
+  }) => {
     if (!formData.category) return;
 
     const newFormData = new FormData();
+    newFormData.append('category', formData.category);
+    newFormData.append('nameYourProgram', formData.nameYourProgram);
+    newFormData.append('typeYourProgram', formData.typeYourProgram);
+    newFormData.append('description', formData.description);
+    newFormData.append('duration', formData.duration);
+    newFormData.append('training', formData.training);
+    newFormData.append('avatar', formData.avatar);
+    newFormData.append('location', formData.location);
+    newFormData.append('price', formData.price);
 
     if (formData.comments) {
       newFormData.append('comments', formData.comments);
     }
 
     if (formData.category === 'your program') {
-      newFormData.append('category', formData.category);
-      newFormData.append('nameYourProgram', formData.nameYourProgram);
-      newFormData.append('typeYourProgram', formData.typeYourProgram);
-      newFormData.append('description', formData.description);
-      newFormData.append('duration', formData.duration);
-      newFormData.append('training', formData.training);
-      newFormData.append('avatar', formData.avatar);
-      newFormData.append('location', formData.location);
-      newFormData.append('price', formData.price);
       dispatch(addUserProgram(newFormData));
       toggleModal();
       return;
     }
-
+    // {
+    // category,
+    // nameYourProgram,
+    // typeYourProgram,
+    // description,
+    // duration,
+    // training,
+    // avatarUrl,
+    // location,
+    // price,
+    // comments,
+    // }
     newFormData.delete('category', formData.category);
     newFormData.append('name', formData.name);
     newFormData.append('strong', formData.strong);
@@ -184,7 +206,7 @@ const AddProgramForm = () => {
       <Formik
         initialValues={formData}
         validationSchema={ValidateProgramSchema}
-        onSubmit={handleSubmit}
+        // onSubmit={handleSubmit}
         validateOnChange={false}
       >
         {() => (

@@ -61,7 +61,7 @@ export const programsSlice = createSlice({
       .addCase(addUserProgram.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload;
+        state.items.push(action.payload);
       })
       .addCase(deleteUserProgram.fulfilled, (state, action) => {
         state.isLoading = false;
