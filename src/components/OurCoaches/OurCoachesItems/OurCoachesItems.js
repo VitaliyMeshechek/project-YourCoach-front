@@ -23,7 +23,8 @@ import {
 } from 'redux/notices/operations';
 import {
   Category,
-  FavoriteBtn,
+  LikeBtn,
+  DislikeBtn,
   Info,
   CoachProgramBtn,
   Photo,
@@ -34,25 +35,25 @@ import {
 } from './OurCoachesItems.styled.js';
 import { showModal } from 'redux/modal/slice';
 
-export const OurCoachesItems = coaches => {
+export const OurCoachesItems = coach => {
   const {
     isDeleted,
     openModal,
-    coach: { _id, avatarUrl, category, location },
-  } = coaches;
+    coach: { _id, avatar, category, name },
+  } = coach;
 
   const { isLoggedIn } = useAuth();
-  const [newCategory, setNewCategory] = useState();
+  const [, setNewCategory] = useState();
   const [favStyle, setFavStyle] = useState(false);
   const [own, setOwn] = useState(false);
   const dispatch = useDispatch();
-  const newLocation =
-    location.length > 5 ? location.slice(0, 4) + '...' : location;
+  // const newLocation =
+  //   location.length > 5 ? location.slice(0, 4) + '...' : location;
   //   const old = getAge(birthday);
-  const coachLike = useSelector(selectLike).find(item => item._id === _id);
-  const coachDislike = useSelector(selectDislike).find(
-    item => item._id === _id
-  );
+  // const coachLike = useSelector(selectLike).find(item => item._id === _id);
+  // const coachDislike = useSelector(selectDislike).find(
+  //   item => item._id === _id
+  // );
   const ratingItem = useSelector(selectRating).find(item => item._id === _id);
   const ownCoach = useSelector(selectOwn).find(item => item._id === _id);
 
@@ -88,7 +89,7 @@ export const OurCoachesItems = coaches => {
     // if (coachDislike) {
     //   setFavStyle(true);
     // }
-  }, [coachLike, coachDislike, ratingItem, ownCoach]);
+  }, [ratingItem, ownCoach]);
 
   const handleAssessment = e => {
     e.preventDefault();
@@ -138,39 +139,28 @@ export const OurCoachesItems = coaches => {
   return (
     <>
       <Thumb>
-        <Photo src={avatarUrl} />
-        <Category>{newCategory}</Category>
-
-        <FavoriteBtn
+        <Photo src={avatar} />
+        <LikeBtn
           type="button"
           className={favStyle ? 'active' : null}
           onClick={handleAssessment}
         >
           <AiFillLike />
+        </LikeBtn>
+        <DislikeBtn
+          type="button"
+          className={favStyle ? 'active' : null}
+          onClick={handleAssessment}
+        >
           <AiFillDislike />
-        </FavoriteBtn>
+        </DislikeBtn>
 
         {own && (
           <TrashBtn type="button" onClick={handleDeleteOwnCoach}>
             <FiTrash2 />
           </TrashBtn>
         )}
-
-        {/* <TabsWrapper>
-          <Info>
-            <HiOutlineLocationMarker />
-            {newLocation}
-          </Info>
-          <Info>
-            <HiOutlineClock />
-            {old > 1 ? `${old} years` : `${old} year`}
-          </Info>
-          <Info>
-            {sex === 'female' ? <TbGenderFemale /> : <TbGenderMale />}
-            {sex}
-          </Info>
-        </TabsWrapper>
-        <Title>{title}</Title> */}
+        <Category>Назва програми: {name}</Category>
         <CoachProgramBtn onClick={handleLookDetails}>
           Ознайомитися
         </CoachProgramBtn>

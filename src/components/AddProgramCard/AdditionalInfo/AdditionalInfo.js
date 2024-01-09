@@ -30,7 +30,7 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
   const [imageValue, setImageValue] = useState('');
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
-  const isAvatarURLFieldValid = Boolean(!errors.avatar && !!formData.avatarUrl);
+  const isAvatarURLFieldValid = Boolean(!errors.avatar && !!formData.avatar);
   const isCommentsFieldValid = Boolean(!errors.comments && !!formData.coments);
   const isLocationFieldValid = Boolean(!errors.location && !!formData.location);
   const isPriceFieldValid = Boolean(!errors.price && !!formData.price);
@@ -103,24 +103,27 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
             htmlFor="program-image"
             category={formData.category}
           >
+            {/* {formData.category === 'your program' || viewportWidth < 768
+              ? 'Додати фото'
+              : 'Завантажте зображення:'} */}
             <AddFormImageWrapper>
-              {!formData.avatarUrl && <BsPlus size="90" />}
-              {!!formData.avatarUrl && (
+              {!formData.avatar && <BsPlus size="90" />}
+              {!!formData.avatar && (
                 <img
                   id="image"
-                  src={URL.createObjectURL(formData.avatarUrl)}
-                  alt={formData.avatarUrl.name}
+                  src={URL.createObjectURL(formData.avatar)}
+                  alt={formData.avatar.name}
+                  accept=".png, .jpg, .jpeg, .webp"
                 />
               )}
             </AddFormImageWrapper>
             <FileInput
               type="file"
               id="program-image"
-              name="avatarUrl"
-              accept=".png, .jpg, .jpeg, .webp"
+              name="avatar"
               onChange={handleInputChange}
               value={imageValue}
-              onBlur={() => validateField('avatarUrl', formData, setErrors)}
+              onBlur={() => validateField('avatar', formData.avatar, setErrors)}
             />
           </AddFormImageLabel>
         </FirstPartFormWrapper>

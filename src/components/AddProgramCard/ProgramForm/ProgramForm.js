@@ -45,7 +45,7 @@ const AddProgramForm = () => {
     impact: '',
     food: '',
     special: '',
-    avatarUrl: null,
+    avatar: '',
     duration: 0,
     price: 0,
     nameYourProgram: '',
@@ -106,91 +106,97 @@ const AddProgramForm = () => {
     setStep(prevState => prevState - 1);
   };
 
-  const handleSubmit = async ({
-    category,
-    nameYourProgram,
-    typeYourProgram,
-    description,
-    duration,
-    training,
-    avatarUrl,
-    location,
-    price,
-    comments,
-  }) => {
+  const handleSubmit = async () => {
     if (!formData.category) return;
 
     const newFormData = new FormData();
+
+    // if (formData.comments) {
+    //   newFormData.append('comments', formData.comments);
+    // }
     newFormData.append('category', formData.category);
     newFormData.append('nameYourProgram', formData.nameYourProgram);
     newFormData.append('typeYourProgram', formData.typeYourProgram);
-    newFormData.append('description', formData.description);
-    newFormData.append('duration', formData.duration);
-    newFormData.append('training', formData.training);
+    // newFormData.append('description', formData.description);
+    // newFormData.append('duration', formData.duration);
+    // newFormData.append('training', formData.training);
     newFormData.append('avatar', formData.avatar);
     newFormData.append('location', formData.location);
     newFormData.append('price', formData.price);
-
-    if (formData.comments) {
-      newFormData.append('comments', formData.comments);
-    }
+    newFormData.append('comments', formData.comments);
 
     if (formData.category === 'your program') {
       dispatch(addUserProgram(newFormData));
       toggleModal();
       return;
     }
-    // {
-    // category,
-    // nameYourProgram,
-    // typeYourProgram,
-    // description,
-    // duration,
-    // training,
-    // avatarUrl,
-    // location,
-    // price,
-    // comments,
-    // }
-    newFormData.delete('category', formData.category);
-    newFormData.append('name', formData.name);
-    newFormData.append('strong', formData.strong);
-    newFormData.append('health', formData.health);
-    newFormData.append('functions', formData.functions);
 
+    // newFormData.append('name', formData.name);
+    // newFormData.append('strong', formData.strong);
+    // newFormData.append('health', formData.health);
+    // newFormData.append('fitnessStrength', formData.fitnessStrength);
+    // newFormData.append('step', formData.step);
+    // newFormData.append('impact', formData.impact);
+    // newFormData.append('special', formData.special);
+    // newFormData.append('functions', formData.functions);
+    // newFormData.append('fitnessWeigth', formData.fitnessWeigth);
+    // newFormData.append('food', formData.food);
+    // newFormData.append('fitnessWellness', formData.fitnessWellness);
+
+    // newFormData.delete('category', formData.category);
+    const category = newFormData.append('category', formData.category);
+    const name = newFormData.append('name', formData.name);
+    const aerobic = newFormData.append('aerobic', formData.aerobic);
+    const avatar = newFormData.append('avatar', formData.avatar);
+    const location = newFormData.append('location', formData.location);
+    const price = newFormData.append('price', formData.price);
+    const comments = newFormData.append('comments', formData.comments);
+    // newFormData.append('strong', formData.strong);
+    // newFormData.append('health', formData.health);
+    // newFormData.append('functions', formData.functions);
     if (formData.category === 'fitnes for women') {
-      dispatch(addNotice({ category: 'fitnes for women', newFormData }));
-      toggleModal();
-    }
-
-    newFormData.append('fitnessWellness', formData.fitnessWellness);
-
-    if (formData.category === 'flexibility and wellness') {
       dispatch(
-        addNotice({ category: 'flexibility and wellness', newFormData })
+        addNotice({
+          category,
+          name,
+          aerobic,
+          avatar,
+          location,
+          price,
+          comments,
+        })
       );
       toggleModal();
     }
 
-    newFormData.append('fitnessStrength', formData.fitnessStrength);
-    newFormData.append('step', formData.step);
-    newFormData.append('impact', formData.impact);
-    newFormData.append('special', formData.special);
+    //   newFormData.append('fitnessWellness', formData.fitnessWellness);
 
-    if (formData.category === 'strength fitness') {
-      dispatch(addNotice({ category: 'strength fitness', newFormData }));
-      toggleModal();
-      return;
-    }
+    //   if (formData.category === 'flexibility and wellness') {
+    //     dispatch(
+    //       addNotice({ category: 'flexibility and wellness', newFormData })
+    //     );
+    //     toggleModal();
+    //   }
 
-    newFormData.append('fitnessWeigth', formData.fitnessWeigth);
-    newFormData.append('food', formData.food);
+    //   newFormData.append('fitnessStrength', formData.fitnessStrength);
+    //   newFormData.append('step', formData.step);
+    //   newFormData.append('impact', formData.impact);
+    //   newFormData.append('special', formData.special);
 
-    if (formData.category === 'weigth') {
-      dispatch(addNotice({ category: formData.category, newFormData }));
-      toggleModal();
-      return;
-    }
+    //   if (formData.category === 'strength fitness') {
+    //     dispatch(addNotice({ category: 'strength fitness', newFormData }));
+    //     toggleModal();
+    //     return;
+    //   }
+
+    //   newFormData.append('fitnessWeigth', formData.fitnessWeigth);
+    //   newFormData.append('food', formData.food);
+
+    //   if (formData.category === 'weigth') {
+    //     dispatch(addNotice({ category: formData.category, newFormData }));
+    //     toggleModal();
+    //     return;
+    //   }
   };
 
   return (
@@ -206,7 +212,7 @@ const AddProgramForm = () => {
       <Formik
         initialValues={formData}
         validationSchema={ValidateProgramSchema}
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         validateOnChange={false}
       >
         {() => (

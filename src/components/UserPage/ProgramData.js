@@ -28,7 +28,7 @@ export const ProgramData = () => {
   }, [dispatch]);
 
   const visiblePrograms = program
-    ? program.filter(program => program.category.includes('your program'))
+    ? program.filter(program => program.category === 'your program')
     : [];
   console.log('visiblePrograms', visiblePrograms);
   return (
@@ -53,8 +53,8 @@ const ProgramList = ({ programs }) => {
   );
 };
 
-const ProgramItem = ({ item }) => {
-  const {
+const ProgramItem = ({
+  item: {
     photo,
     category,
     nameYourProgram,
@@ -64,8 +64,8 @@ const ProgramItem = ({ item }) => {
     training,
     comments,
     _id,
-  } = item;
-
+  },
+}) => {
   const dispatch = useDispatch();
 
   const handleDeleteProgram = () => {
@@ -74,7 +74,7 @@ const ProgramItem = ({ item }) => {
 
   return (
     <ContainerProgram>
-      <MyImg src={photo} alt={nameYourProgram} />
+      <MyImg src={photo} alt="" />
 
       <InfoProgram>
         <InfoProgramItem>

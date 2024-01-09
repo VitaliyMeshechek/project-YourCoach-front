@@ -21,8 +21,16 @@ const AddProgramModal = ({ backLink, category }) => {
   //   : 'Pet was successfully added!';
 
   const buttonText =
-    category === 'your program' ? 'Go to profile' : 'Go to your adds';
-  const path = category === 'your program' ? '/user' : '/notices/my-programs';
+    category === 'your program'
+      ? 'Перейти в свій профіль'
+      : 'Перейти до всіх програм';
+  const path =
+    category === 'your program'
+      ? '/user'
+      : '/notices/fitnes for women' ||
+        '/notices/weigth' ||
+        '/notices/strength fitness' ||
+        '/notices/flexibility and wellness';
   return (
     <AddFormModalWrapper>
       <p>'Програма була успішно додана!'</p>

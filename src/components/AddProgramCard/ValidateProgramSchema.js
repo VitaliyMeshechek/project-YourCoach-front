@@ -8,40 +8,45 @@ export const ValidateProgramSchema = Yup.object().shape({
   category: Yup.string()
     .oneOf(
       [
-        'Фітнес для жінок',
-        'Програма схуднення',
+        'fitnes for women',
+        'weigth',
         'strength fitness',
         'flexibility and wellnes',
+        'your program',
       ],
       'Invalid category'
     )
     .required('Field category is required'),
-  name: Yup.string()
-    .oneOf(
-      [
-        'Аеробні програми',
-        'Силові програми',
-        'Оздоровчі програми',
-        'Функціональний фітнес',
-      ],
-      'Invalid name'
-    )
-    .required('Field name is required'),
-  aerobic: Yup.string()
-    .oneOf(['Step Aerobics', 'Fitball Aerobics', 'Інше'], 'aerobic')
-    .required('Field aerobic is required'),
-  fitnessWeigth: Yup.string()
-    .oneOf(['Аеробіка', 'Аеробний фітнес'], 'Поле не може бути пустим')
-    .required('Field name is required'),
-  fitnessStrength: Yup.string()
-    .oneOf(
-      ['Body Up', 'Body Low', 'Body Pump', 'Body Sculpt', 'ABS'],
-      'Поле не може бути пустим'
-    )
-    .required('Field name is required'),
-  fitnessWellness: Yup.string()
-    .oneOf(['Yoga', 'Pilates', 'Stretching'], 'Поле не може бути пустим')
-    .required('Field name is required'),
+  name: Yup.string().oneOf(
+    [
+      'Аеробні програми',
+      'Силові програми',
+      'Оздоровчі програми',
+      'Функціональний фітнес',
+    ],
+    'Invalid name'
+  ),
+  // .required('Field name is required'),
+  aerobic: Yup.string().oneOf(
+    ['Step Aerobics', 'Fitball Aerobics', 'Інше'],
+    'aerobic'
+  ),
+  // .required('Field aerobic is required'),
+  fitnessWeigth: Yup.string().oneOf(
+    ['Аеробіка', 'Аеробний фітнес'],
+    'Поле не може бути пустим'
+  ),
+  // .required('Field name is required'),
+  fitnessStrength: Yup.string().oneOf(
+    ['Body Up', 'Body Low', 'Body Pump', 'Body Sculpt', 'ABS'],
+    'Поле не може бути пустим'
+  ),
+  // .required('Field name is required'),
+  fitnessWellness: Yup.string().oneOf(
+    ['Yoga', 'Pilates', 'Stretching'],
+    'Поле не може бути пустим'
+  ),
+  // .required('Field name is required'),
   description: Yup.string()
     .min(10, 'Description must be at least 10 characters')
     .max(500, 'Description must not exceed 500 characters')
@@ -50,29 +55,37 @@ export const ValidateProgramSchema = Yup.object().shape({
         return true;
       }
       return value.length >= 10 && value.length <= 500;
-    })
-    .required('Поле необхідно заповнити'),
-  duration: Yup.string()
-    .oneOf(
-      [
-        '1-4 тижнів',
-        '5-8 тижнів',
-        '9-12 тижнів',
-        '12-15 тижнів',
-        'більше 15 тижнів',
-      ],
-      'duration'
-    )
-    .required('Field duration is required'),
+    }),
+  // .required('Поле необхідно заповнити'),
+  duration: Yup.string().oneOf(
+    [
+      '1-4 тижнів',
+      '5-8 тижнів',
+      '9-12 тижнів',
+      '12-15 тижнів',
+      'більше 15 тижнів',
+    ],
+    'duration'
+  ),
+  // .required('Field duration is required'),
   training: Yup.string()
-    .oneOf(['Персональні тренування', 'Групові тренування'], 'training')
-    .required('Field training is required'),
-  location: Yup.string()
-    .matches(/^[A-Za-z\s]+$/i, 'Невірний формат')
-    .required('Location is required'),
-  price: Yup.number()
-    .positive('Price must be greater than 0')
-    .required('Price is required'),
+    .oneOf(
+      ['Персональні тренування', 'Групові тренування'],
+      'Виберіть коректне значення'
+    )
+    .test('Персональні тренування', 'Групові тренування', value => {
+      if (!value) {
+        return true;
+      }
+      return (
+        value === 'Персональні тренування' || value === 'Групові тренування'
+      );
+    }),
+  // .required('Field training is required'),
+  location: Yup.string().matches(/^[A-Za-z\s]+$/i, 'Невірний формат'),
+  // .required('Location is required'),
+  price: Yup.number().positive('Price must be greater than 0'),
+  // .required('Price is required'),
   comments: Yup.string()
     .min(10, 'comments must be at least 10 characters')
     .max(400, 'comments must not exceed 400 characters')
@@ -95,22 +108,38 @@ export const ValidateProgramSchema = Yup.object().shape({
         'Консультації або поради дієтолога',
         'Можливість тренування старших груп',
       ],
-      'Поле не може бути пустим'
+      'Виберіть коректне значення'
+    )
+    .test(
+      'Підбір раціонального харчування',
+      'Консультації або поради дієтолога',
+      'Можливість тренування старших груп',
+      value => {
+        if (!value) {
+          return true;
+        }
+        return (
+          value === 'Підбір раціонального харчування' ||
+          value === 'Консультації або поради дієтолога' ||
+          value === 'Можливість тренування старших груп'
+        );
+      }
     )
     .required('Field special is required'),
-  avatarUrl: Yup.mixed().test(
-    'fileSize',
-    'File size must not exceed 3MB',
-    value => value && value.size <= 3 * 1024 * 1024
-  ),
+  avatar: Yup.mixed().test('3 * 1024 * 1024', value => {
+    if (!value || value.size <= 3 * 1024 * 1024) {
+      return true;
+    }
+    return value => value && value.size <= 3 * 1024 * 1024;
+  }),
   nameYourProgram: Yup.string()
     .min(3, 'Description must be at least 10 characters')
-    .max(30, 'Description must not exceed 30 characters')
-    .required('Поле необхідно заповнити'),
+    .max(30, 'Description must not exceed 30 characters'),
+  // .required('Поле необхідно заповнити'),
   typeYourProgram: Yup.string()
     .min(3, 'Description must be at least 10 characters')
-    .max(30, 'Description must not exceed 30 characters')
-    .required('Поле необхідно заповнити'),
+    .max(30, 'Description must not exceed 30 characters'),
+  // .required('Поле необхідно заповнити'),
 });
 
 export const validateField = async (fieldName, value, setErrors) => {

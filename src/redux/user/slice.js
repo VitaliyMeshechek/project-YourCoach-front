@@ -66,8 +66,6 @@ export const programsSlice = createSlice({
       .addCase(deleteUserProgram.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        console.log(action.payload.id);
-        console.log('state.program', state.program);
         state.program = state.program.filter(
           program => program._id !== action.payload.id
         );

@@ -1,16 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import ModalWrapper from '../ModalWrapper/ModalWrapper';
 import {
-  Desc,
   Img,
   Title,
   DescWrapper,
   InfoList,
-  InfoName,
-  InfoValue,
   InfoLink,
-  InfoNameList,
-  InfoValueList,
   ButtonFlexWrapper,
   CancelButton,
   CancelButtonText,
@@ -18,9 +13,12 @@ import {
   ApproveButtonText,
   HeartIcon,
   FlexWrapper,
-  Category,
+  InfoProgramItem,
+  LabelProgram,
+  InfoProgramText,
   ImgWrapper,
 } from './CoachProgramDetailsModal.styled.js';
+
 
 import { showModal } from 'redux/modal/slice';
 import { useEffect, useState } from 'react';
@@ -32,7 +30,7 @@ const CoachProgramDetailsModal = ({ details, handleFavorite }) => {
   const [
     {
       owner,
-      avatarUrl,
+      avatar,
       category,
       name,
       fitnessWeigth,
@@ -68,64 +66,71 @@ const CoachProgramDetailsModal = ({ details, handleFavorite }) => {
 
   return (
     <ModalWrapper padding="44px 12px 16px 12px">
+      <Title>{name}</Title>
       <FlexWrapper>
-        <ImgWrapper>
-          <Img src={avatarUrl} alt={name}></Img>
-          <Category>{category}</Category>
-        </ImgWrapper>
-
         <DescWrapper>
-          <Title>{name}</Title>
-
+          <ImgWrapper>
+            <Img src={avatar} alt=""></Img>
+          </ImgWrapper>
           <InfoList>
-            <InfoNameList>
-              <InfoName>Назва програми:</InfoName>
-              <InfoName>Тип програми:</InfoName>
-              <InfoName>Опис програми:</InfoName>
-              <InfoName>Особливості програми:</InfoName>
-              <InfoName>Підбір харчування:</InfoName>
-              <InfoName>Тривалість:</InfoName>
-              <InfoName>Тренування:</InfoName>
-              <InfoName>Місцезнаходження:</InfoName>
-              <InfoName>Ціна:</InfoName>
-              <InfoName>Коментарі:</InfoName>
-              <InfoName>Email:</InfoName>
-              <InfoName>Phone:</InfoName>
-            </InfoNameList>
-            <InfoValueList>
-              <InfoValue>
-                {name}
-                {/* || {fitnessWeigth}
-                              || {fitnessStrength}
-                              || {fitnessWellness} */}
-              </InfoValue>
-              <InfoValue>
-                {aerobic}
-                {/* || {strong}
-                              || {health}
-                              || {functions}
-                              || {step}
-                              || {impact} */}
-              </InfoValue>
-              <InfoValue>{description}</InfoValue>
-              <InfoValue>{special}</InfoValue>
-              <InfoValue>{food}</InfoValue>
-
-              <InfoValue>{duration}</InfoValue>
-              <InfoValue>{training}</InfoValue>
-              <InfoValue>{location}</InfoValue>
-              <InfoValue>{price}</InfoValue>
-              <InfoValue>{comments}</InfoValue>
-
-              <InfoValue>
+            <InfoProgramItem>
+              <LabelProgram>Категорія:</LabelProgram>
+              <InfoProgramText>{category}</InfoProgramText>
+            </InfoProgramItem>
+            <InfoProgramItem>
+              <LabelProgram>Назва програми:</LabelProgram>
+              <InfoProgramText>{name}</InfoProgramText>
+            </InfoProgramItem>
+            <InfoProgramItem>
+              <LabelProgram>Тип програми:</LabelProgram>
+              <InfoProgramText>{aerobic}</InfoProgramText>
+            </InfoProgramItem>
+            <InfoProgramItem>
+              <LabelProgram>Опис програми:</LabelProgram>
+              <InfoProgramText>{description}</InfoProgramText>
+            </InfoProgramItem>
+            <InfoProgramItem>
+              <LabelProgram>Особливості програми:</LabelProgram>
+              <InfoProgramText>{special}</InfoProgramText>
+            </InfoProgramItem>
+            <InfoProgramItem>
+              <LabelProgram>Підбір харчування:</LabelProgram>
+              <InfoProgramText>{food}</InfoProgramText>
+            </InfoProgramItem>
+            <InfoProgramItem>
+              <LabelProgram>Тривалість програми:</LabelProgram>
+              <InfoProgramText>{duration}</InfoProgramText>
+            </InfoProgramItem>
+            <InfoProgramItem>
+              <LabelProgram>Тренування:</LabelProgram>
+              <InfoProgramText>{training}</InfoProgramText>
+            </InfoProgramItem>
+            <InfoProgramItem>
+              <LabelProgram>Місцезнаходження:</LabelProgram>
+              <InfoProgramText>{location}</InfoProgramText>
+            </InfoProgramItem>
+            <InfoProgramItem>
+              <LabelProgram>Ціна:</LabelProgram>
+              <InfoProgramText>{price}</InfoProgramText>
+            </InfoProgramItem>
+            <InfoProgramItem>
+              <LabelProgram>Коментарі:</LabelProgram>
+              <InfoProgramText>{comments}</InfoProgramText>
+            </InfoProgramItem>
+            <InfoProgramItem>
+              <LabelProgram>Email:</LabelProgram>
+              <InfoProgramText>
                 <InfoLink>{user.email ? user.email : 'none'}</InfoLink>
-              </InfoValue>
-              <InfoValue>
+              </InfoProgramText>
+            </InfoProgramItem>
+            <InfoProgramItem>
+              <LabelProgram>Телефон:</LabelProgram>
+              <InfoProgramText>
                 <InfoLink href={user.phone ? user.phone : ''}>
                   {user.phone ? user.phone : ''}
                 </InfoLink>
-              </InfoValue>
-            </InfoValueList>
+              </InfoProgramText>
+            </InfoProgramItem>
           </InfoList>
         </DescWrapper>
       </FlexWrapper>

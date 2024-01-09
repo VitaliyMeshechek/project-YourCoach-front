@@ -7,10 +7,10 @@ export const Thumb = styled.div`
   align-items: center;
   width: 280px;
   padding-bottom: 20px;
-  min-height: 456px;
+  min-height: auto;
   background: #ffffff;
-  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
-  border-radius: 0px 0px 40px 40px;
+  box-shadow: 5px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 10px 10px 10px 10px;
 
   @media screen and (min-width: 768px) {
     width: 336px;
@@ -25,6 +25,7 @@ export const Photo = styled.img`
   width: 280px;
   height: 288px;
   object-fit: cover;
+  border-radius: 10px 10px 0px 0px;
 
   @media screen and (min-width: 768px) {
     width: 336px;
@@ -36,14 +37,14 @@ export const Photo = styled.img`
 `;
 
 export const Category = styled.p`
-  position: absolute;
+  /* position: absolute; */
   top: 16px;
   left: 0;
   padding: 11px 17px;
-  min-width: 126px;
+  min-width: 100%;
   height: 32px;
-  background: #cce4fb;
-  border-radius: 0px 16px 16px 0px;
+  background: #54adff;
+  /* border-radius: 16px; */
   font-weight: 500;
   font-size: 14px;
   line-height: 1.36;
@@ -51,7 +52,7 @@ export const Category = styled.p`
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #111111;
+  color: #ffffff;
 `;
 
 export const TabsWrapper = styled.div`
@@ -104,7 +105,7 @@ export const Info = styled.div`
   }
 `;
 
-export const FavoriteBtn = styled.button`
+export const LikeBtn = styled.button`
   position: absolute;
   top: 12px;
   right: 12px;
@@ -126,17 +127,47 @@ export const FavoriteBtn = styled.button`
     color: inherit;
   }
 
-  &:hover,
-  &.active {
+  &:hover {
+    background: #54adff;
     svg {
-      fill: #54adff;
+      color: #ffffff;
+    }
+  }
+`;
+
+export const DislikeBtn = styled.button`
+  position: absolute;
+  top: 56px;
+  right: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: #c5dff6;
+  color: #54adff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  svg {
+    width: 22px;
+    height: 22px;
+    color: inherit;
+  }
+
+  &:hover {
+    background: #54adff;
+    svg {
+      color: #ffffff;
     }
   }
 `;
 
 export const TrashBtn = styled.button`
   position: absolute;
-  top: 68px;
+  top: 100px;
   right: 12px;
   display: flex;
   justify-content: center;
@@ -159,7 +190,7 @@ export const TrashBtn = styled.button`
   &:hover {
     background: #54adff;
     svg {
-      color: #c5dff6;
+      color: #ffffff;
     }
   }
 `;
@@ -175,7 +206,7 @@ export const Title = styled.h2`
 `;
 
 export const CoachProgramBtn = styled.button`
-  position: absolute;
+  /* position: absolute; */
   bottom: 20px;
   margin-top: 20px;
   display: flex;

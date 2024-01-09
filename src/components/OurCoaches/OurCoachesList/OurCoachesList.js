@@ -51,7 +51,7 @@ const OurCoachesList = () => {
   const dispatch = useDispatch();
   const [, setSearchParams] = useSearchParams();
   //   const favorits = useSelector(selectFavorite);
-  const ratinges = useSelector(selectRating);
+  console.log('allCoaches', allCoaches);
 
   useEffect(() => {
     if (!query) {
@@ -69,8 +69,8 @@ const OurCoachesList = () => {
     //   setAssessment(
     //     coachDislike.find(item => item._id === activeNotice[0]._id)
     //   );
-    setAssessment(ratinges.find(item => item._id === activeNotice[0]._id));
-  }, [activeNotice, coachLike, ratinges, coachDislike]);
+    // setAssessment(ratings.find(item => item._id === activeNotice[0]._id));
+  }, [activeNotice, coachLike, ratings, coachDislike]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -124,6 +124,7 @@ const OurCoachesList = () => {
     }
 
     const filterCoaches = allCoaches.filter(({ _id }) => id === _id);
+
     setActiveNotice(filterCoaches);
   };
 

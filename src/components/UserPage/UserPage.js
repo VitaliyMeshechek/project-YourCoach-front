@@ -64,7 +64,7 @@ export const UserPageInfo = () => {
         </UserBlock>
         <ProgramBlock>
           <MyProgramHeaderContainer>
-            <Header>Моя програма:</Header>
+            <Header>Мої індивідуальні програми:</Header>
             <AddProgramBtn text="Додати програму" path="/add-program" />
           </MyProgramHeaderContainer>
           <ProgramData />
