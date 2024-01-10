@@ -114,22 +114,22 @@ const AddProgramForm = () => {
     // if (formData.comments) {
     //   newFormData.append('comments', formData.comments);
     // }
-    newFormData.append('category', formData.category);
-    newFormData.append('nameYourProgram', formData.nameYourProgram);
-    newFormData.append('typeYourProgram', formData.typeYourProgram);
-    // newFormData.append('description', formData.description);
-    // newFormData.append('duration', formData.duration);
-    // newFormData.append('training', formData.training);
-    newFormData.append('avatar', formData.avatar);
-    newFormData.append('location', formData.location);
-    newFormData.append('price', formData.price);
-    newFormData.append('comments', formData.comments);
+    // newFormData.append('category', formData.category);
+    // newFormData.append('nameYourProgram', formData.nameYourProgram);
+    // newFormData.append('typeYourProgram', formData.typeYourProgram);
+    // // newFormData.append('description', formData.description);
+    // // newFormData.append('duration', formData.duration);
+    // // newFormData.append('training', formData.training);
+    // newFormData.append('avatar', formData.avatar);
+    // newFormData.append('location', formData.location);
+    // newFormData.append('price', formData.price);
+    // newFormData.append('comments', formData.comments);
 
-    if (formData.category === 'your program') {
-      dispatch(addUserProgram(newFormData));
-      toggleModal();
-      return;
-    }
+    // if (formData.category === 'your program') {
+    //   dispatch(addUserProgram(newFormData));
+    //   toggleModal();
+    //   return;
+    // }
 
     // newFormData.append('name', formData.name);
     // newFormData.append('strong', formData.strong);
@@ -144,28 +144,20 @@ const AddProgramForm = () => {
     // newFormData.append('fitnessWellness', formData.fitnessWellness);
 
     // newFormData.delete('category', formData.category);
-    const category = newFormData.append('category', formData.category);
-    const name = newFormData.append('name', formData.name);
-    const aerobic = newFormData.append('aerobic', formData.aerobic);
-    const avatar = newFormData.append('avatar', formData.avatar);
-    const location = newFormData.append('location', formData.location);
-    const price = newFormData.append('price', formData.price);
-    const comments = newFormData.append('comments', formData.comments);
+
+    newFormData.append('category', formData.category);
+    newFormData.append('name', formData.name);
+    newFormData.append('aerobic', formData.aerobic);
+    newFormData.append('avatar', formData.avatar);
+    newFormData.append('location', formData.location);
+    newFormData.append('price', formData.price);
+    newFormData.append('comments', formData.comments);
+
     // newFormData.append('strong', formData.strong);
     // newFormData.append('health', formData.health);
     // newFormData.append('functions', formData.functions);
     if (formData.category === 'fitnes for women') {
-      dispatch(
-        addNotice({
-          category,
-          name,
-          aerobic,
-          avatar,
-          location,
-          price,
-          comments,
-        })
-      );
+      dispatch(addNotice({ category: 'fitnes for women', newFormData }));
       toggleModal();
     }
 
@@ -189,14 +181,14 @@ const AddProgramForm = () => {
     //     return;
     //   }
 
-    //   newFormData.append('fitnessWeigth', formData.fitnessWeigth);
-    //   newFormData.append('food', formData.food);
+    newFormData.append('fitnessWeigth', formData.fitnessWeigth);
+    newFormData.append('food', formData.food);
 
-    //   if (formData.category === 'weigth') {
-    //     dispatch(addNotice({ category: formData.category, newFormData }));
-    //     toggleModal();
-    //     return;
-    //   }
+    if (formData.category === 'weigth') {
+      dispatch(addNotice({ category: formData.category, newFormData }));
+      toggleModal();
+      return;
+    }
   };
 
   return (

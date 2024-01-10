@@ -102,6 +102,7 @@ export const ValidateProgramSchema = Yup.object().shape({
     )
     .required('Field food is required'),
   special: Yup.string()
+    .required('Field special is required')
     .oneOf(
       [
         'Підбір раціонального харчування',
@@ -111,9 +112,9 @@ export const ValidateProgramSchema = Yup.object().shape({
       'Виберіть коректне значення'
     )
     .test(
-      'Підбір раціонального харчування',
+      ('Підбір раціонального харчування',
       'Консультації або поради дієтолога',
-      'Можливість тренування старших груп',
+      'Можливість тренування старших груп'),
       value => {
         if (!value) {
           return true;
@@ -124,8 +125,8 @@ export const ValidateProgramSchema = Yup.object().shape({
           value === 'Можливість тренування старших груп'
         );
       }
-    )
-    .required('Field special is required'),
+    ),
+
   avatar: Yup.mixed().test('3 * 1024 * 1024', value => {
     if (!value || value.size <= 3 * 1024 * 1024) {
       return true;

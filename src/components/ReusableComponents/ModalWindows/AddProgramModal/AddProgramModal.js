@@ -27,10 +27,17 @@ const AddProgramModal = ({ backLink, category }) => {
   const path =
     category === 'your program'
       ? '/user'
-      : '/notices/fitnes for women' ||
-        '/notices/weigth' ||
-        '/notices/strength fitness' ||
-        '/notices/flexibility and wellness';
+      : null ||
+        (category === 'fitnes for women'
+          ? '/notices/fitnes for women'
+          : null) ||
+        (category === 'weigth' ? '/notices/weigth' : null) ||
+        (category === 'strength fitness'
+          ? '/notices/strength fitness'
+          : null) ||
+        (category === 'flexibility and wellness'
+          ? '/notices/flexibility and wellness'
+          : null);
   return (
     <AddFormModalWrapper>
       <p>'Програма була успішно додана!'</p>

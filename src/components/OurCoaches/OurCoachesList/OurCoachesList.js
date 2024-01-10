@@ -26,8 +26,7 @@ import {
 import { OurCoachesItems } from '../OurCoachesItems/OurCoachesItems';
 import { CategoriesList } from './OurCoachesList.styled';
 import { useAuth } from 'hooks';
-// import { toast } from 'react-toastify';
-// import { ParkedPage } from '../ParkedPage/ParkedPage';
+import { toast } from 'react-toastify';
 import CoachProgramDetailsModal from 'components/ReusableComponents/ModalWindows/CoachProgramDetailsModal/CoachProgramDetailsModal';
 import RemoveCoachProgramDetailsModal from 'components/ReusableComponents/ModalWindows/RemoveCoachProgramDetailsModal/RemoveCoachProgramDetailsModal';
 import { PageError } from '../PageError/PageError';
@@ -51,7 +50,7 @@ const OurCoachesList = () => {
   const dispatch = useDispatch();
   const [, setSearchParams] = useSearchParams();
   //   const favorits = useSelector(selectFavorite);
-  console.log('allCoaches', allCoaches);
+  // console.log('allCoaches', allCoaches);
 
   useEffect(() => {
     if (!query) {
@@ -69,7 +68,7 @@ const OurCoachesList = () => {
     //   setAssessment(
     //     coachDislike.find(item => item._id === activeNotice[0]._id)
     //   );
-    // setAssessment(ratings.find(item => item._id === activeNotice[0]._id));
+    setAssessment(ratings.find(item => item._id === activeNotice[0]._id));
   }, [activeNotice, coachLike, ratings, coachDislike]);
 
   useEffect(() => {
@@ -123,17 +122,17 @@ const OurCoachesList = () => {
         break;
     }
 
-    const filterCoaches = allCoaches.filter(({ _id }) => id === _id);
-
+    const filterCoaches = allCoaches.filter(({ _id }) => _id === id);
+    console.log('filterCoaches', filterCoaches);
     setActiveNotice(filterCoaches);
   };
 
   const handleFavorite = e => {
     e.preventDefault();
-    // if (!isLoggedIn) {
-    //   toast('Sorry, this option is available only for authorized users');
-    //   return;
-    // }
+    if (!isLoggedIn) {
+      toast('Sorry, this option is available only for authorized users');
+      return;
+    }
     // if (assessment) {
     //   dispatch(deleteFromLike(activeNotice[0]._id));
     //   // ||

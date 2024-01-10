@@ -74,7 +74,7 @@ export const OurCoachesItems = coach => {
       default:
         break;
     }
-  }, [category]);
+  }, [category, setNewCategory]);
 
   useEffect(() => {
     if (ownCoach) {
@@ -91,8 +91,8 @@ export const OurCoachesItems = coach => {
     // }
   }, [ratingItem, ownCoach]);
 
-  const handleAssessment = e => {
-    e.preventDefault();
+  const handleAssessment = event => {
+    event.preventDefault();
     if (!isLoggedIn) {
       setFavStyle(false);
       return;
@@ -103,7 +103,7 @@ export const OurCoachesItems = coach => {
 
       return;
     }
-    dispatch(addToFavorite(_id));
+    // dispatch(addToFavorite(_id));
     // if (coachLike) {
     //   dispatch(deleteFromLike(_id));
     //   setFavStyle(false);
@@ -125,7 +125,6 @@ export const OurCoachesItems = coach => {
     openModal(_id, 'remove');
     dispatch(showModal(true));
     if (isDeleted) {
-      console.log(isDeleted);
       setOwn(false);
     }
   };
