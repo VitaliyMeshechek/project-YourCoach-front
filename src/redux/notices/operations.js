@@ -18,7 +18,7 @@ export const fetchAll = createAsyncThunk(
 
 export const fetchNotices = createAsyncThunk(
   'notices/fetchNotices',
-  async ({ categoryName = 'weigth', query }, thunkAPI) => {
+  async ({ categoryName, query }, thunkAPI) => {
     try {
       const response = await axios.get(`/notices/${categoryName}`, {
         params: { query: query ? query : null },

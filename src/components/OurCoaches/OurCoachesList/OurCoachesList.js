@@ -122,9 +122,16 @@ const OurCoachesList = () => {
         break;
     }
 
-    const filterCoaches = allCoaches.filter(({ _id }) => _id === id);
-    console.log('filterCoaches', filterCoaches);
-    setActiveNotice(filterCoaches);
+    // const visiblePrograms = program
+    //   ? program.filter(program => program.category === 'your program')
+    //   : [];
+    // console.log('visiblePrograms', visiblePrograms);
+    // const visiblePrograms = allCoaches
+    //   ? allCoaches.filter(({ _id }) => _id === id)
+    //   : [];
+
+    // console.log('visiblePrograms', visiblePrograms);
+    setActiveNotice(allCoaches);
   };
 
   const handleFavorite = e => {

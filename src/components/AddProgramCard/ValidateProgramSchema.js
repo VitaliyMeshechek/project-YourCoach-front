@@ -14,9 +14,9 @@ export const ValidateProgramSchema = Yup.object().shape({
         'flexibility and wellnes',
         'your program',
       ],
-      'Invalid category'
+      'Виберіть значення'
     )
-    .required('Field category is required'),
+    .required('Поле обов"язкове для заповнення'),
   name: Yup.string().oneOf(
     [
       'Аеробні програми',
@@ -24,9 +24,30 @@ export const ValidateProgramSchema = Yup.object().shape({
       'Оздоровчі програми',
       'Функціональний фітнес',
     ],
-    'Invalid name'
+    'Виберіть значення'
   ),
   // .required('Field name is required'),
+  kind: Yup.string()
+    .oneOf(
+      [
+        'Step Aerobics',
+        'Fitball Aerobics',
+        'Body Up',
+        'Body Pump',
+        'Тренування ABS',
+        'Йога',
+        'Пілатес',
+        'Ци-гун',
+        'Стретчінг',
+        'Калланетіка',
+        'Zumba',
+        'Dance Fitness',
+        'Belly Dance',
+        'Strip Dance',
+      ],
+      'Виберіть значення'
+    )
+    .required('Поле обов"язкове для заповнення'),
   aerobic: Yup.string().oneOf(
     ['Step Aerobics', 'Fitball Aerobics', 'Інше'],
     'aerobic'
@@ -34,9 +55,23 @@ export const ValidateProgramSchema = Yup.object().shape({
   // .required('Field aerobic is required'),
   fitnessWeigth: Yup.string().oneOf(
     ['Аеробіка', 'Аеробний фітнес'],
-    'Поле не може бути пустим'
+    'Виберіть значення'
   ),
   // .required('Field name is required'),
+  kindProgramWeigth: Yup.string()
+    .oneOf(
+      [
+        'Step-Intro',
+        'Step-B',
+        'Power-Step',
+        'Low-Impact Aerobics',
+        'Low-A',
+        'Middle-Impact',
+        'High-Impact',
+      ],
+      'Виберіть значення'
+    )
+    .required('Поле обов"язкове для заповнення'),
   fitnessStrength: Yup.string().oneOf(
     ['Body Up', 'Body Low', 'Body Pump', 'Body Sculpt', 'ABS'],
     'Поле не може бути пустим'
@@ -73,13 +108,11 @@ export const ValidateProgramSchema = Yup.object().shape({
       ['Персональні тренування', 'Групові тренування'],
       'Виберіть коректне значення'
     )
-    .test('Персональні тренування', 'Групові тренування', value => {
+    .test(('Персональні тренування', 'Групові тренування'), value => {
       if (!value) {
         return true;
       }
-      return (
-        value === 'Персональні тренування' || value === 'Групові тренування'
-      );
+      return value === 'Персональні тренування' || 'Групові тренування';
     }),
   // .required('Field training is required'),
   location: Yup.string().matches(/^[A-Za-z\s]+$/i, 'Невірний формат'),
