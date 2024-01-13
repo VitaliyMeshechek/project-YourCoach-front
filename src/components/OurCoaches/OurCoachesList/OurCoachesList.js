@@ -45,7 +45,7 @@ const OurCoachesList = () => {
   const coachDislike = useSelector(selectDislike);
   const own = useSelector(selectOwn);
   const notices = useSelector(selectNotices);
-  const [allCoaches, setAllCoaches] = useState([]);
+  const [coaches, setCoaches] = useState([]);
   const query = useSelector(selectQuery);
   const dispatch = useDispatch();
   const [, setSearchParams] = useSearchParams();
@@ -84,23 +84,27 @@ const OurCoachesList = () => {
   useEffect(() => {
     switch (categoryName) {
       case 'rating':
-        setAllCoaches(ratings);
+        setCoaches(ratings);
         // setAllCoaches(coachLike);
         // || setAllCoaches(coachDislike);
         break;
       case 'own':
-        setAllCoaches(own);
+        setCoaches(own);
         break;
 
       default:
-        setAllCoaches(notices);
+        setCoaches(notices);
         break;
     }
   }, [categoryName, coachLike, coachDislike, ratings, notices, own]);
 
-  if (!allCoaches) {
+  if (!coaches) {
     return null;
   }
+
+  // const handleDeleteProgram = () => {
+  //   dispatch(deleteUserNotice(activeNotice[0]._id));
+  // };
 
   const onDeleteOwn = () => {
     dispatch(deleteUserNotice(activeNotice[0]._id));
@@ -126,12 +130,12 @@ const OurCoachesList = () => {
     //   ? program.filter(program => program.category === 'your program')
     //   : [];
     // console.log('visiblePrograms', visiblePrograms);
-    // const visiblePrograms = allCoaches
-    //   ? allCoaches.filter(({ _id }) => _id === id)
-    //   : [];
+    const visiblePrograms = coaches
+      ? coaches.filter(({ _id }) => _id === id)
+      : [];
 
     // console.log('visiblePrograms', visiblePrograms);
-    setActiveNotice(allCoaches);
+    setActiveNotice(visiblePrograms);
   };
 
   const handleFavorite = e => {
@@ -158,9 +162,9 @@ const OurCoachesList = () => {
 
   return (
     <>
-      {allCoaches.length > 0 ? (
+      {coaches.length > 0 ? (
         <CategoriesList>
-          {allCoaches.map(coach => (
+          {coaches.map(coach => (
             <OurCoachesItems
               coach={coach}
               key={coach._id}
@@ -177,7 +181,7 @@ const OurCoachesList = () => {
           {modal === 'remove' && (
             <RemoveCoachProgramDetailsModal
               approveHandle={onDeleteOwn}
-              title={activeNotice[0].title}
+              name={activeNotice[0].name}
             ></RemoveCoachProgramDetailsModal>
           )}
         </CategoriesList>

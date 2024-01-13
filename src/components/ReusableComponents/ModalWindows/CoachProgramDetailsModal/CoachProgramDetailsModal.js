@@ -6,6 +6,10 @@ import {
   DescWrapper,
   InfoList,
   InfoLink,
+  InfoName,
+  InfoValue,
+  InfoNameList,
+  InfoValueList,
   ButtonFlexWrapper,
   CancelButton,
   CancelButtonText,
@@ -17,8 +21,8 @@ import {
   LabelProgram,
   InfoProgramText,
   ImgWrapper,
+  Category,
 } from './CoachProgramDetailsModal.styled.js';
-
 
 import { showModal } from 'redux/modal/slice';
 import { useEffect, useState } from 'react';
@@ -33,23 +37,28 @@ const CoachProgramDetailsModal = ({ details, handleFavorite }) => {
       avatar,
       category,
       name,
+      kind,
       fitnessWeigth,
+      kindProgramWeigth,
       fitnessStrength,
       fitnessWellness,
       description,
+      training,
+      location,
+      comments,
+      weigth,
       aerobic,
       strong,
       health,
       functions,
       step,
       impact,
-      special,
       food,
+      special,
       duration,
-      training,
-      location,
       price,
-      comments,
+      nameYourProgram,
+      typeYourProgram,
     },
     setCoachProgramDetail,
   ] = useState({});
@@ -70,7 +79,7 @@ const CoachProgramDetailsModal = ({ details, handleFavorite }) => {
       <FlexWrapper>
         <DescWrapper>
           <ImgWrapper>
-            <Img src={avatar} alt=""></Img>
+            <Img src={avatar} alt={name}></Img>
           </ImgWrapper>
           <InfoList>
             <InfoProgramItem>
@@ -83,7 +92,7 @@ const CoachProgramDetailsModal = ({ details, handleFavorite }) => {
             </InfoProgramItem>
             <InfoProgramItem>
               <LabelProgram>Тип програми:</LabelProgram>
-              <InfoProgramText>{aerobic}</InfoProgramText>
+              <InfoProgramText>{kind}</InfoProgramText>
             </InfoProgramItem>
             <InfoProgramItem>
               <LabelProgram>Опис програми:</LabelProgram>
@@ -135,6 +144,56 @@ const CoachProgramDetailsModal = ({ details, handleFavorite }) => {
         </DescWrapper>
       </FlexWrapper>
       {/* <Desc>{comments}</Desc> */}
+      {/* <FlexWrapper>
+        <ImgWrapper>
+          <Img src={avatar} alt={name}></Img>
+          <Category>{category}</Category>
+        </ImgWrapper>
+
+        <DescWrapper>
+          <Title>{name}</Title>
+
+          <InfoList>
+            <InfoNameList>
+              <InfoName>Назва програми:</InfoName>
+              <InfoName>Тип програми:</InfoName>
+              <InfoName>Опис програми:</InfoName>
+              <InfoName>Особливості програми:</InfoName>
+              <InfoName>Підбір харчування:</InfoName>
+              <InfoName>Тривалість програми:</InfoName>
+              <InfoName>Тренування:</InfoName>
+              <InfoName>Місцезнаходження:</InfoName>
+              <InfoName>Ціна:</InfoName>
+              <InfoName>Коментарі:</InfoName>
+              <InfoName>Email:</InfoName>
+              <InfoName>Phone:</InfoName>
+            </InfoNameList>
+            <InfoValueList>
+              <InfoValue>{name}</InfoValue>
+              <InfoValue>{kind}</InfoValue>
+              <InfoValue>{description}</InfoValue>
+              <InfoValue>{special}</InfoValue>
+
+              <InfoValue>{food}</InfoValue>
+              <InfoValue>{duration}</InfoValue>
+              <InfoValue>{training}</InfoValue>
+              <InfoValue>{location}</InfoValue>
+              <InfoValue>{price}</InfoValue>
+              <InfoValue>{comments}</InfoValue>
+
+              <InfoValue>
+                <InfoLink>{user.email ? user.email : 'none'}</InfoLink>
+              </InfoValue>
+              <InfoValue>
+                <InfoLink href={user.phone ? user.phone : ''}>
+                  {user.phone ? user.phone : ''}
+                </InfoLink>
+              </InfoValue>
+            </InfoValueList>
+          </InfoList>
+        </DescWrapper>
+      </FlexWrapper> */}
+
       <ButtonFlexWrapper>
         <CancelButton onClick={() => dispatch(showModal(false))}>
           <CancelButtonText>

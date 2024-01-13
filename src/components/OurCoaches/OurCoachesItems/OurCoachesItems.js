@@ -35,12 +35,12 @@ import {
 } from './OurCoachesItems.styled.js';
 import { showModal } from 'redux/modal/slice';
 
-export const OurCoachesItems = coach => {
+export const OurCoachesItems = coaches => {
   const {
     isDeleted,
     openModal,
     coach: { _id, avatar, category, name },
-  } = coach;
+  } = coaches;
 
   const { isLoggedIn } = useAuth();
   const [, setNewCategory] = useState();
@@ -103,7 +103,7 @@ export const OurCoachesItems = coach => {
 
       return;
     }
-    // dispatch(addToFavorite(_id));
+    dispatch(addToFavorite(_id));
     // if (coachLike) {
     //   dispatch(deleteFromLike(_id));
     //   setFavStyle(false);
@@ -117,7 +117,6 @@ export const OurCoachesItems = coach => {
     //   return;
     // }
     // dispatch(addToLike(_id));
-    // || dispatch(addToDislike(_id));
   };
 
   const handleDeleteOwnCoach = e => {
@@ -146,13 +145,13 @@ export const OurCoachesItems = coach => {
         >
           <AiFillLike />
         </LikeBtn>
-        <DislikeBtn
+        {/* <DislikeBtn
           type="button"
           className={favStyle ? 'active' : null}
           onClick={handleAssessment}
         >
           <AiFillDislike />
-        </DislikeBtn>
+        </DislikeBtn> */}
 
         {own && (
           <TrashBtn type="button" onClick={handleDeleteOwnCoach}>

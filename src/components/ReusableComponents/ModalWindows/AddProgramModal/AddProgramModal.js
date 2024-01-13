@@ -24,20 +24,20 @@ const AddProgramModal = ({ backLink, category }) => {
     category === 'your program'
       ? 'Перейти в свій профіль'
       : 'Перейти до всіх програм';
-  const path =
-    category === 'your program'
-      ? '/user'
-      : null ||
-        (category === 'fitnes for women'
-          ? '/notices/fitnes for women'
-          : null) ||
-        (category === 'weigth' ? '/notices/weigth' : null) ||
-        (category === 'strength fitness'
-          ? '/notices/strength fitness'
-          : null) ||
-        (category === 'flexibility and wellness'
-          ? '/notices/flexibility and wellness'
-          : null);
+  const path = category === 'your program' ? '/user' : '/notices/my-program';
+  // category === 'your program'
+  //   ? '/user'
+  //   : null ||
+  //     (category === 'fitnes for women'
+  //       ? '/notices/fitnes for women'
+  //       : null) ||
+  //     (category === 'weigth' ? '/notices/weigth' : null) ||
+  //     (category === 'strength fitness'
+  //       ? '/notices/strength fitness'
+  //       : null) ||
+  //     (category === 'flexibility and wellness'
+  //       ? '/notices/flexibility and wellness'
+  //       : null);
   return (
     <AddFormModalWrapper>
       <p>'Програма була успішно додана!'</p>

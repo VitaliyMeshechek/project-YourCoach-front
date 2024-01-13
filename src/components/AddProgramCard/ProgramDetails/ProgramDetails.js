@@ -245,7 +245,6 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 id="name-select"
                 name="name"
                 type="text"
-                label="Назва програми"
                 onChange={handleInputChange}
                 value={formData.name}
                 sx={{ borderRadius: 40, marginBottom: 4 }}
@@ -285,7 +284,6 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 id="kind-select"
                 name="kind"
                 type="text"
-                label="Тип програми"
                 onChange={handleInputChange}
                 value={formData.kind}
                 sx={{ borderRadius: 40 }}
@@ -313,6 +311,131 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 <MenuItem value={'Strip Dance'}>Strip Dance</MenuItem>
               </Select>
             </FormControl>
+            <FormControl
+              htmlFor="description"
+              sx={{
+                marginTop: 4,
+                width: 594,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <TextField
+                id="description"
+                label="Опис програми"
+                variant="outlined"
+                type="text"
+                name="description"
+                onChange={handleInputChange}
+                value={formData.description}
+                InputProps={{ sx: { borderRadius: 40, minWidth: 594 } }}
+                onBlur={() => validateField('description', formData, setErrors)}
+              />
+              {/* {!!formData.description &&
+                   !errors.description ? (
+                     <ErrorMessage message={errors.description} />
+                   ) : null} */}
+            </FormControl>
+            <FormControl
+              htmlFor="duration"
+              sx={{
+                marginTop: 4,
+                width: 594,
+                gap: 2,
+                display: 'flex',
+                justifyContent: 'start',
+                // alignItems: 'center',
+              }}
+            >
+              <FormLabel id="duration-label">Тривалість</FormLabel>
+              <RadioGroup
+                // as={RadioGroup}
+
+                // aria-label="duration-label"
+                type="text"
+                name="duration"
+                onChange={handleInputChange}
+                value={formData.duration}
+                // onBlur={() => validateField('duration', formData, setErrors)}
+              >
+                <FormControlLabel
+                  value="1-4 тижнів"
+                  control={<Radio />}
+                  label="1-4 тижнів"
+                />
+                <FormControlLabel
+                  value="5-8 тижнів"
+                  control={<Radio />}
+                  label="5-8 тижнів"
+                />
+                <FormControlLabel
+                  value="9-12 тижнів"
+                  control={<Radio />}
+                  label="9-12 тижнів"
+                />
+                <FormControlLabel
+                  value="12-15 тижнів"
+                  control={<Radio />}
+                  label="12-15 тижнів"
+                />
+                <FormControlLabel
+                  value="більше 15 тижнів"
+                  control={<Radio />}
+                  label="більше 15 тижнів"
+                />
+                {/* {!!formData.duration &&
+                      !errors.duration &&
+                      !touched.duration ? (
+                        <ErrorMessage message={errors.duration} />
+                      ) : null} */}
+              </RadioGroup>
+            </FormControl>
+            <FormControl
+              htmlFor="training"
+              sx={{
+                marginTop: 4,
+                width: 594,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <InputLabel
+                id="training-label"
+                sx={{
+                  fontSize: 16,
+                  textAline: 'center',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                Тренування
+              </InputLabel>
+              <Select
+                htmlFor="training"
+                id="training-select"
+                multiple
+                name="training"
+                value={personName}
+                onChange={onInputChangeTraining}
+                renderValue={selected => selected.join(', ')}
+                MenuProps={MenuProps}
+                sx={{ borderRadius: 40, width: 594 }}
+                onBlur={() => validateField('training', formData, setErrors)}
+              >
+                {names.map(name => (
+                  <MenuItem key={name} value={name}>
+                    <Checkbox checked={personName.indexOf(name) > -1} />
+                    <ListItemText primary={name} />
+                  </MenuItem>
+                ))}
+                {/* {!!personName && !errors.personName ? (
+              <ErrorMessage message={errors.personName} />
+            ) : null} */}
+              </Select>
+            </FormControl>
           </div>
         )}
         {formData.category === 'weigth' && (
@@ -331,7 +454,6 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 id="fitnessWeigth-select"
                 name="fitnessWeigth"
                 type="text"
-                label="Назва програми"
                 onChange={handleInputChange}
                 value={formData.fitnessWeigth}
                 sx={{ borderRadius: 40, marginBottom: 4 }}
@@ -361,7 +483,6 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 id="kindProgramWeigth-select"
                 name="kindProgramWeigth"
                 type="text"
-                label="Тип програми"
                 onChange={handleInputChange}
                 value={formData.kindProgramWeigth}
                 sx={{ borderRadius: 40 }}
@@ -443,7 +564,6 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 id="fitnessStrength-select"
                 name="fitnessStrength"
                 type="text"
-                label="Назва програми"
                 onChange={handleInputChange}
                 value={formData.fitnessStrength}
                 sx={{ borderRadius: 40 }}
@@ -510,7 +630,6 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 id="fitnessWellness-select"
                 name="fitnessWellness"
                 type="text"
-                label="Назва програми"
                 onChange={handleInputChange}
                 value={formData.fitnessWellness}
                 sx={{ borderRadius: 40 }}
@@ -576,133 +695,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
             </FormControl>
           </Box>
         )}
-        <div>
-          <FormControl
-            htmlFor="description"
-            sx={{
-              marginTop: 4,
-              width: 594,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <TextField
-              id="description"
-              label="Опис програми"
-              variant="outlined"
-              type="text"
-              name="description"
-              onChange={handleInputChange}
-              value={formData.description}
-              InputProps={{ sx: { borderRadius: 40, minWidth: 594 } }}
-              onBlur={() => validateField('description', formData, setErrors)}
-            />
-            {/* {!!formData.description &&
-                   !errors.description ? (
-                     <ErrorMessage message={errors.description} />
-                   ) : null} */}
-          </FormControl>
-          <FormControl
-            htmlFor="duration"
-            sx={{
-              marginTop: 4,
-              width: 594,
-              gap: 2,
-              display: 'flex',
-              justifyContent: 'start',
-              // alignItems: 'center',
-            }}
-          >
-            <FormLabel id="duration-label">Тривалість</FormLabel>
-            <RadioGroup
-              // as={RadioGroup}
 
-              // aria-label="duration-label"
-              type="text"
-              name="duration"
-              onChange={handleInputChange}
-              value={formData.duration}
-              // onBlur={() => validateField('duration', formData, setErrors)}
-            >
-              <FormControlLabel
-                value="1-4 тижнів"
-                control={<Radio />}
-                label="1-4 тижнів"
-              />
-              <FormControlLabel
-                value="5-8 тижнів"
-                control={<Radio />}
-                label="5-8 тижнів"
-              />
-              <FormControlLabel
-                value="9-12 тижнів"
-                control={<Radio />}
-                label="9-12 тижнів"
-              />
-              <FormControlLabel
-                value="12-15 тижнів"
-                control={<Radio />}
-                label="12-15 тижнів"
-              />
-              <FormControlLabel
-                value="більше 15 тижнів"
-                control={<Radio />}
-                label="більше 15 тижнів"
-              />
-              {/* {!!formData.duration &&
-                      !errors.duration &&
-                      !touched.duration ? (
-                        <ErrorMessage message={errors.duration} />
-                      ) : null} */}
-            </RadioGroup>
-          </FormControl>
-          <FormControl
-            htmlFor="training"
-            sx={{
-              marginTop: 4,
-              width: 594,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <InputLabel
-              id="training-label"
-              sx={{
-                fontSize: 16,
-                textAline: 'center',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              Тренування
-            </InputLabel>
-            <Select
-              htmlFor="training"
-              id="training-select"
-              multiple
-              name="training"
-              value={personName}
-              onChange={onInputChangeTraining}
-              renderValue={selected => selected.join(', ')}
-              MenuProps={MenuProps}
-              sx={{ borderRadius: 40, width: 594 }}
-              onBlur={() => validateField('training', formData, setErrors)}
-            >
-              {names.map(name => (
-                <MenuItem key={name} value={name}>
-                  <Checkbox checked={personName.indexOf(name) > -1} />
-                  <ListItemText primary={name} />
-                </MenuItem>
-              ))}
-              {/* {!!personName && !errors.personName ? (
-              <ErrorMessage message={errors.personName} />
-            ) : null} */}
-            </Select>
-          </FormControl>
-        </div>
         <AddFormButtonWrapper>
           <AddFormButtonNext
             type="button"
@@ -727,6 +720,134 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
     </ProgramFormWrapper>
   );
 };
+
+//  <div>
+//    <FormControl
+//      htmlFor="description"
+//      sx={{
+//        marginTop: 4,
+//        width: 594,
+//        display: 'flex',
+//        justifyContent: 'center',
+//        alignItems: 'center',
+//      }}
+//    >
+//      <TextField
+//        id="description"
+//        label="Опис програми"
+//        variant="outlined"
+//        type="text"
+//        name="description"
+//        onChange={handleInputChange}
+//        value={formData.description}
+//        InputProps={{ sx: { borderRadius: 40, minWidth: 594 } }}
+//        onBlur={() => validateField('description', formData, setErrors)}
+//      />
+//      {/* {!!formData.description &&
+//              !errors.description ? (
+//                <ErrorMessage message={errors.description} />
+//              ) : null} */}
+//    </FormControl>
+//    <FormControl
+//      htmlFor="duration"
+//      sx={{
+//        marginTop: 4,
+//        width: 594,
+//        gap: 2,
+//        display: 'flex',
+//        justifyContent: 'start',
+//        // alignItems: 'center',
+//      }}
+//    >
+//      <FormLabel id="duration-label">Тривалість</FormLabel>
+//      <RadioGroup
+//        // as={RadioGroup}
+
+//        // aria-label="duration-label"
+//        type="text"
+//        name="duration"
+//        onChange={handleInputChange}
+//        value={formData.duration}
+//        // onBlur={() => validateField('duration', formData, setErrors)}
+//      >
+//        <FormControlLabel
+//          value="1-4 тижнів"
+//          control={<Radio />}
+//          label="1-4 тижнів"
+//        />
+//        <FormControlLabel
+//          value="5-8 тижнів"
+//          control={<Radio />}
+//          label="5-8 тижнів"
+//        />
+//        <FormControlLabel
+//          value="9-12 тижнів"
+//          control={<Radio />}
+//          label="9-12 тижнів"
+//        />
+//        <FormControlLabel
+//          value="12-15 тижнів"
+//          control={<Radio />}
+//          label="12-15 тижнів"
+//        />
+//        <FormControlLabel
+//          value="більше 15 тижнів"
+//          control={<Radio />}
+//          label="більше 15 тижнів"
+//        />
+//        {/* {!!formData.duration &&
+//                 !errors.duration &&
+//                 !touched.duration ? (
+//                   <ErrorMessage message={errors.duration} />
+//                 ) : null} */}
+//      </RadioGroup>
+//    </FormControl>
+//    <FormControl
+//      htmlFor="training"
+//      sx={{
+//        marginTop: 4,
+//        width: 594,
+//        display: 'flex',
+//        justifyContent: 'center',
+//        alignItems: 'center',
+//      }}
+//    >
+//      <InputLabel
+//        id="training-label"
+//        sx={{
+//          fontSize: 16,
+//          textAline: 'center',
+//          display: 'flex',
+//          justifyContent: 'center',
+//          alignItems: 'center',
+//        }}
+//      >
+//        Тренування
+//      </InputLabel>
+//      <Select
+//        htmlFor="training"
+//        id="training-select"
+//        multiple
+//        name="training"
+//        value={personName}
+//        onChange={onInputChangeTraining}
+//        renderValue={selected => selected.join(', ')}
+//        MenuProps={MenuProps}
+//        sx={{ borderRadius: 40, width: 594 }}
+//        onBlur={() => validateField('training', formData, setErrors)}
+//      >
+//        {names.map(name => (
+//          <MenuItem key={name} value={name}>
+//            <Checkbox checked={personName.indexOf(name) > -1} />
+//            <ListItemText primary={name} />
+//          </MenuItem>
+//        ))}
+//        {/* {!!personName && !errors.personName ? (
+//         <ErrorMessage message={errors.personName} />
+//       ) : null} */}
+//      </Select>
+//    </FormControl>
+//  </div>;
 
 //   return (
 //     <ProgramFormWrapper>

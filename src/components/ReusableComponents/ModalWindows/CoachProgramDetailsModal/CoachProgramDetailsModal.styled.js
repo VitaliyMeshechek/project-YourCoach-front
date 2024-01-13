@@ -47,23 +47,23 @@ export const ImgWrapper = styled.div`
   display: flex;
 `;
 
-// export const Category = styled.div`
-//   padding: 12px;
-//   font-weight: 500;
-//   font-size: 14px;
-//   line-height: 19px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   position: absolute;
-//   width: 126px;
-//   height: 32px;
-//   left: 0px;
-//   top: 16px;
-//   border-radius: 0px 40px 40px 0px;
+export const Category = styled.div`
+  padding: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 126px;
+  height: 32px;
+  left: 0px;
+  top: 16px;
+  border-radius: 0px 40px 40px 0px;
 
-//   background: #cce4fb;
-// `;
+  background: #cce4fb;
+`;
 
 export const Img = styled.img`
   position: relative;
@@ -120,15 +120,15 @@ export const InfoLink = styled.a`
   color: #ffc107;
 `;
 
-// export const InfoNameList = styled.ul`
-//   display: flex;
-//   flex-direction: column;
-//   gap: 8px;
-//   margin-right: 20px;
-//   @media screen and (min-width: ${breakPoints.tablet}) {
-//     margin-right: 50px;
-//   }
-// `;
+export const InfoNameList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-right: 20px;
+  @media screen and (min-width: ${breakPoints.tablet}) {
+    margin-right: 50px;
+  }
+`;
 
 export const InfoProgramItem = styled.div`
   /* border: solid 1px orange; */
@@ -167,38 +167,38 @@ export const InfoProgramText = styled.span`
   }
 `;
 
-// export const InfoName = styled.li`
-//   font-weight: 600;
-//   font-size: 14px;
-//   line-height: 19px;
-//   @media screen and (min-width: ${breakPoints.tablet}) {
-//     font-size: 16px;
-//     line-height: 22px;
-//   }
-// `;
+export const InfoName = styled.li`
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  @media screen and (min-width: ${breakPoints.tablet}) {
+    font-size: 16px;
+    line-height: 22px;
+  }
+`;
 
-// export const InfoValueList = styled.ul`
-//   display: flex;
-//   flex-direction: column;
-//   gap: 11px;
-//   padding-top: 2px;
-//   @media screen and (min-width: ${breakPoints.tablet}) {
-//     font-size: 16px;
-//     line-height: 22px;
-//     gap: 8px;
-//     padding-top: 1px;
-//   }
-// `;
+export const InfoValueList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding-top: 2px;
+  @media screen and (min-width: ${breakPoints.tablet}) {
+    font-size: 16px;
+    line-height: 22px;
+    gap: 8px;
+    padding-top: 1px;
+  }
+`;
 
-// export const InfoValue = styled.li`
-//   font-weight: 500;
-//   font-size: 12px;
-//   line-height: 16px;
-//   @media screen and (min-width: ${breakPoints.tablet}) {
-//     font-size: 16px;
-//     line-height: 22px;
-//   }
-// `;
+export const InfoValue = styled.li`
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  @media screen and (min-width: ${breakPoints.tablet}) {
+    font-size: 16px;
+    line-height: 22px;
+  }
+`;
 
 export const DescWrapper = styled.div`
   display: flex;
