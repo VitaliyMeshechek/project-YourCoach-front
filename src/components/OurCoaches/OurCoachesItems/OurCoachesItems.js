@@ -22,7 +22,7 @@ import {
   deleteFromFavorite,
 } from 'redux/notices/operations';
 import {
-  Category,
+  NameProgram,
   LikeBtn,
   DislikeBtn,
   Info,
@@ -44,7 +44,7 @@ export const OurCoachesItems = coaches => {
 
   const { isLoggedIn } = useAuth();
   const [, setNewCategory] = useState();
-  const [favStyle, setFavStyle] = useState(false);
+  const [rating, setRating] = useState(false);
   const [own, setOwn] = useState(false);
   const dispatch = useDispatch();
   // const newLocation =
@@ -54,8 +54,8 @@ export const OurCoachesItems = coaches => {
   // const coachDislike = useSelector(selectDislike).find(
   //   item => item._id === _id
   // );
-  const ratingItem = useSelector(selectRating).find(item => item._id === _id);
-  const ownCoach = useSelector(selectOwn).find(item => item._id === _id);
+  const ratingItem = useSelector(selectRating).filter(item => item._id === _id);
+  const ownCoach = useSelector(selectOwn).filter(item => item._id === _id);
 
   useEffect(() => {
     switch (category) {
@@ -81,7 +81,7 @@ export const OurCoachesItems = coaches => {
       setOwn(true);
     }
     if (ratingItem) {
-      setFavStyle(true);
+      setRating(true);
     }
     // if (coachLike) {
     //   setFavStyle(true);
@@ -93,13 +93,13 @@ export const OurCoachesItems = coaches => {
 
   const handleAssessment = event => {
     event.preventDefault();
-    if (!isLoggedIn) {
-      setFavStyle(false);
+    if (isLoggedIn) {
+      setRating(false);
       return;
     }
     if (ratingItem) {
       dispatch(deleteFromFavorite(_id));
-      setFavStyle(false);
+      setRating(false);
 
       return;
     }
@@ -119,8 +119,8 @@ export const OurCoachesItems = coaches => {
     // dispatch(addToLike(_id));
   };
 
-  const handleDeleteOwnCoach = e => {
-    e.preventDefault();
+  const handleDeleteOwnCoach = event => {
+    event.preventDefault();
     openModal(_id, 'remove');
     dispatch(showModal(true));
     if (isDeleted) {
@@ -128,7 +128,7 @@ export const OurCoachesItems = coaches => {
     }
   };
 
-  const handleLookDetails = e => {
+  const handleLookDetails = () => {
     dispatch(showModal(true));
 
     openModal(_id, 'lookDetails');
@@ -140,7 +140,7 @@ export const OurCoachesItems = coaches => {
         <Photo src={avatar} />
         <LikeBtn
           type="button"
-          className={favStyle ? 'active' : null}
+          className={rating ? 'active' : null}
           onClick={handleAssessment}
         >
           <AiFillLike />
@@ -158,7 +158,7 @@ export const OurCoachesItems = coaches => {
             <FiTrash2 />
           </TrashBtn>
         )}
-        <Category>Назва програми: {name}</Category>
+        <NameProgram>Назва програми: {name}</NameProgram>
         <CoachProgramBtn onClick={handleLookDetails}>
           Ознайомитися
         </CoachProgramBtn>

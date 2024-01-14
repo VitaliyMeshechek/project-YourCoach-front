@@ -36,7 +36,7 @@ export const Photo = styled.img`
   }
 `;
 
-export const Category = styled.p`
+export const NameProgram = styled.p`
   /* position: absolute; */
   top: 16px;
   left: 0;

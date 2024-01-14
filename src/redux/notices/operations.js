@@ -33,9 +33,9 @@ export const fetchNotices = createAsyncThunk(
 export const fetchFavorites = createAsyncThunk(
   'notices/fetchFavorites',
   async (query, thunkAPI) => {
-    const { token } = thunkAPI.getState().auth;
+    // const { token } = thunkAPI.getState().auth;
     try {
-      setAuthHeader(token);
+      setAuthHeader();
       const response = await axios.get(`/notices/rating`, {
         params: { query: query ? query : null },
       });
@@ -49,9 +49,9 @@ export const fetchFavorites = createAsyncThunk(
 export const addToFavorite = createAsyncThunk(
   'notices/addToFavorite',
   async (id, thunkAPI) => {
-    const { token } = thunkAPI.getState().auth;
+    // const { token } = thunkAPI.getState().auth;
     try {
-      setAuthHeader(token);
+      setAuthHeader();
       const response = await axios.post(`/notices/rating/${id}`);
       const result = response.data.rating[0];
       return result;
