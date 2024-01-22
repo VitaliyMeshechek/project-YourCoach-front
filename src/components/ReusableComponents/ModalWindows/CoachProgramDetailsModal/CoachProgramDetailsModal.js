@@ -27,16 +27,15 @@ import {
 import { showModal } from 'redux/modal/slice';
 import { useEffect, useState } from 'react';
 import { fetchUserById } from 'redux/notices/operations';
-import { selectUserById } from 'redux/notices/selectors';
+import { selectUserById, selectNotices } from 'redux/notices/selectors';
 
-const CoachProgramDetailsModal = ({ details, handleFavorite }) => {
-  const dispatch = useDispatch();
+const CoachProgramDetailsModal = ({ coach, handleFavorite }) => {
   const [
     {
-      owner,
-      avatar,
-      category,
       name,
+      avatar,
+      owner,
+      category,
       kind,
       fitnessWeigth,
       kindProgramWeigth,
@@ -46,40 +45,41 @@ const CoachProgramDetailsModal = ({ details, handleFavorite }) => {
       training,
       location,
       comments,
-      weigth,
-      aerobic,
-      strong,
-      health,
-      functions,
-      step,
-      impact,
       food,
       special,
       duration,
       price,
-      nameYourProgram,
-      typeYourProgram,
     },
     setCoachProgramDetail,
   ] = useState({});
 
+  const dispatch = useDispatch();
+  // const [coachProgramDetail, setCoachProgramDetail] = useState([]);
+
+  // const noticesDetails = useSelector(selectNotices);
+  // console.log('noticesDetails', noticesDetails);
+  console.log('owner', owner);
   const user = useSelector(selectUserById);
 
   useEffect(() => {
-    if (!details) {
+    if (!coach) {
       return;
     }
-    setCoachProgramDetail(details);
+    setCoachProgramDetail(coach);
+
     dispatch(fetchUserById(owner));
-  }, [dispatch, owner, details]);
+  }, [dispatch, owner, coach]);
+
+  // const result = coachProgramDetail.map(item => item);
+  // console.log('result', result);
 
   return (
     <ModalWrapper padding="44px 12px 16px 12px">
-      <Title>{name}</Title>
+      <Title>{fitnessWeigth}</Title>
       <FlexWrapper>
         <DescWrapper>
           <ImgWrapper>
-            <Img src={avatar} alt={name}></Img>
+            <Img src={avatar} alt=""></Img>
           </ImgWrapper>
           <InfoList>
             <InfoProgramItem>
@@ -88,11 +88,11 @@ const CoachProgramDetailsModal = ({ details, handleFavorite }) => {
             </InfoProgramItem>
             <InfoProgramItem>
               <LabelProgram>Назва програми:</LabelProgram>
-              <InfoProgramText>{name}</InfoProgramText>
+              <InfoProgramText>{fitnessWeigth}</InfoProgramText>
             </InfoProgramItem>
             <InfoProgramItem>
               <LabelProgram>Тип програми:</LabelProgram>
-              <InfoProgramText>{kind}</InfoProgramText>
+              <InfoProgramText>{kindProgramWeigth}</InfoProgramText>
             </InfoProgramItem>
             <InfoProgramItem>
               <LabelProgram>Опис програми:</LabelProgram>

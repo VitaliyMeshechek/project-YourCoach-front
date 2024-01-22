@@ -14,8 +14,8 @@ export const updateUser = createAsyncThunk(
       const response = await axios.patch('/programs', values);
 
       return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -28,8 +28,8 @@ export const updateUserPhoto = createAsyncThunk(
 
       const response = await axios.patch('/programs', formData);
       return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -41,25 +41,24 @@ export const getCurrentPrograms = createAsyncThunk(
       const response = await axios.get('/programs');
 
       return response.data.user.programs;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
 export const addUserProgram = createAsyncThunk(
   'programs/addUserProgram',
-  async (program, thunkAPI) => {
+  async (div, thunkAPI) => {
     const { token } = thunkAPI.getState().auth;
     try {
       // const formData = new FormData();
       // formData.append('category', program);
       setAuthHeader(token);
-      const response = await axios.post('/programs', program);
-      console.log('addUserProgram', response.data);
+      const response = await axios.post('/programs', div);
       return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -70,8 +69,8 @@ export const deleteUserProgram = createAsyncThunk(
     try {
       const response = await axios.delete(`/programs/${id}`);
       return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

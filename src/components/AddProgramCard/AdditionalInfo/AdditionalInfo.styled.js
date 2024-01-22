@@ -1,6 +1,8 @@
+
 import styled from '@emotion/styled';
 import { Field } from 'formik';
 import { breakPoints, colors } from 'base-styles/variables';
+
 
 export const AdditionalInfoFormWrapper = styled.div`
   display: flex;
@@ -131,3 +133,5 @@ export const AddFormImageWrapper = styled.div`
     height: 182px;
   }
 `;
+
+

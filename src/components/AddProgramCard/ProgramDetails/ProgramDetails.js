@@ -4,6 +4,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import ListSubheader from '@mui/material/ListSubheader';
 import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
 import Select from '@mui/material/Select';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -23,6 +24,7 @@ import { MdOutlineFitnessCenter } from 'react-icons/md';
 
 import {
   ProgramFormWrapper,
+  CategoryContainer,
   AddFormLabel,
   AddFormInput,
   AddFormLabelWrapper,
@@ -230,11 +232,11 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
         }}
       >
         {formData.category === 'fitnes for women' && (
-          <div>
+          <CategoryContainer>
             <FormControl
               fullWidth
-              htmlFor="name"
               sx={{ minWidth: 594, display: 'flex' }}
+              htmlFor="name"
             >
               <InputLabel id="name-label" sx={{ fontSize: 16 }}>
                 Назва програми
@@ -245,13 +247,14 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 id="name-select"
                 name="name"
                 type="text"
+                label="Назва програми"
                 onChange={handleInputChange}
                 value={formData.name}
                 sx={{ borderRadius: 40, marginBottom: 4 }}
               >
-                {!!formData.name && !errors.name ? (
+                {/* {!!formData.name && !errors.name ? (
                   <ErrorMessage message={errors.name} />
-                ) : null}
+                ) : null} */}
                 <option aria-label="None" value="" />
                 <optgroup label="Аеробні програми">
                   <option value={'Аеробні програми'}>Аеробні програми</option>
@@ -273,8 +276,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
             </FormControl>
             <FormControl
               fullWidth
-              htmlFor="kind"
               sx={{ minWidth: 594, display: 'flex' }}
+              htmlFor="kind"
             >
               <InputLabel id="kind-label" sx={{ fontSize: 16 }}>
                 Тип програми
@@ -284,13 +287,14 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 id="kind-select"
                 name="kind"
                 type="text"
+                label="Тип програми"
                 onChange={handleInputChange}
                 value={formData.kind}
                 sx={{ borderRadius: 40 }}
               >
-                {!!formData.kind && !errors.kind ? (
+                {/* {!!formData.kind && !errors.kind ? (
                   <ErrorMessage message={errors.kind} />
-                ) : null}
+                ) : null} */}
                 <ListSubheader>Аеробні програми</ListSubheader>
                 <MenuItem value={'Step Aerobics'}>Step Aerobics</MenuItem>
                 <MenuItem value={'Fitball Aerobics'}>Fitball Aerobics</MenuItem>
@@ -311,10 +315,10 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 <MenuItem value={'Strip Dance'}>Strip Dance</MenuItem>
               </Select>
             </FormControl>
-          </div>
+          </CategoryContainer>
         )}
         {formData.category === 'weigth' && (
-          <div>
+          <CategoryContainer>
             <FormControl
               fullWidth
               htmlFor="fitnessWeigth"
@@ -333,9 +337,9 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 value={formData.fitnessWeigth}
                 sx={{ borderRadius: 40, marginBottom: 4 }}
               >
-                {!!formData.fitnessWeigth && !errors.fitnessWeigth ? (
+                {/* {!!formData.fitnessWeigth && !errors.fitnessWeigth ? (
                   <ErrorMessage message={errors.fitnessWeigth} />
-                ) : null}
+                ) : null} */}
                 <option aria-label="None" value="" />
                 <optgroup label="Аеробіка">
                   <option value={'Аеробіка'}>Аеробіка</option>
@@ -362,9 +366,9 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 value={formData.kindProgramWeigth}
                 sx={{ borderRadius: 40 }}
               >
-                {!!formData.kindProgramWeigth && !errors.kindProgramWeigth ? (
+                {/* {!!formData.kindProgramWeigth && !errors.kindProgramWeigth ? (
                   <ErrorMessage message={errors.kindProgramWeigth} />
-                ) : null}
+                ) : null} */}
                 <ListSubheader>Аеробіка</ListSubheader>
                 <MenuItem value={'Step-Intro'}>Step-Intro</MenuItem>
                 <MenuItem value={'Step-B'}>Step-B</MenuItem>
@@ -385,6 +389,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
               }}
             >
               <InputLabel
+                htmlFor="special"
                 id="special-label"
                 sx={{
                   fontSize: 16,
@@ -398,14 +403,14 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
               </InputLabel>
               <Select
                 // as={Select}
-                htmlFor="special"
+                
                 // labelId="special-label"
                 id="special-select"
                 multiple
                 name="special"
                 value={dietName}
                 onChange={onInputChangeDiet}
-                input={<OutlinedInput label="Особливості програми" />}
+                // input={<OutlinedInput label="Особливості програми" />}
                 renderValue={selected => selected.join(', ')}
                 MenuProps={MenuProps}
                 sx={{ borderRadius: 40 }}
@@ -417,15 +422,21 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                     <ListItemText primary={diet} />
                   </MenuItem>
                 ))}
-                {/* {!!dietName && !errors.dietName && !touched.dietName ? (
+                {/* {!!dietName && !errors.dietName (
                               <ErrorMessage message={errors.dietName} />
-                            ) : null} */}
+                            )} */}
               </Select>
-            </FormControl>
-          </div>
+            </FormControl> 
+            {/* <FormGroup htmlFor="special" name="special"
+                value={formData.special}>
+            <FormControlLabel control={<Checkbox defaultChecked />} label="Підбір раціонального харчування" />
+            <FormControlLabel control={<Checkbox />} label="Консультація або порада дієтолога" />
+            <FormControlLabel control={<Checkbox />} label="Можливість тренування старших груп" />
+          </FormGroup> */}
+          </CategoryContainer>
         )}
         {formData.category === 'strength fitness' && (
-          <div>
+          <CategoryContainer>
             <FormControl
               fullWidth
               htmlFor="fitnessStrength"
@@ -443,9 +454,9 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 value={formData.fitnessStrength}
                 sx={{ borderRadius: 40 }}
               >
-                {!!formData.fitnessStrength && !errors.fitnessStrength ? (
+                {/* {!!formData.fitnessStrength && !errors.fitnessStrength ? (
                   <ErrorMessage message={errors.fitnessStrength} />
-                ) : null}
+                ) : null} */}
                 <ListSubheader>Виберіть програму</ListSubheader>
                 <MenuItem value={'Body Up'}>Body Up</MenuItem>
                 <MenuItem value={'Body Low'}>Body Low</MenuItem>
@@ -483,15 +494,15 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                   control={<Radio />}
                   label="Продукти рослинного походження"
                 />
-                {!!formData.food && !errors.food ? (
+                {/* {!!formData.food && !errors.food ? (
                   <ErrorMessage message={errors.food} />
-                ) : null}
+                ) : null} */}
               </RadioGroup>
             </FormControl>
-          </div>
+          </CategoryContainer>
         )}
         {formData.category === 'flexibility and wellness' && (
-          <div>
+          <CategoryContainer>
             <FormControl
               fullWidth
               htmlFor="fitnessWellness"
@@ -509,16 +520,16 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 value={formData.fitnessWellness}
                 sx={{ borderRadius: 40 }}
               >
-                {!!formData.fitnessWellness && !errors.fitnessWellness ? (
+                {/* {!!formData.fitnessWellness && !errors.fitnessWellness ? (
                   <ErrorMessage message={errors.fitnessWellness} />
-                ) : null}
+                ) : null} */}
                 <ListSubheader>Виберіть програму</ListSubheader>
                 <MenuItem value={'Yoga'}>Yoga</MenuItem>
                 <MenuItem value={'Pilates'}>Pilates</MenuItem>
                 <MenuItem value={'Stretching'}>Stretching</MenuItem>
               </Select>
             </FormControl>
-          </div>
+          </CategoryContainer>
         )}
         {formData.category === 'your program' && (
           <Box
@@ -570,9 +581,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
             </FormControl>
           </Box>
         )}
-        <div>
+        <CategoryContainer>
           <FormControl
-            htmlFor="description"
             sx={{
               marginTop: 4,
               width: 594,
@@ -582,6 +592,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
             }}
           >
             <TextField
+            htmlFor="description"
               id="description"
               label="Опис програми"
               variant="outlined"
@@ -592,11 +603,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
               InputProps={{ sx: { borderRadius: 40, minWidth: 594 } }}
               onBlur={() => validateField('description', formData, setErrors)}
             />
-            {/* {!!formData.description &&
-                   !errors.description ? (
-                     <ErrorMessage message={errors.description} />
-                   ) : null} */}
-          </FormControl>
+           </FormControl>  
           <FormControl
             htmlFor="duration"
             sx={{
@@ -683,7 +690,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
               renderValue={selected => selected.join(', ')}
               MenuProps={MenuProps}
               sx={{ borderRadius: 40, width: 594 }}
-              onBlur={() => validateField('training', formData, setErrors)}
+              onBlur={() => validateField('training', personName, setErrors)}
             >
               {names.map(name => (
                 <MenuItem key={name} value={name}>
@@ -696,7 +703,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
             ) : null} */}
             </Select>
           </FormControl>
-        </div>
+        </CategoryContainer>
         <AddFormButtonWrapper>
           <AddFormButtonNext
             type="button"
@@ -870,19 +877,19 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
 //             {!!errors.name && <ErrorMessage message={errors.name} />}
 //           </AddFormLabelWrapper>
 //           <AddFormLabelWrapper>
-//             <AddFormLabel htmlFor="aerobic">
+//             <AddFormLabel htmlFor="kind">
 //               Тип програми:
 //               <AddFormInput
-//                 placeholder="Type aerobic pet"
+//                 placeholder="Type kind"
 //                 type="text"
-//                 name="aerobic"
+//                 name="kind"
 //                 onChange={handleInputChange}
-//                 value={formData.aerobic}
-//                 onBlur={() => validateField('aerobic', formData, setErrors)}
-//                 className={errors.aerobic ? 'invalid' : ''}
+//                 value={formData.kind}
+//                 onBlur={() => validateField('kind', formData, setErrors)}
+//                 className={errors.kind ? 'invalid' : ''}
 //               />
 //             </AddFormLabel>
-//             {!!errors.aerobic && <ErrorMessage message={errors.aerobic} />}
+//             {!!errors.kind && <ErrorMessage message={errors.kind} />}
 //           </AddFormLabelWrapper>
 //         </div>
 //       )}
@@ -891,7 +898,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
 //           <AddFormLabel htmlFor="special">
 //             Особливості програми:
 //             <AddFormInput
-//               placeholder="Type special pet"
+//               placeholder="Type special"
 //               type="text"
 //               name="special"
 //               onChange={handleInputChange}
@@ -1059,6 +1066,137 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
 //         </AddFormLabel>
 //         {!!errors.training && <ErrorMessage message={errors.training} />}
 //       </AddFormLabelWrapper>
+//        <CategoryContainer>
+//    <FormControl
+//      htmlFor="description"
+//      sx={{
+//        marginTop: 4,
+//        width: 594,
+//        display: 'flex',
+//        justifyContent: 'center',
+//        alignItems: 'center',
+//      }}
+//    >
+//      <TextField
+//        id="description"
+//        label="Опис програми"
+//        variant="outlined"
+//        type="text"
+//        name="description"
+//        onChange={handleInputChange}
+//        value={formData.description}
+//        InputProps={{ sx: { borderRadius: 40, minWidth: 594 } }}
+//        onBlur={() => validateField('description', formData, setErrors)}
+//      />
+//      {/* {!!formData.description &&
+//              !errors.description ? (
+//                <ErrorMessage message={errors.description} />
+//              ) : null} */}
+//    </FormControl>
+//    <div>
+//    <FormControl
+//      htmlFor="duration"
+//      sx={{
+//        marginTop: 4,
+//        width: 594,
+//        gap: 2,
+//        display: 'flex',
+//        justifyContent: 'start',
+//        // alignItems: 'center',
+//      }}
+//    >
+//      <FormLabel id="duration-label">Тривалість</FormLabel>
+//      <RadioGroup
+//        // as={RadioGroup}
+
+//        // aria-label="duration-label"
+//        type="text"
+//        name="duration"
+//        onChange={handleInputChange}
+//        value={formData.duration}
+//        // onBlur={() => validateField('duration', formData, setErrors)}
+//      >
+//        <FormControlLabel
+//          value="1-4 тижнів"
+//          control={<Radio />}
+//          label="1-4 тижнів"
+//        />
+//        <FormControlLabel
+//          value="5-8 тижнів"
+//          control={<Radio />}
+//          label="5-8 тижнів"
+//        />
+//        <FormControlLabel
+//          value="9-12 тижнів"
+//          control={<Radio />}
+//          label="9-12 тижнів"
+//        />
+//        <FormControlLabel
+//          value="12-15 тижнів"
+//          control={<Radio />}
+//          label="12-15 тижнів"
+//        />
+//        <FormControlLabel
+//          value="більше 15 тижнів"
+//          control={<Radio />}
+//          label="більше 15 тижнів"
+//        />
+//        {/* {!!formData.duration &&
+//                 !errors.duration &&
+//                 !touched.duration ? (
+//                   <ErrorMessage message={errors.duration} />
+//                 ) : null} */}
+//      </RadioGroup>
+//    </FormControl>
+//    </div>
+//    <div>
+//    <FormControl
+//      htmlFor="training"
+//      sx={{
+//        marginTop: 4,
+//        width: 594,
+//        display: 'flex',
+//        justifyContent: 'center',
+//        alignItems: 'center',
+//      }}
+//    >
+//      <InputLabel
+//        id="training-label"
+//        sx={{
+//          fontSize: 16,
+//          textAline: 'center',
+//          display: 'flex',
+//          justifyContent: 'center',
+//          alignItems: 'center',
+//        }}
+//      >
+//        Тренування
+//      </InputLabel>
+//      <Select
+//        htmlFor="training"
+//        id="training-select"
+//        multiple
+//        name="training"
+//        value={personName}
+//        onChange={onInputChangeTraining}
+//        renderValue={selected => selected.join(', ')}
+//        MenuProps={MenuProps}
+//        sx={{ borderRadius: 40, width: 594 }}
+//        onBlur={() => validateField('training', formData, setErrors)}
+//      >
+//        {names.map(name => (
+//          <MenuItem key={name} value={name}>
+//            <Checkbox checked={personName.indexOf(name) > -1} />
+//            <ListItemText primary={name} />
+//          </MenuItem>
+//        ))}
+//        {/* {!!personName && !errors.personName ? (
+//         <ErrorMessage message={errors.personName} />
+//       ) : null} */}
+//      </Select>
+//    </FormControl>
+//    </div>
+//  </CategoryContainer>;
 //       <AddFormButtonWrapper>
 //         <AddFormButtonNext
 //           type="button"

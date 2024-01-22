@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
 
 import { AddFormButtonWrapper } from '../ProgramForm/ProgramForm.styled';
 import AddFormButtonBack from '../AddFormButton/AddFormButtonBack';
@@ -7,6 +9,8 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { MdOutlineFitnessCenter } from 'react-icons/md';
 import { BsPlus } from 'react-icons/bs';
 import { validateField } from '../ValidateProgramSchema';
+// import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
+// import {styled} from '@mui/system';
 
 import {
   AddFormInput,
@@ -24,6 +28,7 @@ import {
   AddFormTextAreaLabel,
 } from './AdditionalInfo.styled.js';
 
+
 const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errors, setErrors] = useState({});
@@ -34,6 +39,58 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
   const isCommentsFieldValid = Boolean(!errors.comments && !!formData.coments);
   const isLocationFieldValid = Boolean(!errors.location && !!formData.location);
   const isPriceFieldValid = Boolean(!errors.price && !!formData.price);
+
+  // const blue = {
+  //   100: '#DAECFF',
+  //   200: '#b6daff',
+  //   400: '#3399FF',
+  //   500: '#007FFF',
+  //   600: '#0072E5',
+  //   900: '#003A75',
+  // };
+
+  // const grey = {
+  //   50: '#F3F6F9',
+  //   100: '#E5EAF2',
+  //   200: '#DAE2ED',
+  //   300: '#C7D0DD',
+  //   400: '#B0B8C4',
+  //   500: '#9DA8B7',
+  //   600: '#6B7A90',
+  //   700: '#434D5B',
+  //   800: '#303740',
+  //   900: '#1C2025',
+  // };
+
+  // const Textarea = styled(BaseTextareaAutosize)(
+  //   ({ theme }) => `
+  //   width: 594px;
+  //   font-family: 'IBM Plex Sans', sans-serif;
+  //   font-size: 0.875rem;
+  //   font-weight: 400;
+  //   line-height: 1.5;
+  //   padding: 8px 12px;
+  //   border-radius: 10px;
+  //   color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  //   background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  //   border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
+  //   box-shadow: 0px 2px 2px ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
+
+  //   &:hover {
+  //     border-color: ${blue[400]};
+  //   }
+
+  //   &:focus {
+  //     border-color: ${blue[400]};
+  //     box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
+  //   }
+
+  //   // firefox
+  //   &:focus-visible {
+  //     outline: 0;
+  //   }
+  // `,
+  // )
 
   useEffect(() => {
     const handleResize = () => {
@@ -97,11 +154,11 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
 
   return (
     <>
-      <AdditionalInfoFormWrapper category={formData.category}>
-        <FirstPartFormWrapper category={formData.category}>
+      <AdditionalInfoFormWrapper>
+        <FirstPartFormWrapper>
           <AddFormImageLabel
             htmlFor="program-image"
-            category={formData.category}
+            // category={formData.category}
           >
             {/* {formData.category === 'your program' || viewportWidth < 768
               ? 'Додати фото'
@@ -129,7 +186,31 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
         </FirstPartFormWrapper>
         <SecondPartFormWrapper>
           <AddFormLabelWrapper>
-            <AddFormLabel htmlFor="location">
+            <FormControl
+              htmlFor="location"
+              sx={{
+                display: 'flex',
+              }}
+            >
+              <TextField
+                id="location"
+                label="Місцезнаходження"
+                variant="outlined"
+                type="text"
+                name="location"
+                onChange={handleInputChange}
+                InputProps={{
+                  sx: { borderRadius: 40, minWidth: 594 },
+                }}
+                value={formData.location}
+                className={errors.location ? 'invalid' : ''}
+              />
+              {/* {!!formData.description &&
+                   !errors.description ? (
+                     <ErrorMessage message={errors.description} />
+                   ) : null} */}
+            </FormControl>
+            {/* <AddFormLabel htmlFor="location">
               Місцезнаходження
               <AddFormInput
                 placeholder="Type of location"
@@ -141,10 +222,35 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
                 className={errors.location ? 'invalid' : ''}
               />
             </AddFormLabel>
-            {!!errors.location && <ErrorMessage message={errors.location} />}
+            {!!errors.location && <ErrorMessage message={errors.location} />} */}
           </AddFormLabelWrapper>
           <AddFormLabelWrapper>
-            <AddFormLabel htmlFor="price">
+            <FormControl
+              htmlFor="price"
+              sx={{
+                display: 'flex',
+              }}
+            >
+              <TextField
+                id="number"
+                label="Ціна"
+                variant="outlined"
+                type="number"
+                name="price"
+                onChange={handleInputChange}
+                value={formData.price}
+                InputProps={{
+                  sx: { borderRadius: 40, minWidth: 594 },
+                }}
+                onBlur={() => validateField('price', formData, setErrors)}
+                className={errors.price ? 'invalid' : ''}
+              />
+              {/* {!!formData.description &&
+                   !errors.description ? (
+                     <ErrorMessage message={errors.description} />
+                   ) : null} */}
+            </FormControl>
+            {/* <AddFormLabel htmlFor="price">
               Ціна
               <AddFormInput
                 placeholder="Type of price"
@@ -156,10 +262,46 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
                 className={errors.price ? 'invalid' : ''}
               />
             </AddFormLabel>
-            {!!errors.price && <ErrorMessage message={errors.price} />}
+            {!!errors.price && <ErrorMessage message={errors.price} />} */}
           </AddFormLabelWrapper>
           <AddFormLabelWrapper>
-            <AddFormTextAreaLabel htmlFor="comments">
+          {/* <Textarea
+          htmlFor="comments"
+          label="Коментарі"
+      maxRows={5}
+      aria-label="maximum height"
+      name="comments"
+      value={formData.comments}
+      placeholder="Maximum 5 rows"
+      defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua."
+    /> */}
+            <FormControl
+              htmlFor="comments"
+              sx={{
+                display: 'flex',
+              }}
+            >
+              <TextField
+                id="comments"
+                // component="textarea"
+                label="Коментарі"
+                variant="outlined"
+                name="comments"
+                onChange={handleInputChange}
+                InputProps={{
+                  sx: { borderRadius: 40, minWidth: 594 },
+                }}
+                value={formData.comments}
+                onBlur={() => validateField('comments', formData, setErrors)}
+                className={errors.comments ? 'invalid' : ''}
+              />
+              {!!formData.description &&
+                   !errors.description ? (
+                     <ErrorMessage message={errors.description} />
+                   ) : null} 
+            </FormControl> 
+            {/* <AddFormTextAreaLabel htmlFor="comments">
               Коментарі
               <AddFormTextArea
                 component="textarea"
@@ -171,7 +313,7 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
                 className={errors.comments ? 'invalid' : ''}
               />
             </AddFormTextAreaLabel>
-            {!!errors.comments && <ErrorMessage message={errors.comments} />}
+            {!!errors.comments && <ErrorMessage message={errors.comments} />} */}
           </AddFormLabelWrapper>
         </SecondPartFormWrapper>
       </AdditionalInfoFormWrapper>

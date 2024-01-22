@@ -32,6 +32,9 @@ import RemoveCoachProgramDetailsModal from 'components/ReusableComponents/ModalW
 import { PageError } from '../PageError/PageError';
 
 const OurCoachesList = () => {
+
+  const programs = useSelector(selectNotices);
+
   const { isLoggedIn } = useAuth();
   const { categoryName } = useParams();
 
@@ -49,8 +52,9 @@ const OurCoachesList = () => {
   const query = useSelector(selectQuery);
   const dispatch = useDispatch();
   const [, setSearchParams] = useSearchParams();
-  // const showRating = useSelector(selectRating);
-  // console.log('allCoaches', allCoaches);
+  const showRating = useSelector(selectRating);
+
+  console.log('coaches', coaches);
 
   useEffect(() => {
     if (!query) {
@@ -68,11 +72,12 @@ const OurCoachesList = () => {
     //   setAssessment(
     //     coachDislike.find(item => item._id === activeNotice[0]._id)
     //   );
-    setAssessment(ratingCoach.filter(item => item._id === activeNotice[0]._id));
+    setAssessment(ratingCoach.find(item => item._id === activeNotice[0]._id));
+    console.log('activeNotice', activeNotice);
   }, [activeNotice, coachLike, ratingCoach, coachDislike]);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       // dispatch(fetchLike(query));
       // dispatch(fetchDislike(query));
       dispatch(fetchFavorites(query));
@@ -107,6 +112,11 @@ const OurCoachesList = () => {
   // };
 
   const onDeleteOwn = () => {
+    // const filtered = activeNotice.filter(id => {
+    //   return []._id !== id;
+    // });
+    // const id = activeNotice.filter(({ _id }) => id !== _id);
+    // setActiveNotice(coaches.find(item => item._id === id))
     dispatch(deleteUserNotice(activeNotice[0]._id));
     setIsDeleted(true);
   };
@@ -126,15 +136,9 @@ const OurCoachesList = () => {
         break;
     }
 
-    // const visiblePrograms = program
-    //   ? program.filter(program => program.category === 'your program')
-    //   : [];
-    // console.log('visiblePrograms', visiblePrograms);
-    const visiblePrograms = coaches ? coaches.filter(item => item) : [];
-
-    // console.log('visiblePrograms', visiblePrograms);
-    console.log('coaches', coaches);
-    setActiveNotice(visiblePrograms);
+    const filterCoach = coaches.filter(({ _id }) => id === _id);
+    console.log('filterCoach', filterCoach);
+    setActiveNotice(filterCoach);
   };
 
   const handleFavorite = e => {
@@ -161,32 +165,33 @@ const OurCoachesList = () => {
 
   return (
     <>
-      {coaches.length > 0 ? (
-        <CategoriesList>
-          {coaches.map(coach => (
-            <OurCoachesItems
-              coach={coach}
-              key={coach._id}
-              openModal={openModal}
-              isDeleted={isDeleted}
-            />
-          ))}
-          {modal === 'lookDetails' && (
-            <CoachProgramDetailsModal
-              handleFavorite={handleFavorite}
-              details={activeNotice[0]}
-            ></CoachProgramDetailsModal>
-          )}
-          {modal === 'remove' && (
-            <RemoveCoachProgramDetailsModal
-              approveHandle={onDeleteOwn}
-              name={activeNotice[0]}
-            ></RemoveCoachProgramDetailsModal>
-          )}
-        </CategoriesList>
-      ) : (
-        <PageError />
-      )}
+    {coaches.length > 0 ?
+      <CategoriesList>
+        {coaches.map(coach => (
+          <OurCoachesItems
+            key={coach._id}
+            coach={coach}
+            openModal={openModal}
+            isDeleted={isDeleted}
+          />
+        ))}
+                {
+            modal === 'lookDetails' && (
+              <CoachProgramDetailsModal
+                handleFavorite={handleFavorite}
+                coach={activeNotice[0]}
+              ></CoachProgramDetailsModal>
+            )
+        }
+        {modal === 'remove' && (
+          <RemoveCoachProgramDetailsModal
+            approveHandle={onDeleteOwn}
+            title={activeNotice[0].title}
+          ></RemoveCoachProgramDetailsModal>
+        )}
+      </CategoriesList>
+      :
+      <PageError/>}
     </>
   );
 };

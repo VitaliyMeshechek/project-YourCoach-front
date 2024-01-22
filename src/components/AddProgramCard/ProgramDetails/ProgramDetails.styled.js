@@ -10,6 +10,12 @@ export const ProgramFormWrapper = styled.div`
   gap: 20px;
 `;
 
+export const CategoryContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-width: 394 px;
+`;
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;

@@ -125,31 +125,33 @@ const AddProgramForm = () => {
     newFormData.append('comments', formData.comments);
 
     if (formData.category === 'fitnes for women') {
-      dispatch(addNotice({ category: 'fitnes for women', newFormData }));
+      dispatch(addNotice({ category: 'fitnes for women', newFormData, div}));
       toggleModal();
     }
+
 
     newFormData.delete('category', formData.category);
     div.delete('name', formData.name);
     div.delete('kind', formData.kind);
-    div.append('fitnessWeigth', formData.fitnessWeigth);
-    div.append('kindProgramWeigth', formData.kindProgramWeigth);
-    div.append('special', formData.special);
+    newFormData.append('fitnessWeigth', formData.fitnessWeigth);
+    newFormData.append('kindProgramWeigth', formData.kindProgramWeigth);
+    newFormData.append('special', formData.special);
+
 
     if (formData.category === 'weigth') {
-      dispatch(addNotice({ category: 'weigth', newFormData }));
+      dispatch(addNotice({ category: 'weigth', newFormData, div }));
       toggleModal();
       return;
     }
 
-    div.delete('fitnessWeigth', formData.fitnessWeigth);
-    div.delete('kindProgramWeigth', formData.kindProgramWeigth);
+    newFormData.delete('fitnessWeigth', formData.fitnessWeigth);
+    newFormData.delete('kindProgramWeigth', formData.kindProgramWeigth);
     div.delete('special', formData.special);
     div.append('fitnessStrength', formData.fitnessStrength);
     div.append('food', formData.food);
 
     if (formData.category === 'strength fitness') {
-      dispatch(addNotice({ category: 'strength fitness', newFormData }));
+      dispatch(addNotice({ category: 'strength fitness', newFormData, div }));
       toggleModal();
       return;
     }
@@ -160,18 +162,18 @@ const AddProgramForm = () => {
 
     if (formData.category === 'flexibility and wellness') {
       dispatch(
-        addNotice({ category: 'flexibility and wellness', newFormData })
+        addNotice({ category: 'flexibility and wellness', div })
       );
       toggleModal();
     }
 
-    newFormData.delete('fitnessWellness', formData.fitnessWellness);
-    newFormData.append('category', formData.category);
-    newFormData.append('nameYourProgram', formData.nameYourProgram);
-    newFormData.append('typeYourProgram', formData.typeYourProgram);
+    div.delete('fitnessWellness', formData.fitnessWellness);
+    div.append('category', formData.category);
+    div.append('nameYourProgram', formData.nameYourProgram);
+    div.append('typeYourProgram', formData.typeYourProgram);
 
     if (formData.category === 'your program') {
-      dispatch(addUserProgram(newFormData));
+      dispatch(addUserProgram(div));
       toggleModal();
       return;
     }

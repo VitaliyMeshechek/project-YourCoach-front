@@ -1,16 +1,49 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { HiOutlineLocationMarker, HiOutlineClock } from 'react-icons/hi';
 import { FiTrash2 } from 'react-icons/fi';
 import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import { TbGenderFemale, TbGenderMale } from 'react-icons/tb';
+import CoachProgramDetailsModal from 'components/ReusableComponents/ModalWindows/CoachProgramDetailsModal/CoachProgramDetailsModal';
+import RemoveCoachProgramDetailsModal from 'components/ReusableComponents/ModalWindows/RemoveCoachProgramDetailsModal/RemoveCoachProgramDetailsModal';
 // import { getAge } from 'utils/getAge';
 import { useAuth } from 'hooks';
+import ModalWrapper from 'components/ReusableComponents/ModalWindows/ModalWrapper/ModalWrapper';
+
+import {
+  Img,
+  Title,
+  DescWrapper,
+  InfoList,
+  InfoLink,
+  InfoName,
+  InfoValue,
+  InfoNameList,
+  InfoValueList,
+  ButtonFlexWrapper,
+  CancelButton,
+  CancelButtonText,
+  ApproveButton,
+  ApproveButtonText,
+  HeartIcon,
+  FlexWrapper,
+  InfoProgramItem,
+  LabelProgram,
+  InfoProgramText,
+  ImgWrapper,
+  Category,
+} from 'components/ReusableComponents/ModalWindows/CoachProgramDetailsModal/CoachProgramDetailsModal.styled.js';
+
 import {
   selectLike,
   selectDislike,
   selectRating,
+  selectNotices,
   selectOwn,
+  selectQuery,
+  selectUserById,
 } from 'redux/notices/selectors';
 
 import {
@@ -18,8 +51,13 @@ import {
   addToDislike,
   deleteFromLike,
   deleteFromDislike,
+  fetchNotices,
+  fetchUsersNotices,
+  fetchFavorites,
+  deleteUserNotice,
   addToFavorite,
   deleteFromFavorite,
+  fetchUserById,
 } from 'redux/notices/operations';
 import {
   NameProgram,
@@ -30,22 +68,54 @@ import {
   Photo,
   TabsWrapper,
   Thumb,
-  Title,
+  // Title,
   TrashBtn,
 } from './OurCoachesItems.styled.js';
 import { showModal } from 'redux/modal/slice';
 
-export const OurCoachesItems = coaches => {
-  const {
+export const OurCoachesItems = (items) => {
+  const {    
     isDeleted,
     openModal,
-    coach: { _id, avatar, category, name },
-  } = coaches;
+    coach: {
+      _id,     
+      avatar,
+      name,
+      category,
+      owner,
+      kind,
+      fitnessWeigth,
+      kindProgramWeigth,
+      fitnessStrength,
+      fitnessWellness,
+      description,
+      training,
+      location,
+      comments,
+      food,
+      special,
+      duration,
+      price
+    },
+  } = items
 
+  // console.log("id", id)
   const { isLoggedIn } = useAuth();
+  const { categoryName } = useParams();
+
+  const [assessment, setAssessment] = useState(null);
+  const coachLike = useSelector(selectLike);
+  const ratingCoach = useSelector(selectRating);
+  const coachDislike = useSelector(selectDislike);
+  // const own = useSelector(selectOwn);
+  const notices = useSelector(selectNotices);
+  const [coaches, setCoaches] = useState([]);
+  const query = useSelector(selectQuery);
+  const [modal, setModal] = useState('');
   const [, setNewCategory] = useState();
   const [rating, setRating] = useState(false);
   const [own, setOwn] = useState(false);
+  const [, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   // const newLocation =
   //   location.length > 5 ? location.slice(0, 4) + '...' : location;
@@ -56,6 +126,7 @@ export const OurCoachesItems = coaches => {
   // );
   const ratingItem = useSelector(selectRating).filter(item => item._id === _id);
   const ownCoach = useSelector(selectOwn).filter(item => item._id === _id);
+
 
   useEffect(() => {
     switch (category) {
@@ -119,6 +190,13 @@ export const OurCoachesItems = coaches => {
     // dispatch(addToLike(_id));
   };
 
+  const handleLookDetails = () => {
+    dispatch(showModal(true));
+
+    openModal(_id, 'lookDetails');
+  };
+
+
   const handleDeleteOwnCoach = event => {
     event.preventDefault();
     openModal(_id, 'remove');
@@ -128,11 +206,6 @@ export const OurCoachesItems = coaches => {
     }
   };
 
-  const handleLookDetails = () => {
-    dispatch(showModal(true));
-
-    openModal(_id, 'lookDetails');
-  };
 
   return (
     <>
