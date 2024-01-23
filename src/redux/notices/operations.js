@@ -185,14 +185,14 @@ export const deleteUserNotice = createAsyncThunk(
 
 export const addNotice = createAsyncThunk(
   'notices/addNotice',
-  async ({ category, newFormData, div}, thunkAPI) => {
+  async ({ category, newFormData}, thunkAPI) => {
     const { token } = thunkAPI.getState().auth;
     // const object = {      
     //    div,
     // }
     try {
       setAuthHeader(token);
-      const response = await axios.post(`/notices/${category}`, newFormData, div);
+      const response = await axios.post(`/notices/${category}`, newFormData);
       console.log("response.data", response.data)
       return response.data;
     } catch (error) {

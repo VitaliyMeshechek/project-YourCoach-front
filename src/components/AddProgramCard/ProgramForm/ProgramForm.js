@@ -48,14 +48,16 @@ const AddProgramForm = () => {
     food: '',
     special: '',
     avatar: '',
-    duration: 0,
-    price: 0,
+    duration: '',
+    price: '',
     nameYourProgram: '',
     typeYourProgram: '',
     descriptionYourProgram: '',
     durationYourProgram: '',
     trainingYourProgram: '',
   });
+  const [dietName, setDietName] = useState([]);
+  const [personName, setPersonName] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [step, setStep] = useState(0);
   const [title, setTitle] = useState('');
@@ -73,7 +75,7 @@ const AddProgramForm = () => {
       'strength fitness': 'Додавання програми для силового фітнесу',
       'flexibility and wellness':
         'Додавання програми гнучкості та оздоровлення',
-      'your program': 'Додавання своєї програми',
+      'your program': 'Додавання індивідуальної програми',
       '': 'Додавання програми',
     };
 
@@ -114,11 +116,11 @@ const AddProgramForm = () => {
     const div = new FormData();
     const newFormData = new FormData();
     newFormData.append('category', formData.category);
-    div.append('name', formData.name);
-    div.append('kind', formData.kind);
-    div.append('description', formData.description);
-    div.append('duration', formData.duration);
-    div.append('training', formData.training);
+    newFormData.append('name', formData.name);
+    newFormData.append('kind', formData.kind);
+    newFormData.append('description', formData.description);
+    newFormData.append('duration', formData.duration);
+    newFormData.append('training', personName);
     newFormData.append('avatar', formData.avatar);
     newFormData.append('location', formData.location);
     newFormData.append('price', formData.price);
@@ -131,49 +133,49 @@ const AddProgramForm = () => {
 
 
     newFormData.delete('category', formData.category);
-    div.delete('name', formData.name);
-    div.delete('kind', formData.kind);
+    newFormData.delete('name', formData.name);
+    newFormData.delete('kind', formData.kind);
     newFormData.append('fitnessWeigth', formData.fitnessWeigth);
     newFormData.append('kindProgramWeigth', formData.kindProgramWeigth);
-    newFormData.append('special', formData.special);
+    newFormData.append('special', dietName);
 
 
     if (formData.category === 'weigth') {
-      dispatch(addNotice({ category: 'weigth', newFormData, div }));
+      dispatch(addNotice({ category: 'weigth', newFormData, div}));
       toggleModal();
       return;
     }
 
     newFormData.delete('fitnessWeigth', formData.fitnessWeigth);
     newFormData.delete('kindProgramWeigth', formData.kindProgramWeigth);
-    div.delete('special', formData.special);
+    div.delete('special', dietName);
     div.append('fitnessStrength', formData.fitnessStrength);
     div.append('food', formData.food);
 
     if (formData.category === 'strength fitness') {
-      dispatch(addNotice({ category: 'strength fitness', newFormData, div }));
+      dispatch(addNotice({ category: 'strength fitness', newFormData, div}));
       toggleModal();
       return;
     }
 
     div.delete('fitnessStrength', formData.fitnessStrength);
     div.delete('food', formData.food);
-    div.append('fitnessWellness', formData.fitnessWellness);
+    newFormData.append('fitnessWellness', formData.fitnessWellness);
 
     if (formData.category === 'flexibility and wellness') {
       dispatch(
-        addNotice({ category: 'flexibility and wellness', div })
+        addNotice({ category: 'flexibility and wellness', newFormData })
       );
       toggleModal();
     }
 
-    div.delete('fitnessWellness', formData.fitnessWellness);
-    div.append('category', formData.category);
-    div.append('nameYourProgram', formData.nameYourProgram);
-    div.append('typeYourProgram', formData.typeYourProgram);
+    newFormData.delete('fitnessWellness', formData.fitnessWellness);
+    newFormData.append('category', formData.category);
+    newFormData.append('nameYourProgram', formData.nameYourProgram);
+    newFormData.append('typeYourProgram', formData.typeYourProgram);
 
     if (formData.category === 'your program') {
-      dispatch(addUserProgram(div));
+      dispatch(addUserProgram(newFormData));
       toggleModal();
       return;
     }
@@ -209,6 +211,10 @@ const AddProgramForm = () => {
               <ProgramDetails
                 formData={formData}
                 setFormData={setFormData}
+                dietName={dietName}
+                setDietName={setDietName}
+                personName={personName}
+                setPersonName={setPersonName}
                 nextStep={handleNextClick}
                 backStep={handlePrevClick}
               />

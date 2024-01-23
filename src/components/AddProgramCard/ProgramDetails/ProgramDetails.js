@@ -32,10 +32,8 @@ import {
 
 import { validateField } from '../ValidateProgramSchema';
 
-const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [personName, setPersonName] = useState([]);
-  const [dietName, setDietName] = useState([]);
+const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personName, setPersonName, nextStep, backStep }) => {
+  const [isDisabled, setIsDisabled] = useState(true);  
   const [errors, setErrors] = useState({});
   const [isActiveAerobic, setIsActiveAerobic] = useState(false);
   const [isActiveStrong, setIsActiveStrong] = useState(false);
@@ -383,13 +381,13 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
               </Select>
             </FormControl>
             <FormControl
+            htmlFor="special"
               sx={{
                 marginTop: 4,
                 minWidth: 594,
               }}
             >
               <InputLabel
-                htmlFor="special"
                 id="special-label"
                 sx={{
                   fontSize: 16,
@@ -402,9 +400,6 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 Особливості програми
               </InputLabel>
               <Select
-                // as={Select}
-                
-                // labelId="special-label"
                 id="special-select"
                 multiple
                 name="special"
@@ -427,12 +422,6 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                             )} */}
               </Select>
             </FormControl> 
-            {/* <FormGroup htmlFor="special" name="special"
-                value={formData.special}>
-            <FormControlLabel control={<Checkbox defaultChecked />} label="Підбір раціонального харчування" />
-            <FormControlLabel control={<Checkbox />} label="Консультація або порада дієтолога" />
-            <FormControlLabel control={<Checkbox />} label="Можливість тренування старших груп" />
-          </FormGroup> */}
           </CategoryContainer>
         )}
         {formData.category === 'strength fitness' && (
@@ -476,9 +465,6 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
                 Підбір харчування
               </FormLabel>
               <RadioGroup
-                // as={RadioGroup}
-                htmlFor="food"
-                // aria-label="food-label"
                 type="text"
                 name="food"
                 onChange={handleInputChange}
@@ -583,6 +569,8 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
         )}
         <CategoryContainer>
           <FormControl
+          fullWidth
+          htmlFor="description"
             sx={{
               marginTop: 4,
               width: 594,
@@ -592,7 +580,6 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
             }}
           >
             <TextField
-            htmlFor="description"
               id="description"
               label="Опис програми"
               variant="outlined"
@@ -601,7 +588,7 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
               onChange={handleInputChange}
               value={formData.description}
               InputProps={{ sx: { borderRadius: 40, minWidth: 594 } }}
-              onBlur={() => validateField('description', formData, setErrors)}
+              // onBlur={() => validateField('description', formData, setErrors)}
             />
            </FormControl>  
           <FormControl
@@ -612,14 +599,10 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
               gap: 2,
               display: 'flex',
               justifyContent: 'start',
-              // alignItems: 'center',
             }}
           >
             <FormLabel id="duration-label">Тривалість</FormLabel>
             <RadioGroup
-              // as={RadioGroup}
-
-              // aria-label="duration-label"
               type="text"
               name="duration"
               onChange={handleInputChange}
@@ -681,7 +664,6 @@ const ProgramDetails = ({ formData, setFormData, nextStep, backStep }) => {
               Тренування
             </InputLabel>
             <Select
-              htmlFor="training"
               id="training-select"
               multiple
               name="training"
