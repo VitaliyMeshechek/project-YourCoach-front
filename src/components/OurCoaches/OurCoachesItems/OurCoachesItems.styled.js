@@ -55,6 +55,7 @@ export const NameProgram = styled.p`
   color: #ffffff;
 `;
 
+
 export const TabsWrapper = styled.div`
   position: absolute;
   top: 248px;

@@ -150,7 +150,6 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
   }, [
     errors,
     formData.category,
-    formData.aerobic,
     isDescriptionFieldValid,
     isDurationFieldValid,
     isNameFieldValid,
@@ -245,10 +244,11 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
                 id="name-select"
                 name="name"
                 type="text"
+                variant="filled"
                 label="Назва програми"
                 onChange={handleInputChange}
                 value={formData.name}
-                sx={{ borderRadius: 40, marginBottom: 4 }}
+                sx={{ marginBottom: 4 }}
               >
                 {/* {!!formData.name && !errors.name ? (
                   <ErrorMessage message={errors.name} />
@@ -285,10 +285,11 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
                 id="kind-select"
                 name="kind"
                 type="text"
+                variant="filled"
                 label="Тип програми"
                 onChange={handleInputChange}
                 value={formData.kind}
-                sx={{ borderRadius: 40 }}
+                // sx={{ borderRadius: 40 }}
               >
                 {/* {!!formData.kind && !errors.kind ? (
                   <ErrorMessage message={errors.kind} />
@@ -330,10 +331,11 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
                 // defaultValue=""
                 id="fitnessWeigth-select"
                 name="fitnessWeigth"
+                variant="filled"
                 type="text"
                 onChange={handleInputChange}
                 value={formData.fitnessWeigth}
-                sx={{ borderRadius: 40, marginBottom: 4 }}
+                sx={{ marginBottom: 4 }}
               >
                 {/* {!!formData.fitnessWeigth && !errors.fitnessWeigth ? (
                   <ErrorMessage message={errors.fitnessWeigth} />
@@ -360,9 +362,10 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
                 id="kindProgramWeigth-select"
                 name="kindProgramWeigth"
                 type="text"
+                variant="filled"
                 onChange={handleInputChange}
                 value={formData.kindProgramWeigth}
-                sx={{ borderRadius: 40 }}
+                // sx={{ borderRadius: 40 }}
               >
                 {/* {!!formData.kindProgramWeigth && !errors.kindProgramWeigth ? (
                   <ErrorMessage message={errors.kindProgramWeigth} />
@@ -403,12 +406,13 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
                 id="special-select"
                 multiple
                 name="special"
+                variant="filled"
                 value={dietName}
                 onChange={onInputChangeDiet}
                 // input={<OutlinedInput label="Особливості програми" />}
                 renderValue={selected => selected.join(', ')}
                 MenuProps={MenuProps}
-                sx={{ borderRadius: 40 }}
+                // sx={{ borderRadius: 40 }}
                 onBlur={() => validateField('special', formData, setErrors)}
               >
                 {specialDiet.map(diet => (
@@ -439,9 +443,10 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
                 id="fitnessStrength-select"
                 name="fitnessStrength"
                 type="text"
+                variant="filled"
                 onChange={handleInputChange}
                 value={formData.fitnessStrength}
-                sx={{ borderRadius: 40 }}
+                // sx={{ borderRadius: 40 }}
               >
                 {/* {!!formData.fitnessStrength && !errors.fitnessStrength ? (
                   <ErrorMessage message={errors.fitnessStrength} />
@@ -502,9 +507,10 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
                 id="fitnessWellness-select"
                 name="fitnessWellness"
                 type="text"
+                variant="filled"
                 onChange={handleInputChange}
                 value={formData.fitnessWellness}
-                sx={{ borderRadius: 40 }}
+                // sx={{ borderRadius: 40 }}
               >
                 {/* {!!formData.fitnessWellness && !errors.fitnessWellness ? (
                   <ErrorMessage message={errors.fitnessWellness} />
@@ -532,16 +538,16 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
             <FormControl fullWidth htmlFor="nameYourProgram">
               <TextField
                 // as={TextField}
-                htmlFor="nameYourProgram"
                 id="nameYourProgram"
-                variant="outlined"
+                // variant="outlined"
+                variant="filled"
                 label="Назва програми"
                 type="text"
                 name="nameYourProgram"
                 onChange={handleInputChange}
                 value={formData.nameYourProgram}
                 InputProps={{
-                  sx: { borderRadius: 40, minWidth: 594 },
+                  sx: { minWidth: 594 },
                 }}
                 onBlur={() =>
                   validateField('nameYourProgram', formData, setErrors)
@@ -553,44 +559,44 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
                 // as={TextField}
                 htmlFor="typeYourProgram"
                 id="typeYourProgram"
-                variant="outlined"
+                // variant="outlined"
+                variant="filled"
                 label="Тип програми"
                 type="text"
                 name="typeYourProgram"
                 onChange={handleInputChange}
                 value={formData.typeYourProgram}
-                InputProps={{ sx: { borderRadius: 40, minWidth: 594 } }}
+                InputProps={{ sx: { minWidth: 594 } }}
                 onBlur={() =>
                   validateField('typeYourProgram', formData, setErrors)
                 }
               />
             </FormControl>
           </Box>
-        )}
+        )}  
         <CategoryContainer>
-          <FormControl
+        <FormControl
           fullWidth
           htmlFor="description"
             sx={{
               marginTop: 4,
-              width: 594,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
             }}
           >
             <TextField
               id="description"
               label="Опис програми"
-              variant="outlined"
+              // variant="outlined"
+              variant="filled"
               type="text"
               name="description"
               onChange={handleInputChange}
               value={formData.description}
-              InputProps={{ sx: { borderRadius: 40, minWidth: 594 } }}
-              // onBlur={() => validateField('description', formData, setErrors)}
+              multiline
+              maxRows={4}
+              InputProps={{ sx: { minWidth: 594, } }}
+              onBlur={() => validateField('description', formData, setErrors)}
             />
-           </FormControl>  
+           </FormControl>
           <FormControl
             htmlFor="duration"
             sx={{
@@ -667,11 +673,12 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
               id="training-select"
               multiple
               name="training"
+              variant="filled"
               value={personName}
               onChange={onInputChangeTraining}
               renderValue={selected => selected.join(', ')}
               MenuProps={MenuProps}
-              sx={{ borderRadius: 40, width: 594 }}
+              sx={{ width: 594 }}
               onBlur={() => validateField('training', personName, setErrors)}
             >
               {names.map(name => (

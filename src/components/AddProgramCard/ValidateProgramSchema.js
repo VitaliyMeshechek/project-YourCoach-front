@@ -81,15 +81,15 @@ export const ValidateProgramSchema = Yup.object().shape({
   //   'Поле не може бути пустим'
   // ),
   .required('Field name is required'),
-  description: Yup.string()
-    .min(10, 'Description must be at least 10 characters')
-    .max(500, 'Description must not exceed 500 characters')
-    .test(value => {
-      if (!value) {
-        return true;
-      }
-      return value.length >= 10 && value.length <= 500;
-    }),
+  description: Yup.string(),
+    // .min(10, 'Description must be at least 10 characters')
+    // .max(500, 'Description must not exceed 500 characters'),
+    // .test(value => {
+    //   if (!value) {
+    //     return true;
+    //   }
+    //   return value.length >= 10 && value.length <= 500;
+    // }),
   // .required('Поле необхідно заповнити'),
   duration: Yup.string()
   // .oneOf(

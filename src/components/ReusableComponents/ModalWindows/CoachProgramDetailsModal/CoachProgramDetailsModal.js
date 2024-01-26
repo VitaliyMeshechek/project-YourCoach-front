@@ -75,7 +75,10 @@ const CoachProgramDetailsModal = ({ coach, handleFavorite }) => {
 
   return (
     <ModalWrapper padding="44px 12px 16px 12px">
-      <Title>{fitnessWeigth}</Title>
+      {name && (<Title>{name}</Title>)}
+      {fitnessWeigth && (<Title>{fitnessWeigth}</Title>)}
+      {fitnessStrength && (<Title>{fitnessStrength}</Title>)}
+      {fitnessWellness && (<Title>{fitnessWellness}</Title>)}     
       <FlexWrapper>
         <DescWrapper>
           <ImgWrapper>
@@ -86,26 +89,42 @@ const CoachProgramDetailsModal = ({ coach, handleFavorite }) => {
               <LabelProgram>Категорія:</LabelProgram>
               <InfoProgramText>{category}</InfoProgramText>
             </InfoProgramItem>
-            <InfoProgramItem>
+            {name && (<InfoProgramItem>              
+              <LabelProgram>Назва програми:</LabelProgram>
+              <InfoProgramText>{name}</InfoProgramText>
+            </InfoProgramItem>)}
+            {fitnessWeigth && (<InfoProgramItem>              
               <LabelProgram>Назва програми:</LabelProgram>
               <InfoProgramText>{fitnessWeigth}</InfoProgramText>
-            </InfoProgramItem>
-            <InfoProgramItem>
+            </InfoProgramItem>)}
+            {fitnessStrength && (<InfoProgramItem>              
+              <LabelProgram>Назва програми:</LabelProgram>
+              <InfoProgramText>{fitnessStrength}</InfoProgramText>
+            </InfoProgramItem>)}
+            {fitnessWellness && (<InfoProgramItem>              
+              <LabelProgram>Назва програми:</LabelProgram>
+              <InfoProgramText>{fitnessWellness}</InfoProgramText>
+            </InfoProgramItem>)}
+            {kind && (<InfoProgramItem>
+              <LabelProgram>Тип програми:</LabelProgram>
+              <InfoProgramText>{kind}</InfoProgramText>
+            </InfoProgramItem>)}
+            {kindProgramWeigth && (<InfoProgramItem>
               <LabelProgram>Тип програми:</LabelProgram>
               <InfoProgramText>{kindProgramWeigth}</InfoProgramText>
-            </InfoProgramItem>
+            </InfoProgramItem>)}
             <InfoProgramItem>
               <LabelProgram>Опис програми:</LabelProgram>
               <InfoProgramText>{description}</InfoProgramText>
             </InfoProgramItem>
-            <InfoProgramItem>
+            {special && (<InfoProgramItem>
               <LabelProgram>Особливості програми:</LabelProgram>
               <InfoProgramText>{special}</InfoProgramText>
-            </InfoProgramItem>
-            <InfoProgramItem>
+            </InfoProgramItem>)}
+            {food && (<InfoProgramItem>
               <LabelProgram>Підбір харчування:</LabelProgram>
               <InfoProgramText>{food}</InfoProgramText>
-            </InfoProgramItem>
+            </InfoProgramItem>)}
             <InfoProgramItem>
               <LabelProgram>Тривалість програми:</LabelProgram>
               <InfoProgramText>{duration}</InfoProgramText>

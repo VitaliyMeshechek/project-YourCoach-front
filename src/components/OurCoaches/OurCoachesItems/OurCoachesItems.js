@@ -231,7 +231,10 @@ export const OurCoachesItems = (items) => {
             <FiTrash2 />
           </TrashBtn>
         )}
-        <NameProgram>Назва програми: {name}</NameProgram>
+        {name && (<NameProgram>Назва програми: {name} </NameProgram>)}
+        {fitnessWeigth && (<NameProgram>Назва програми: {fitnessWeigth}</NameProgram>)}
+        {fitnessStrength && (<NameProgram>Назва програми: {fitnessStrength}</NameProgram>)}
+        {fitnessWellness && (<NameProgram>Назва програми: {fitnessWellness}</NameProgram>)}
         <CoachProgramBtn onClick={handleLookDetails}>
           Ознайомитися
         </CoachProgramBtn>

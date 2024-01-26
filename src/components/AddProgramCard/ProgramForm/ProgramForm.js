@@ -30,21 +30,14 @@ const AddProgramForm = () => {
     category: '',
     name: '',
     kind: '',
+    description: '',
     fitnessWeigth: '',
     kindProgramWeigth: '',
     fitnessStrength: '',
     fitnessWellness: '',
-    description: '',
     training: '',
     location: '',
     comments: '',
-    weigth: '',
-    aerobic: '',
-    strong: '',
-    health: '',
-    functions: '',
-    step: '',
-    impact: '',
     food: '',
     special: '',
     avatar: '',
@@ -53,8 +46,6 @@ const AddProgramForm = () => {
     nameYourProgram: '',
     typeYourProgram: '',
     descriptionYourProgram: '',
-    durationYourProgram: '',
-    trainingYourProgram: '',
   });
   const [dietName, setDietName] = useState([]);
   const [personName, setPersonName] = useState([]);
@@ -102,7 +93,7 @@ const AddProgramForm = () => {
     return 'current';
   };
 
-  const handleNextClick = e => {
+  const handleNextClick = () => {
     setStep(prevState => prevState + 1);
   };
 
@@ -126,8 +117,9 @@ const AddProgramForm = () => {
     newFormData.append('price', formData.price);
     newFormData.append('comments', formData.comments);
 
+
     if (formData.category === 'fitnes for women') {
-      dispatch(addNotice({ category: 'fitnes for women', newFormData, div}));
+      dispatch(addNotice({ category: formData.category, newFormData}));
       toggleModal();
     }
 
@@ -135,36 +127,37 @@ const AddProgramForm = () => {
     newFormData.delete('category', formData.category);
     newFormData.delete('name', formData.name);
     newFormData.delete('kind', formData.kind);
+    
     newFormData.append('fitnessWeigth', formData.fitnessWeigth);
     newFormData.append('kindProgramWeigth', formData.kindProgramWeigth);
     newFormData.append('special', dietName);
 
 
     if (formData.category === 'weigth') {
-      dispatch(addNotice({ category: 'weigth', newFormData, div}));
+      dispatch(addNotice({ category: formData.category, newFormData}));
       toggleModal();
       return;
     }
 
     newFormData.delete('fitnessWeigth', formData.fitnessWeigth);
     newFormData.delete('kindProgramWeigth', formData.kindProgramWeigth);
-    div.delete('special', dietName);
-    div.append('fitnessStrength', formData.fitnessStrength);
-    div.append('food', formData.food);
+    newFormData.delete('special', dietName);
+    newFormData.append('fitnessStrength', formData.fitnessStrength);
+    newFormData.append('food', formData.food);
 
     if (formData.category === 'strength fitness') {
-      dispatch(addNotice({ category: 'strength fitness', newFormData, div}));
+      dispatch(addNotice({ category: formData.category, newFormData}));
       toggleModal();
       return;
     }
 
-    div.delete('fitnessStrength', formData.fitnessStrength);
-    div.delete('food', formData.food);
+    newFormData.delete('fitnessStrength', formData.fitnessStrength);
+    newFormData.delete('food', formData.food);
     newFormData.append('fitnessWellness', formData.fitnessWellness);
 
     if (formData.category === 'flexibility and wellness') {
       dispatch(
-        addNotice({ category: 'flexibility and wellness', newFormData })
+        addNotice({ category: formData.category, newFormData })
       );
       toggleModal();
     }

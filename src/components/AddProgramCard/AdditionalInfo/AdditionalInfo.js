@@ -195,12 +195,13 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
               <TextField
                 id="location"
                 label="Місцезнаходження"
-                variant="outlined"
+                // variant="outlined"
+                variant="filled"
                 type="text"
                 name="location"
                 onChange={handleInputChange}
                 InputProps={{
-                  sx: { borderRadius: 40, minWidth: 594 },
+                  sx: { minWidth: 594 },
                 }}
                 value={formData.location}
                 className={errors.location ? 'invalid' : ''}
@@ -234,13 +235,14 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
               <TextField
                 id="number"
                 label="Ціна"
-                variant="outlined"
+                // variant="outlined"
+                variant="filled"
                 type="number"
                 name="price"
                 onChange={handleInputChange}
                 value={formData.price}
                 InputProps={{
-                  sx: { borderRadius: 40, minWidth: 594 },
+                  sx: { minWidth: 594 },
                 }}
                 onBlur={() => validateField('price', formData, setErrors)}
                 className={errors.price ? 'invalid' : ''}
@@ -286,11 +288,12 @@ const AdditionalInfo = ({ formData, setFormData, submit, backStep }) => {
                 id="comments"
                 // component="textarea"
                 label="Коментарі"
-                variant="outlined"
+                // variant="outlined"
+                variant="filled"
                 name="comments"
                 onChange={handleInputChange}
                 InputProps={{
-                  sx: { borderRadius: 40, minWidth: 594 },
+                  sx: { minWidth: 594 },
                 }}
                 value={formData.comments}
                 onBlur={() => validateField('comments', formData, setErrors)}

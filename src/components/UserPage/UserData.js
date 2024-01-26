@@ -81,11 +81,11 @@ export const UserData = () => {
     }
 
     const formData = new FormData();
-    formData.append('avatar', PhotoEdit);
+    formData.append('avatarUrl', PhotoEdit);
 
     dispatch(updateUserPhoto(PhotoEdit)).then(response => {
       // Assuming the API response returns the URL of the uploaded  image
-      setPreviewUrl(response.data.avatar);
+      setPreviewUrl(response.data.avatarUrl);
       console.log(response.data);
     });
   };
@@ -417,7 +417,7 @@ export const UserData = () => {
                   type="text"
                   name="city"
                   readOnly={!isCityEdit}
-                  autoComplete="off"
+                  autoComplete="on"
                   validate={validateCity}
                 />
                 {!isCityEdit && (
