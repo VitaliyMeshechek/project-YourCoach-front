@@ -49,9 +49,9 @@ export const fetchFavorites = createAsyncThunk(
 export const addToFavorite = createAsyncThunk(
   'notices/addToFavorite',
   async (id, thunkAPI) => {
-    // const { token } = thunkAPI.getState().auth;
+    const { token } = thunkAPI.getState().auth;
     try {
-      setAuthHeader();
+      setAuthHeader(token);
       const response = await axios.post(`/notices/rating/${id}`);
       const result = response.data.rating[0];
       return result;
@@ -64,9 +64,9 @@ export const addToFavorite = createAsyncThunk(
 export const deleteFromFavorite = createAsyncThunk(
   'notices/deleteFromFavorite',
   async (id, thunkAPI) => {
-    // const { token } = thunkAPI.getState().auth;
+    const { token } = thunkAPI.getState().auth;
     try {
-      setAuthHeader();
+      setAuthHeader(token);
       const response = await axios.delete(`/notices/rating/${id}`);
       return response.data;
     } catch (error) {

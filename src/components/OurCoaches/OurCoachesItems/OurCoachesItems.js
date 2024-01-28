@@ -126,6 +126,7 @@ export const OurCoachesItems = (items) => {
   // );
   const ratingItem = useSelector(selectRating).filter(item => item._id === _id);
   const ownCoach = useSelector(selectOwn).filter(item => item._id === _id);
+  console.log('ratingItem', ratingItem)
 
 
   useEffect(() => {
@@ -164,16 +165,15 @@ export const OurCoachesItems = (items) => {
 
   const handleAssessment = event => {
     event.preventDefault();
-    if (isLoggedIn) {
+    if (isLoggedIn) {      
       setRating(false);
       return;
     }
-    if (ratingItem) {
+
       dispatch(deleteFromFavorite(_id));
       setRating(false);
 
-      return;
-    }
+
     dispatch(addToFavorite(_id));
     // if (coachLike) {
     //   dispatch(deleteFromLike(_id));

@@ -143,10 +143,10 @@ const OurCoachesList = () => {
 
   const handleFavorite = event => {
     event.preventDefault();
-    if (!isLoggedIn) {
-      toast('Sorry, this option is available only for authorized users');
-      return;
-    }
+    // if (!isLoggedIn) {
+    //   toast('Sorry, this option is available only for authorized users');
+    //   return;
+    // }
     // if (assessment) {
     //   dispatch(deleteFromLike(activeNotice[0]._id));
     //   // ||
