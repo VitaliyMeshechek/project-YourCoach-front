@@ -6,10 +6,6 @@ import {
   DescWrapper,
   InfoList,
   InfoLink,
-  InfoName,
-  InfoValue,
-  InfoNameList,
-  InfoValueList,
   ButtonFlexWrapper,
   CancelButton,
   CancelButtonText,
@@ -21,7 +17,6 @@ import {
   LabelProgram,
   InfoProgramText,
   ImgWrapper,
-  Category,
 } from './CoachProgramDetailsModal.styled.js';
 
 import { showModal } from 'redux/modal/slice';
@@ -29,7 +24,7 @@ import { useEffect, useState } from 'react';
 import { fetchUserById } from 'redux/notices/operations';
 import { selectUserById, selectNotices } from 'redux/notices/selectors';
 
-const CoachProgramDetailsModal = ({ coach, handleFavorite }) => {
+const CoachProgramDetailsModal = ({ coach, handleFavorite}) => {
   const [
     {
       name,
@@ -54,10 +49,6 @@ const CoachProgramDetailsModal = ({ coach, handleFavorite }) => {
   ] = useState({});
 
   const dispatch = useDispatch();
-  // const [coachProgramDetail, setCoachProgramDetail] = useState([]);
-
-  // const noticesDetails = useSelector(selectNotices);
-  // console.log('noticesDetails', noticesDetails);
   console.log('owner', owner);
   const user = useSelector(selectUserById);
 
@@ -70,8 +61,6 @@ const CoachProgramDetailsModal = ({ coach, handleFavorite }) => {
     dispatch(fetchUserById(owner));
   }, [dispatch, owner, coach]);
 
-  // const result = coachProgramDetail.map(item => item);
-  // console.log('result', result);
 
   return (
     <ModalWrapper padding="44px 12px 16px 12px">
@@ -162,57 +151,6 @@ const CoachProgramDetailsModal = ({ coach, handleFavorite }) => {
           </InfoList>
         </DescWrapper>
       </FlexWrapper>
-      {/* <Desc>{comments}</Desc> */}
-      {/* <FlexWrapper>
-        <ImgWrapper>
-          <Img src={avatar} alt={name}></Img>
-          <Category>{category}</Category>
-        </ImgWrapper>
-
-        <DescWrapper>
-          <Title>{name}</Title>
-
-          <InfoList>
-            <InfoNameList>
-              <InfoName>Назва програми:</InfoName>
-              <InfoName>Тип програми:</InfoName>
-              <InfoName>Опис програми:</InfoName>
-              <InfoName>Особливості програми:</InfoName>
-              <InfoName>Підбір харчування:</InfoName>
-              <InfoName>Тривалість програми:</InfoName>
-              <InfoName>Тренування:</InfoName>
-              <InfoName>Місцезнаходження:</InfoName>
-              <InfoName>Ціна:</InfoName>
-              <InfoName>Коментарі:</InfoName>
-              <InfoName>Email:</InfoName>
-              <InfoName>Phone:</InfoName>
-            </InfoNameList>
-            <InfoValueList>
-              <InfoValue>{name}</InfoValue>
-              <InfoValue>{kind}</InfoValue>
-              <InfoValue>{description}</InfoValue>
-              <InfoValue>{special}</InfoValue>
-
-              <InfoValue>{food}</InfoValue>
-              <InfoValue>{duration}</InfoValue>
-              <InfoValue>{training}</InfoValue>
-              <InfoValue>{location}</InfoValue>
-              <InfoValue>{price}</InfoValue>
-              <InfoValue>{comments}</InfoValue>
-
-              <InfoValue>
-                <InfoLink>{user.email ? user.email : 'none'}</InfoLink>
-              </InfoValue>
-              <InfoValue>
-                <InfoLink href={user.phone ? user.phone : ''}>
-                  {user.phone ? user.phone : ''}
-                </InfoLink>
-              </InfoValue>
-            </InfoValueList>
-          </InfoList>
-        </DescWrapper>
-      </FlexWrapper> */}
-
       <ButtonFlexWrapper>
         <CancelButton onClick={() => dispatch(showModal(false))}>
           <CancelButtonText>

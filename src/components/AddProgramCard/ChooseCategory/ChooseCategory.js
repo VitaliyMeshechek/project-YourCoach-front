@@ -19,8 +19,8 @@ const ChooseCategory = ({ formData, setFormData, nextStep, cancel }) => {
     else setIsDisabled(false);
   }, [formData.category]);
 
-  const handleCategoryChange = e => {
-    const { name, value } = e.target;
+  const handleCategoryChange = event => {
+    const { name, value } = event.target;
 
     setFormData(prevState => ({
       ...prevState,

@@ -77,7 +77,7 @@ const OurCoachesList = () => {
   }, [activeNotice, coachLike, ratingCoach, coachDislike]);
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
       // dispatch(fetchLike(query));
       // dispatch(fetchDislike(query));
       dispatch(fetchFavorites(query));
@@ -141,8 +141,8 @@ const OurCoachesList = () => {
     setActiveNotice(filterCoach);
   };
 
-  const handleFavorite = e => {
-    e.preventDefault();
+  const handleFavorite = event => {
+    event.preventDefault();
     if (!isLoggedIn) {
       toast('Sorry, this option is available only for authorized users');
       return;
@@ -156,7 +156,7 @@ const OurCoachesList = () => {
     // dispatch(addToLike(activeNotice[0]._id));
     // ||
     // dispatch(addToDislike(activeNotice[0]._id));
-    if (assessment) {
+    if (assessment && !isLoggedIn) {
       dispatch(deleteFromFavorite(activeNotice[0]._id));
       return;
     }
@@ -186,7 +186,7 @@ const OurCoachesList = () => {
         {modal === 'remove' && (
           <RemoveCoachProgramDetailsModal
             approveHandle={onDeleteOwn}
-            title={activeNotice[0].title}
+            // title={activeNotice[0].title}
           ></RemoveCoachProgramDetailsModal>
         )}
       </CategoriesList>

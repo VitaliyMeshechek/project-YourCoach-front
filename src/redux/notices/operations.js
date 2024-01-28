@@ -64,9 +64,9 @@ export const addToFavorite = createAsyncThunk(
 export const deleteFromFavorite = createAsyncThunk(
   'notices/deleteFromFavorite',
   async (id, thunkAPI) => {
-    const { token } = thunkAPI.getState().auth;
+    // const { token } = thunkAPI.getState().auth;
     try {
-      setAuthHeader(token);
+      setAuthHeader();
       const response = await axios.delete(`/notices/rating/${id}`);
       return response.data;
     } catch (error) {
@@ -187,9 +187,6 @@ export const addNotice = createAsyncThunk(
   'notices/addNotice',
   async ({ category, newFormData}, thunkAPI) => {
     const { token } = thunkAPI.getState().auth;
-    // const object = {      
-    //    div,
-    // }
     try {
       setAuthHeader(token);
       const response = await axios.post(`/notices/${category}`, newFormData);

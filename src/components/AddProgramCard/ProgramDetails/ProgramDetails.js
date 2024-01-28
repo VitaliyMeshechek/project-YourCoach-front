@@ -218,6 +218,7 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
 
     console.log(value);
   };
+  
 
   return (
     <ProgramFormWrapper>
@@ -383,6 +384,28 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
                 <MenuItem value={'High-Impact'}>High-Impact</MenuItem>
               </Select>
             </FormControl>
+            {/* <FormControl
+          fullWidth
+          htmlFor="descriptionWeigthProgram"
+            sx={{
+              marginTop: 4,
+            }}
+          >
+            <TextField
+              id="descriptionWeigthProgram"
+              label="Опис програми"
+              // variant="outlined"
+              variant="filled"
+              type="text"
+              name="descriptionWeigthProgram"
+              onChange={handleInputChange}
+              value={formData.descriptionWeigthProgram}
+              multiline
+              maxRows={4}
+              InputProps={{ sx: { minWidth: 594, } }}
+              onBlur={() => validateField('descriptionWeigthProgram', formData, setErrors)}
+            />
+           </FormControl> */}
             <FormControl
             htmlFor="special"
               sx={{
@@ -589,12 +612,12 @@ const ProgramDetails = ({ formData, setFormData, dietName, setDietName, personNa
               variant="filled"
               type="text"
               name="description"
-              onChange={handleInputChange}
               value={formData.description}
+              onChange={handleInputChange}
               multiline
               maxRows={4}
               InputProps={{ sx: { minWidth: 594, } }}
-              onBlur={() => validateField('description', formData, setErrors)}
+              // onBlur={() => validateField('description', formData, setErrors)}
             />
            </FormControl>
           <FormControl

@@ -45,7 +45,7 @@ const AddProgramForm = () => {
     price: '',
     nameYourProgram: '',
     typeYourProgram: '',
-    descriptionYourProgram: '',
+    descriptionWeigthProgram: '',
   });
   const [dietName, setDietName] = useState([]);
   const [personName, setPersonName] = useState([]);
@@ -104,7 +104,6 @@ const AddProgramForm = () => {
   const handleSubmit = async () => {
     if (!formData.category) return;
 
-    const div = new FormData();
     const newFormData = new FormData();
     newFormData.append('category', formData.category);
     newFormData.append('name', formData.name);
@@ -116,20 +115,23 @@ const AddProgramForm = () => {
     newFormData.append('location', formData.location);
     newFormData.append('price', formData.price);
     newFormData.append('comments', formData.comments);
-
-
+    
+    
     if (formData.category === 'fitnes for women') {
       dispatch(addNotice({ category: formData.category, newFormData}));
       toggleModal();
     }
-
-
+    
+    
     newFormData.delete('category', formData.category);
     newFormData.delete('name', formData.name);
     newFormData.delete('kind', formData.kind);
+    // newFormData.delete('description', formData.description);
     
     newFormData.append('fitnessWeigth', formData.fitnessWeigth);
     newFormData.append('kindProgramWeigth', formData.kindProgramWeigth);
+        
+    // newFormData.append('descriptionWeigthProgram', formData.descriptionWeigthProgram);
     newFormData.append('special', dietName);
 
 
@@ -166,6 +168,7 @@ const AddProgramForm = () => {
     newFormData.append('category', formData.category);
     newFormData.append('nameYourProgram', formData.nameYourProgram);
     newFormData.append('typeYourProgram', formData.typeYourProgram);
+    // newFormData.append('description', formData.description);
 
     if (formData.category === 'your program') {
       dispatch(addUserProgram(newFormData));
