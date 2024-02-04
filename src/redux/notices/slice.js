@@ -7,8 +7,11 @@ import {
   fetchAll,
   fetchLike,
   fetchDislike,
+  fetchRating,
   fetchNotices,
   addNotice,
+  addLike,
+  addDislike,
   fetchUsersNotices,
   deleteUserNotice,
   fetchUserById,
@@ -34,6 +37,7 @@ const noticesPageSlice = createSlice({
     // like: [],
     // dislike: [],
     rating: [],
+    favorite: [],
     own: [],
     user: {},
   },
@@ -66,7 +70,7 @@ const noticesPageSlice = createSlice({
     [fetchFavorites.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.rating = action.payload;
+      state.favorite = action.payload;
     },
     [fetchFavorites.rejected]: handleRejected,
 
@@ -74,7 +78,7 @@ const noticesPageSlice = createSlice({
     [addToFavorite.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.rating.push(action.payload);
+      state.favorite.push(action.payload);
     },
     [addToFavorite.rejected]: handleRejected,
 
@@ -82,20 +86,34 @@ const noticesPageSlice = createSlice({
     [deleteFromFavorite.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      const index = state.rating.findIndex(
+      const index = state.favorite.findIndex(
         contact => contact.id === action.payload.id
       );
-      state.rating.splice(index, 1);
+      state.favorite.splice(index, 1);
     },
     [deleteFromFavorite.rejected]: handleRejected,
 
-    // [fetchLike.pending]: handlePending,
-    // [fetchLike.fulfilled](state, action) {
-    //   state.isLoading = false;
-    //   state.error = null;
-    //   state.like = action.payload;
-    // },
-    // [fetchLike.rejected]: handleRejected,
+    [fetchRating.pending]: handlePending,
+    [fetchRating.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.rating = action.payload;
+    },
+    [fetchRating.rejected]: handleRejected,
+    [addLike.pending]: handlePending,
+    [addLike.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.rating.push(action.payload);
+    },
+    [addLike.rejected]: handleRejected,
+    [addDislike.pending]: handlePending,
+    [addDislike.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.rating.push(action.payload);
+    },
+    [addDislike.rejected]: handleRejected,
 
     // [fetchDislike.pending]: handlePending,
     // [fetchDislike.fulfilled](state, action) {

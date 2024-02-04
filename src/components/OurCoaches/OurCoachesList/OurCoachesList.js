@@ -5,18 +5,18 @@ import {
   selectLike,
   selectDislike,
   selectNotices,
-  selectRating,
+  selectFavorite,
   selectOwn,
   selectQuery,
 } from 'redux/notices/selectors';
 import {
-  addToLike,
-  addToDislike,
-  deleteFromLike,
-  deleteFromDislike,
+  // addToLike,
+  // addToDislike,
+  // deleteFromLike,
+  // deleteFromDislike,
   deleteUserNotice,
-  fetchLike,
-  fetchDislike,
+  // fetchLike,
+  // fetchDislike,
   fetchNotices,
   fetchUsersNotices,
   fetchFavorites,
@@ -33,7 +33,7 @@ import { PageError } from '../PageError/PageError';
 
 const OurCoachesList = () => {
 
-  const programs = useSelector(selectNotices);
+  // const programs = useSelector(selectNotices);
 
   const { isLoggedIn } = useAuth();
   const { categoryName } = useParams();
@@ -43,16 +43,16 @@ const OurCoachesList = () => {
   const [isDeleted, setIsDeleted] = useState(false);
 
   const [assessment, setAssessment] = useState(null);
-  const coachLike = useSelector(selectLike);
-  const ratingCoach = useSelector(selectRating);
-  const coachDislike = useSelector(selectDislike);
+  // const coachLike = useSelector(selectLike);
+  const favoriteCoach = useSelector(selectFavorite);
+  // const coachDislike = useSelector(selectDislike);
   const own = useSelector(selectOwn);
   const notices = useSelector(selectNotices);
   const [coaches, setCoaches] = useState([]);
   const query = useSelector(selectQuery);
   const dispatch = useDispatch();
   const [, setSearchParams] = useSearchParams();
-  const showRating = useSelector(selectRating);
+  // const showRating = useSelector(selectRating);
 
   console.log('coaches', coaches);
 
@@ -72,24 +72,24 @@ const OurCoachesList = () => {
     //   setAssessment(
     //     coachDislike.find(item => item._id === activeNotice[0]._id)
     //   );
-    setAssessment(ratingCoach.find(item => item._id === activeNotice[0]._id));
+    setAssessment(favoriteCoach.find(item => item._id === activeNotice[0]._id));
     console.log('activeNotice', activeNotice);
-  }, [activeNotice, coachLike, ratingCoach, coachDislike]);
+  }, [activeNotice, favoriteCoach,]);
 
   useEffect(() => {
     if (isLoggedIn) {
       // dispatch(fetchLike(query));
       // dispatch(fetchDislike(query));
-      dispatch(fetchFavorites(query));
       dispatch(fetchUsersNotices(query));
     }
+    dispatch(fetchFavorites(query));
     dispatch(fetchNotices({ categoryName, query }));
   }, [categoryName, dispatch, isLoggedIn, query]);
 
   useEffect(() => {
     switch (categoryName) {
-      case 'rating':
-        setCoaches(ratingCoach);
+      case 'favorite':
+        setCoaches(favoriteCoach);
         // setAllCoaches(coachLike);
         // || setAllCoaches(coachDislike);
         break;
@@ -101,7 +101,7 @@ const OurCoachesList = () => {
         setCoaches(notices);
         break;
     }
-  }, [categoryName, coachLike, coachDislike, ratingCoach, notices, own]);
+  }, [categoryName, favoriteCoach, notices, own]);
 
   if (!coaches) {
     return null;
@@ -141,7 +141,7 @@ const OurCoachesList = () => {
     setActiveNotice(filterCoach);
   };
 
-  const handleFavorite = event => {
+  const handleFavorite = (event) => {
     event.preventDefault();
     // if (!isLoggedIn) {
     //   toast('Sorry, this option is available only for authorized users');
@@ -156,7 +156,7 @@ const OurCoachesList = () => {
     // dispatch(addToLike(activeNotice[0]._id));
     // ||
     // dispatch(addToDislike(activeNotice[0]._id));
-    if (assessment && !isLoggedIn) {
+    if (assessment) {
       dispatch(deleteFromFavorite(activeNotice[0]._id));
       return;
     }

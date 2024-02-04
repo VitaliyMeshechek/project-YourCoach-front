@@ -6,7 +6,7 @@ const links = [
   { href: 'weigth', text: 'Програма схуднення' },
   { href: 'strength fitness', text: 'Силовий фітнес' },
   { href: 'flexibility and wellness', text: 'Гнучкість та оздоровлення' },
-  { href: 'rating', text: 'Рейтинг тренерів' },
+  { href: 'favorite', text: 'Улюблені тренери' },
 ];
 
 const userLinks = [

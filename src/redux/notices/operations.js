@@ -36,9 +36,10 @@ export const fetchFavorites = createAsyncThunk(
     // const { token } = thunkAPI.getState().auth;
     try {
       setAuthHeader();
-      const response = await axios.get(`/notices/rating`, {
+      const response = await axios.get(`/notices/favorite`, {
         params: { query: query ? query : null },
       });
+      console.log('fetchFavorites', response.data)
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -49,11 +50,12 @@ export const fetchFavorites = createAsyncThunk(
 export const addToFavorite = createAsyncThunk(
   'notices/addToFavorite',
   async (id, thunkAPI) => {
-    const { token } = thunkAPI.getState().auth;
+    // const { token } = thunkAPI.getState().auth;
     try {
-      setAuthHeader(token);
-      const response = await axios.post(`/notices/rating/${id}`);
-      const result = response.data.rating[0];
+      setAuthHeader();
+      const response = await axios.post(`/notices/favorite/${id}`);
+      const result = response.data.favorite[0];
+      console.log('addToFavorite', result)
       return result;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -64,10 +66,11 @@ export const addToFavorite = createAsyncThunk(
 export const deleteFromFavorite = createAsyncThunk(
   'notices/deleteFromFavorite',
   async (id, thunkAPI) => {
-    const { token } = thunkAPI.getState().auth;
+    // const { token } = thunkAPI.getState().auth;
     try {
-      setAuthHeader(token);
-      const response = await axios.delete(`/notices/rating/${id}`);
+      setAuthHeader();
+      const response = await axios.delete(`/notices/favorite/${id}`);
+      console.log('deleteFromFavorite', response.data)
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -75,12 +78,11 @@ export const deleteFromFavorite = createAsyncThunk(
   }
 );
 
-export const fetchLike = createAsyncThunk(
-  'notices/fetchLike',
-  async (query, thunkAPI) => {
+export const fetchRating = createAsyncThunk(
+  'notices/fetchRating',
+  async (_, thunkAPI) => {
     try {
-      const response = await axios.get(`/notices/like`, {
-        params: { query: query ? query : null },
+      const response = await axios.get(`/notices/rating`, {
       });
       return response.data;
     } catch (error) {
@@ -89,13 +91,25 @@ export const fetchLike = createAsyncThunk(
   }
 );
 
-export const fetchDislike = createAsyncThunk(
-  'notices/fetchDislike',
-  async (query, thunkAPI) => {
+// export const fetchDislike = createAsyncThunk(
+//   'notices/fetchDislike',
+//   async (query, thunkAPI) => {
+//     try {
+//       const response = await axios.get(`/notices/dislike`, {
+//         params: { query: query ? query : null },
+//       });
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+export const addLike = createAsyncThunk(
+  'notices/addLike',
+  async (_, thunkAPI) => {
     try {
-      const response = await axios.get(`/notices/dislike`, {
-        params: { query: query ? query : null },
-      });
+      const response = await axios.post(`/notices/rating/like`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -103,37 +117,11 @@ export const fetchDislike = createAsyncThunk(
   }
 );
 
-export const addToLike = createAsyncThunk(
-  'notices/addToLike',
-  async (id, thunkAPI) => {
+export const addDislike = createAsyncThunk(
+  'notices/addDislike',
+  async (_, thunkAPI) => {
     try {
-      const response = await axios.post(`/notices/like/${id}`);
-      const result = response.data.rating[0];
-      return result;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const addToDislike = createAsyncThunk(
-  'notices/addToDislike',
-  async (id, thunkAPI) => {
-    try {
-      const response = await axios.post(`/notices/dislike/${id}`);
-      const result = response.data.rating[0];
-      return result;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const deleteFromLike = createAsyncThunk(
-  'notices/deleteFromLike',
-  async (id, thunkAPI) => {
-    try {
-      const response = await axios.delete(`/notices/like/${id}`);
+      const response = await axios.post(`/notices/rating/dislike`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -141,17 +129,42 @@ export const deleteFromLike = createAsyncThunk(
   }
 );
 
-export const deleteFromDislike = createAsyncThunk(
-  'notices/deleteFromDislike',
-  async (id, thunkAPI) => {
-    try {
-      const response = await axios.delete(`/notices/dislike/${id}`);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+// export const addToDislike = createAsyncThunk(
+//   'notices/addToDislike',
+//   async (id, thunkAPI) => {
+//     try {
+//       const response = await axios.post(`/notices/dislike/${id}`);
+//       const result = response.data.rating[0];
+//       return result;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// export const deleteFromLike = createAsyncThunk(
+//   'notices/deleteFromLike',
+//   async (id, thunkAPI) => {
+//     try {
+//       const response = await axios.delete(`/notices/like/${id}`);
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// export const deleteFromDislike = createAsyncThunk(
+//   'notices/deleteFromDislike',
+//   async (id, thunkAPI) => {
+//     try {
+//       const response = await axios.delete(`/notices/dislike/${id}`);
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 export const fetchUsersNotices = createAsyncThunk(
   'notices/fetchUsersNotices',

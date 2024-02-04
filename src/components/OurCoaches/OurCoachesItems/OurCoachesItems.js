@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { HiOutlineLocationMarker, HiOutlineClock } from 'react-icons/hi';
-import { FiTrash2 } from 'react-icons/fi';
+import {FiHeart, FiTrash2 } from 'react-icons/fi';
 import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import { TbGenderFemale, TbGenderMale } from 'react-icons/tb';
 import CoachProgramDetailsModal from 'components/ReusableComponents/ModalWindows/CoachProgramDetailsModal/CoachProgramDetailsModal';
@@ -11,6 +11,7 @@ import RemoveCoachProgramDetailsModal from 'components/ReusableComponents/ModalW
 // import { getAge } from 'utils/getAge';
 import { useAuth } from 'hooks';
 import ModalWrapper from 'components/ReusableComponents/ModalWindows/ModalWrapper/ModalWrapper';
+import { nanoid } from 'nanoid'
 
 import {
   Img,
@@ -37,9 +38,9 @@ import {
 } from 'components/ReusableComponents/ModalWindows/CoachProgramDetailsModal/CoachProgramDetailsModal.styled.js';
 
 import {
-  selectLike,
-  selectDislike,
-  selectRating,
+  // selectLike,
+  // selectDislike,
+  selectFavorite,
   selectNotices,
   selectOwn,
   selectQuery,
@@ -61,6 +62,8 @@ import {
 } from 'redux/notices/operations';
 import {
   NameProgram,
+  FavoriteBtn,
+  ContainerFeedback,
   LikeBtn,
   DislikeBtn,
   Info,
@@ -72,6 +75,8 @@ import {
   TrashBtn,
 } from './OurCoachesItems.styled.js';
 import { showModal } from 'redux/modal/slice';
+import { FeedbackOptions } from '../FeedbackOptions/FeedbackOptions.js';
+import { RatingCoach } from '../RatingCoach/RatingCoach.js';
 
 export const OurCoachesItems = (items) => {
   const {    
@@ -82,38 +87,30 @@ export const OurCoachesItems = (items) => {
       avatar,
       name,
       category,
-      owner,
-      kind,
       fitnessWeigth,
-      kindProgramWeigth,
       fitnessStrength,
       fitnessWellness,
-      description,
-      training,
-      location,
-      comments,
-      food,
-      special,
-      duration,
-      price
     },
   } = items
 
   // console.log("id", id)
   const { isLoggedIn } = useAuth();
+  const [like, setLike] = useState(0);
+  const [dislike, setDislike] = useState(0);
+
   const { categoryName } = useParams();
 
   const [assessment, setAssessment] = useState(null);
-  const coachLike = useSelector(selectLike);
-  const ratingCoach = useSelector(selectRating);
-  const coachDislike = useSelector(selectDislike);
+  // const coachLike = useSelector(selectLike);
+  // const ratingCoach = useSelector(selectRating);
+  // const coachDislike = useSelector(selectDislike);
   // const own = useSelector(selectOwn);
   const notices = useSelector(selectNotices);
   const [coaches, setCoaches] = useState([]);
   const query = useSelector(selectQuery);
   const [modal, setModal] = useState('');
   const [, setNewCategory] = useState();
-  const [rating, setRating] = useState(false);
+  const [favorite, setFavorite] = useState(false);
   const [own, setOwn] = useState(false);
   const [, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
@@ -124,10 +121,29 @@ export const OurCoachesItems = (items) => {
   // const coachDislike = useSelector(selectDislike).find(
   //   item => item._id === _id
   // );
-  const ratingItem = useSelector(selectRating).filter(item => item._id === _id);
-  const ownCoach = useSelector(selectOwn).filter(item => item._id === _id);
-  console.log('ratingItem', ratingItem)
+  const favoriteItem = useSelector(selectFavorite).find(item => item._id === _id);
+  const ownCoach = useSelector(selectOwn).find(item => item._id === _id);
+  console.log('favoriteItem', favoriteItem)
 
+
+  const feedback = Object.keys({like, dislike});
+
+  const total = like + dislike;
+
+  const countPositiveFeedbackPercentage = Math.round((like / total) * 100);
+
+  const onLeaveFeedback = (value) => {
+    switch (value) {
+      case 'dislike':
+        setDislike(prevDislike => prevDislike + 1)
+        break;
+        case 'like':
+          setLike(prevLike => prevLike + 1);
+          break;
+        default:
+          return;
+      }
+    };
 
   useEffect(() => {
     switch (category) {
@@ -152,8 +168,8 @@ export const OurCoachesItems = (items) => {
     if (ownCoach) {
       setOwn(true);
     }
-    if (ratingItem) {
-      setRating(true);
+    if (favoriteItem) {
+      setFavorite(true);
     }
     // if (coachLike) {
     //   setFavStyle(true);
@@ -161,20 +177,38 @@ export const OurCoachesItems = (items) => {
     // if (coachDislike) {
     //   setFavStyle(true);
     // }
-  }, [ratingItem, ownCoach]);
+  }, [favoriteItem, ownCoach]);
+
+  // useEffect(() => {
+  //   if (!query) {
+  //     setSearchParams('');
+  //     return;
+  //   }
+  //   setSearchParams({ query });
+  // }, [setSearchParams, query]);
+
+  // useEffect(() => {
+  //   if(isLoggedIn) {
+  //     dispatch(fetchFavorites(query));
+  //   }  
+
+  // }, [dispatch, isLoggedIn, query]);
 
   const handleAssessment = event => {
     event.preventDefault();
-    if (isLoggedIn) {      
-      setRating(false);
-      return;
-    }
-
+    
+    if (favoriteItem && !isLoggedIn) {
       dispatch(deleteFromFavorite(_id));
-      setRating(false);
-
-
+      setFavorite(false);
+      return;
+    } 
     dispatch(addToFavorite(_id));
+    setFavorite(false);
+    return;
+    
+
+    // dispatch(addToFavorite(_id));
+    
     // if (coachLike) {
     //   dispatch(deleteFromLike(_id));
     //   setFavStyle(false);
@@ -211,21 +245,32 @@ export const OurCoachesItems = (items) => {
     <>
       <Thumb>
         <Photo src={avatar} />
-        <LikeBtn
+        <FavoriteBtn
           type="button"
-          className={rating ? 'active' : null}
+          className={favorite ? 'active' : null}
           onClick={handleAssessment}
         >
-          <AiFillLike />
-        </LikeBtn>
-        {/* <DislikeBtn
-          type="button"
-          className={favStyle ? 'active' : null}
-          onClick={handleAssessment}
-        >
-          <AiFillDislike />
-        </DislikeBtn> */}
-
+          <FiHeart />
+        </FavoriteBtn>
+        {/* {feedback.map(item => (
+                  <ContainerFeedback key={nanoid()}>
+                  <LikeBtn                  
+                    type="button"
+                    onClick={()=> onLeaveFeedback(item)}
+                  >
+                    <AiFillLike />
+                  </LikeBtn>                 
+                  <DislikeBtn
+                    type="button"
+                    onClick={()=> onLeaveFeedback(item)}
+                  >
+                    <AiFillDislike />
+                  </DislikeBtn>
+                  </ContainerFeedback>
+        ))} */}
+        {/* <RatingCoach
+            positiveFidback={countPositiveFeedbackPercentage}
+            /> */}
         {own && (
           <TrashBtn type="button" onClick={handleDeleteOwnCoach}>
             <FiTrash2 />
@@ -235,6 +280,10 @@ export const OurCoachesItems = (items) => {
         {fitnessWeigth && (<NameProgram>Назва програми: {fitnessWeigth}</NameProgram>)}
         {fitnessStrength && (<NameProgram>Назва програми: {fitnessStrength}</NameProgram>)}
         {fitnessWellness && (<NameProgram>Назва програми: {fitnessWellness}</NameProgram>)}
+        <FeedbackOptions
+          // options={feedback}
+          // onLeaveFeedback={onLeaveFeedback}
+          />
         <CoachProgramBtn onClick={handleLookDetails}>
           Ознайомитися
         </CoachProgramBtn>
