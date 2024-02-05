@@ -4,7 +4,8 @@ export const Container = styled.div`
 display: flex;
 justify-content: center;
 gap: 12px;
-align-items: center
+align-items: center;
+min-width: 100%;
 `;
 
  export const LikeBtn = styled.button`

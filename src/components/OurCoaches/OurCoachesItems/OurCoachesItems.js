@@ -95,16 +95,8 @@ export const OurCoachesItems = (items) => {
 
   // console.log("id", id)
   const { isLoggedIn } = useAuth();
-  const [like, setLike] = useState(0);
-  const [dislike, setDislike] = useState(0);
-
   const { categoryName } = useParams();
-
   const [assessment, setAssessment] = useState(null);
-  // const coachLike = useSelector(selectLike);
-  // const ratingCoach = useSelector(selectRating);
-  // const coachDislike = useSelector(selectDislike);
-  // const own = useSelector(selectOwn);
   const notices = useSelector(selectNotices);
   const [coaches, setCoaches] = useState([]);
   const query = useSelector(selectQuery);
@@ -114,36 +106,10 @@ export const OurCoachesItems = (items) => {
   const [own, setOwn] = useState(false);
   const [, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
-  // const newLocation =
-  //   location.length > 5 ? location.slice(0, 4) + '...' : location;
-  //   const old = getAge(birthday);
-  // const coachLike = useSelector(selectLike).find(item => item._id === _id);
-  // const coachDislike = useSelector(selectDislike).find(
-  //   item => item._id === _id
-  // );
   const favoriteItem = useSelector(selectFavorite).find(item => item._id === _id);
   const ownCoach = useSelector(selectOwn).find(item => item._id === _id);
   console.log('favoriteItem', favoriteItem)
 
-
-  const feedback = Object.keys({like, dislike});
-
-  const total = like + dislike;
-
-  const countPositiveFeedbackPercentage = Math.round((like / total) * 100);
-
-  const onLeaveFeedback = (value) => {
-    switch (value) {
-      case 'dislike':
-        setDislike(prevDislike => prevDislike + 1)
-        break;
-        case 'like':
-          setLike(prevLike => prevLike + 1);
-          break;
-        default:
-          return;
-      }
-    };
 
   useEffect(() => {
     switch (category) {
@@ -171,28 +137,8 @@ export const OurCoachesItems = (items) => {
     if (favoriteItem) {
       setFavorite(true);
     }
-    // if (coachLike) {
-    //   setFavStyle(true);
-    // }
-    // if (coachDislike) {
-    //   setFavStyle(true);
-    // }
   }, [favoriteItem, ownCoach]);
 
-  // useEffect(() => {
-  //   if (!query) {
-  //     setSearchParams('');
-  //     return;
-  //   }
-  //   setSearchParams({ query });
-  // }, [setSearchParams, query]);
-
-  // useEffect(() => {
-  //   if(isLoggedIn) {
-  //     dispatch(fetchFavorites(query));
-  //   }  
-
-  // }, [dispatch, isLoggedIn, query]);
 
   const handleAssessment = event => {
     event.preventDefault();
@@ -205,23 +151,6 @@ export const OurCoachesItems = (items) => {
     dispatch(addToFavorite(_id));
     setFavorite(false);
     return;
-    
-
-    // dispatch(addToFavorite(_id));
-    
-    // if (coachLike) {
-    //   dispatch(deleteFromLike(_id));
-    //   setFavStyle(false);
-
-    //   return;
-    // }
-    // if (coachDislike) {
-    //   dispatch(deleteFromDislike(_id));
-    //   setFavStyle(false);
-
-    //   return;
-    // }
-    // dispatch(addToLike(_id));
   };
 
   const handleLookDetails = () => {
@@ -252,25 +181,6 @@ export const OurCoachesItems = (items) => {
         >
           <FiHeart />
         </FavoriteBtn>
-        {/* {feedback.map(item => (
-                  <ContainerFeedback key={nanoid()}>
-                  <LikeBtn                  
-                    type="button"
-                    onClick={()=> onLeaveFeedback(item)}
-                  >
-                    <AiFillLike />
-                  </LikeBtn>                 
-                  <DislikeBtn
-                    type="button"
-                    onClick={()=> onLeaveFeedback(item)}
-                  >
-                    <AiFillDislike />
-                  </DislikeBtn>
-                  </ContainerFeedback>
-        ))} */}
-        {/* <RatingCoach
-            positiveFidback={countPositiveFeedbackPercentage}
-            /> */}
         {own && (
           <TrashBtn type="button" onClick={handleDeleteOwnCoach}>
             <FiTrash2 />
@@ -280,10 +190,7 @@ export const OurCoachesItems = (items) => {
         {fitnessWeigth && (<NameProgram>Назва програми: {fitnessWeigth}</NameProgram>)}
         {fitnessStrength && (<NameProgram>Назва програми: {fitnessStrength}</NameProgram>)}
         {fitnessWellness && (<NameProgram>Назва програми: {fitnessWellness}</NameProgram>)}
-        <FeedbackOptions
-          // options={feedback}
-          // onLeaveFeedback={onLeaveFeedback}
-          />
+        <FeedbackOptions/>
         <CoachProgramBtn onClick={handleLookDetails}>
           Ознайомитися
         </CoachProgramBtn>

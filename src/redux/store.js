@@ -4,6 +4,7 @@ import { authReducer } from './auth/slice';
 import { modalReducer } from './modal/slice';
 import { programReducer, userDataReducer } from './user/slice';
 import { noticesPageReducer, queryReducer } from './notices/slice';
+import { counterReducer } from './counter/slice';
 
 import {
   persistStore,
@@ -30,6 +31,7 @@ export const store = configureStore({
     user: userDataReducer,
     notices: noticesPageReducer,
     query: queryReducer,
+    counter: counterReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
