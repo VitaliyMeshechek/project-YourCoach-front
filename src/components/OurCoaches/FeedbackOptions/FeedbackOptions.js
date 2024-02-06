@@ -3,25 +3,38 @@ import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Container, LikeBtn, DislikeBtn} from './FeedbackOptions.styled';
-import { selectLike, selectDislike } from 'redux/counter/selectors';
+import { selectRatingCount } from 'redux/counter/selectors';
 import { RatingCoach } from '../RatingCoach/RatingCoach';
-import { bad, good } from 'redux/counter/slice';
+import { addRating } from 'redux/counter/operations';
+
+import { useAuth } from 'hooks';
 
 
-export const FeedbackOptions = () => {
-    const like = useSelector(selectLike);
-    const dislike = useSelector(selectDislike);
+export const FeedbackOptions = ({id}) => {
+    const { isLoggedIn } = useAuth();
+
     const dispatch = useDispatch();
+    const { like, dislike } = useSelector(selectRatingCount);
 
-    const total = like + dislike;
+    // const ratingItem = useSelector(selectRating).find(item => item._id === id);    
 
-    const countPositiveFeedbackPercentage = Math.round((like / total) * 100);
+    const handleRating = event => {
+      event.preventDefault();
+      
+      if (!isLoggedIn) {
+        dispatch(addRating(id));
+      } 
+    };
+    
+    const total = like + dislike
+
+    const feedback = Math.round((like / total) * 100)
 
   return (
     <Container>
-     <LikeBtn type="button" onClick={() => dispatch(good())}><AiFillLike /></LikeBtn>
-     <DislikeBtn type="button" onClick={() => dispatch(bad())}><AiFillDislike /></DislikeBtn>
-     <RatingCoach positiveFidback={countPositiveFeedbackPercentage} />
+     <LikeBtn type="button" onClick={handleRating}><AiFillLike />{like}</LikeBtn>
+     <DislikeBtn type="button" onClick={handleRating}><AiFillDislike />{dislike}</DislikeBtn>
+     <RatingCoach positiveFidback={feedback} />
      </Container>
   );
 };

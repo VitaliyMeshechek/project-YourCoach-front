@@ -190,7 +190,9 @@ export const OurCoachesItems = (items) => {
         {fitnessWeigth && (<NameProgram>Назва програми: {fitnessWeigth}</NameProgram>)}
         {fitnessStrength && (<NameProgram>Назва програми: {fitnessStrength}</NameProgram>)}
         {fitnessWellness && (<NameProgram>Назва програми: {fitnessWellness}</NameProgram>)}
-        <FeedbackOptions/>
+        <FeedbackOptions
+        id={_id}
+        />
         <CoachProgramBtn onClick={handleLookDetails}>
           Ознайомитися
         </CoachProgramBtn>

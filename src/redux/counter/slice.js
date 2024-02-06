@@ -1,25 +1,32 @@
+import { addRating } from './operations';
+
 const { createSlice } = require('@reduxjs/toolkit');
+
+
+const handlePending = state => {
+  state.isLoading = true;
+};
+const handleRejected = (state, action) => {
+  state.isLoading = false;
+  state.error = action.payload;
+};
 
 export const counterSlice = createSlice({
   name: 'counter',
   initialState: { 
-    like: 0,
-    dislike: 0
+    rating: [],
+    isLoading: false,
+    error: null,
 },
   reducers: {
-    good: state => {
-        state.like += 1
+    [addRating.pending]: handlePending,
+    [addRating.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.rating.push(action.payload);
     },
-    bad: state => {
-        state.dislike += 1
-    },
-    countAmount: (state, action) => {
-        state.like += action.payload
-        state.dislike += action.payload
-    }
+    [addRating.rejected]: handleRejected,
   },
 });
-
-export const { good, bad, countAmount } = counterSlice.actions
 
 export const counterReducer = counterSlice.reducer;
