@@ -1,4 +1,4 @@
-import { addRating } from './operations';
+import { addRating, fetchRating } from './operations';
 
 const { createSlice } = require('@reduxjs/toolkit');
 
@@ -19,6 +19,14 @@ export const counterSlice = createSlice({
     error: null,
 },
   reducers: {
+    [fetchRating.pending]: handlePending,
+    [fetchRating.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      // state.rating.push(action.payload)
+      state.rating = action.payload;
+    },
+    [fetchRating.rejected]: handleRejected,
     [addRating.pending]: handlePending,
     [addRating.fulfilled](state, action) {
       state.isLoading = false;

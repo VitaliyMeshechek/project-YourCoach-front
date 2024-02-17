@@ -11,7 +11,8 @@ import RemoveCoachProgramDetailsModal from 'components/ReusableComponents/ModalW
 // import { getAge } from 'utils/getAge';
 import { useAuth } from 'hooks';
 import ModalWrapper from 'components/ReusableComponents/ModalWindows/ModalWrapper/ModalWrapper';
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
+import {FeedbackList} from '../FeedbackList/FeedbackList.js';
 
 import {
   Img,
@@ -190,7 +191,10 @@ export const OurCoachesItems = (items) => {
         {fitnessWeigth && (<NameProgram>Назва програми: {fitnessWeigth}</NameProgram>)}
         {fitnessStrength && (<NameProgram>Назва програми: {fitnessStrength}</NameProgram>)}
         {fitnessWellness && (<NameProgram>Назва програми: {fitnessWellness}</NameProgram>)}
-        <FeedbackOptions
+        {/* <FeedbackList
+        // id={_id}
+        /> */}
+        <FeedbackOptions 
         id={_id}
         />
         <CoachProgramBtn onClick={handleLookDetails}>

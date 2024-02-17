@@ -90,8 +90,6 @@ const OurCoachesList = () => {
     switch (categoryName) {
       case 'favorite':
         setCoaches(favoriteCoach);
-        // setAllCoaches(coachLike);
-        // || setAllCoaches(coachDislike);
         break;
       case 'own':
         setCoaches(own);
@@ -107,16 +105,7 @@ const OurCoachesList = () => {
     return null;
   }
 
-  // const handleDeleteProgram = () => {
-  //   dispatch(deleteUserNotice(activeNotice[0]._id));
-  // };
-
   const onDeleteOwn = () => {
-    // const filtered = activeNotice.filter(id => {
-    //   return []._id !== id;
-    // });
-    // const id = activeNotice.filter(({ _id }) => id !== _id);
-    // setActiveNotice(coaches.find(item => item._id === id))
     dispatch(deleteUserNotice(activeNotice[0]._id));
     setIsDeleted(true);
   };
@@ -143,19 +132,7 @@ const OurCoachesList = () => {
 
   const handleFavorite = (event) => {
     event.preventDefault();
-    // if (!isLoggedIn) {
-    //   toast('Sorry, this option is available only for authorized users');
-    //   return;
-    // }
-    // if (assessment) {
-    //   dispatch(deleteFromLike(activeNotice[0]._id));
-    //   // ||
-    //   // dispatch(deleteFromDislike(activeNotice[0]._id));
-    //   return;
-    // }
-    // dispatch(addToLike(activeNotice[0]._id));
-    // ||
-    // dispatch(addToDislike(activeNotice[0]._id));
+
     if (assessment) {
       dispatch(deleteFromFavorite(activeNotice[0]._id));
       return;
