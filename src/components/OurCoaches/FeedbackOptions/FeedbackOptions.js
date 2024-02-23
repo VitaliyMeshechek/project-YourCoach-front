@@ -22,6 +22,8 @@ export const FeedbackOptions = ({id}) => {
 
     const counter = useSelector(selectRatingCount)
     console.log('counter', counter)
+    // const counterArray = Object.values(counter)
+    // console.log('counterArray', counterArray)
 
     useEffect(() => {
         dispatch(fetchRating());
@@ -33,17 +35,22 @@ export const FeedbackOptions = ({id}) => {
 
 
     // const countObjLike = ratingItem.like
-    // // const countObjLike = Object.keys(ratingItem).length
+    // const countObjLike = Object.keys(counter)
+    // console.log('countObjLike', countObjLike)
     // console.log('countObjLike', countObjLike)
     // const countObjDislike = ratingItem.like
     // console.log('countObjDislike', countObjDislike)
     
     // const totalLike = counter.like += 1;
     // const totalDislike = counter.dislike += 1;
-    const total = counter.like += 1;
-    console.log('total', total)
+    const totalLike = counter.like + 1;
+    console.log('totalLike', totalLike)
+    const totalDislike = counter.dislike + 1;
+    console.log('totalDislike', totalDislike)
+    const totalFidback = totalLike + totalDislike;
+    console.log('totalFidback', totalFidback)
 
-    counter.feedback = Math.round((counter.like / total) * 100)
+    counter.feedback = Math.round((totalLike / totalFidback) * 100)
     console.log('feedback', counter.feedback)
 
   //   const result = counter.reduce(
