@@ -9,9 +9,9 @@ export const selectRatingCount = createSelector([selectRating], counter => {
     return counter.reduce(
       (count, item) => {
         if (item.like) {
-          count.like += 1 
+          count.like += 0 
         } if (item.dislike) {
-            count.dislike += 1
+            count.dislike += 0
           } 
           if (item.total) {
             count.total = count.like + count.dislike

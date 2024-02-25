@@ -82,7 +82,7 @@ export const FeedbackOptions = ({id}) => {
     // event.preventDefault();
    
     if (!isLoggedIn) {
-      dispatch(addRating(counter));
+      dispatch(addRating(id));
       setRating(true);
     } 
     // if (counter.dislike && !isLoggedIn) {
@@ -93,8 +93,8 @@ export const FeedbackOptions = ({id}) => {
 
         return (
           <Container>
-           <LikeBtn type="button" ><AiFillLike onClick={() => handleRating()} />{counter.like}</LikeBtn>
-           <DislikeBtn type="button" ><AiFillDislike onClick={() => handleRating()}/>{counter.dislike}</DislikeBtn>
+           <LikeBtn type="button" ><AiFillLike onClick={handleRating} />{counter.like}</LikeBtn>
+           <DislikeBtn type="button" ><AiFillDislike onClick={handleRating}/>{counter.dislike}</DislikeBtn>
            <RatingCoach 
            positiveFidback={counter.feedback} 
            />
