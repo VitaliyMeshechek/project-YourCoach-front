@@ -43,9 +43,9 @@ export const FeedbackOptions = ({id}) => {
     
     // const totalLike = counter.like += 1;
     // const totalDislike = counter.dislike += 1;
-    const totalLike = counter.like + 1;
+    const totalLike = counter.like += 1;
     console.log('totalLike', totalLike)
-    const totalDislike = counter.dislike + 1;
+    const totalDislike = counter.dislike += 1;
     console.log('totalDislike', totalDislike)
     const totalFidback = totalLike + totalDislike;
     console.log('totalFidback', totalFidback)
@@ -82,7 +82,7 @@ export const FeedbackOptions = ({id}) => {
     // event.preventDefault();
    
     if (!isLoggedIn) {
-      dispatch(addRating(id));
+      dispatch(addRating(counter));
       setRating(true);
     } 
     // if (counter.dislike && !isLoggedIn) {

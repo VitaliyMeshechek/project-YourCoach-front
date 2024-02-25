@@ -19,9 +19,13 @@ export const fetchRating = createAsyncThunk(
 
 export const addRating = createAsyncThunk(
     'counter/addRating',
-    async (id, thunkAPI) => {
+    async (counter, thunkAPI) => {
+      // counter = {
+      //   like: 2,
+      //   dislike: 2
+      // }
       try {
-        const response = await axios.post(`/counters/rating/${id}`);
+        const response = await axios.post(`/counters/rating`, {counter});
         console.log('addRating', response.data)
         return response.data;
       } catch (error) {
