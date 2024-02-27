@@ -26,12 +26,20 @@ export const FeedbackOptions = ({id}) => {
     // console.log('counterArray', counterArray)
 
     useEffect(() => {
-        dispatch(fetchRating());
+        // dispatch(fetchRating());
 
     }, [ dispatch, isLoggedIn]);
    
 
+    const totalLike = counter.like + 1;
+    console.log('totalLike', totalLike)
+    const totalDislike = counter.dislike + 1;
+    console.log('totalDislike', totalDislike)
+    const totalFidback = totalLike + totalDislike;
+    console.log('totalFidback', totalFidback)
 
+    counter.feedback = Math.round((totalLike / totalFidback) * 100)
+    console.log('feedback', counter.feedback)
 
 
     // const countObjLike = ratingItem.like
@@ -43,15 +51,10 @@ export const FeedbackOptions = ({id}) => {
     
     // const totalLike = counter.like += 1;
     // const totalDislike = counter.dislike += 1;
-    const totalLike = counter.like += 1;
-    console.log('totalLike', totalLike)
-    const totalDislike = counter.dislike += 1;
-    console.log('totalDislike', totalDislike)
-    const totalFidback = totalLike + totalDislike;
-    console.log('totalFidback', totalFidback)
 
-    counter.feedback = Math.round((totalLike / totalFidback) * 100)
-    console.log('feedback', counter.feedback)
+
+
+
 
   //   const result = counter.reduce(
   //     (count, item) => {
@@ -78,11 +81,24 @@ export const FeedbackOptions = ({id}) => {
   //   dislike: "dislike",
   // });
 
-  const handleRating = () => {
+  const handleRating = (counter) => {
+
     // event.preventDefault();
+    // switch (counter) {
+    //   case 'like':
+    //     return counter.like += 1;
+    //     case 'dislike':
+    //       return counter.dislike += 1;
+    //       default: break;
+    // }
    
     if (!isLoggedIn) {
-      dispatch(addRating(id));
+
+
+      dispatch(addRating({
+        like: counter.like,
+        dislike: counter.dislike,
+      }));
       setRating(true);
     } 
     // if (counter.dislike && !isLoggedIn) {
@@ -91,10 +107,11 @@ export const FeedbackOptions = ({id}) => {
     // } 
   }; 
 
+
         return (
           <Container>
-           <LikeBtn type="button" ><AiFillLike onClick={handleRating} />{counter.like}</LikeBtn>
-           <DislikeBtn type="button" ><AiFillDislike onClick={handleRating}/>{counter.dislike}</DislikeBtn>
+           <LikeBtn type="button" ><AiFillLike onClick={() => handleRating(totalLike)} />{totalLike}</LikeBtn>
+           <DislikeBtn type="button" ><AiFillDislike onClick={() => handleRating(totalDislike)}/>{totalDislike}</DislikeBtn>
            <RatingCoach 
            positiveFidback={counter.feedback} 
            />
