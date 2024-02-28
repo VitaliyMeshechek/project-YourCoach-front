@@ -26,7 +26,7 @@ export const FeedbackOptions = ({id}) => {
     // console.log('counterArray', counterArray)
 
     useEffect(() => {
-        // dispatch(fetchRating());
+        dispatch(fetchRating());
 
     }, [ dispatch, isLoggedIn]);
    
@@ -92,19 +92,16 @@ export const FeedbackOptions = ({id}) => {
     //       default: break;
     // }
    
-    if (!isLoggedIn) {
-
-
+    if (counter.like && !isLoggedIn) {
       dispatch(addRating({
-        like: counter.like,
-        dislike: counter.dislike,
+        like: counter,
       }));
       setRating(true);
     } 
-    // if (counter.dislike && !isLoggedIn) {
-    //   dispatch(addRating(counter.dislike));
-    //   setRating(true);
-    // } 
+      // dispatch(addRating({
+      //   dislike: counter.dislike,
+      // }));
+
   }; 
 
 

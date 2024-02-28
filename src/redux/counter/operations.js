@@ -25,7 +25,7 @@ export const addRating = createAsyncThunk(
       //   dislike: dislike
       // }
       try {
-        const response = await axios.post(`/counters/rating`, counter);
+        const response = await axios.post(`/counters/rating`, {counter});
         console.log('addRating', response.data)
         return response.data;
       } catch (error) {
