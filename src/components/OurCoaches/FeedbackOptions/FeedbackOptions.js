@@ -29,28 +29,6 @@ export const FeedbackOptions = ({id}) => {
         dispatch(fetchRating());
 
     }, [ dispatch, isLoggedIn]);
-   
-
-    const totalLike = counter.like + 1;
-    console.log('totalLike', totalLike)
-    const totalDislike = counter.dislike + 1;
-    console.log('totalDislike', totalDislike)
-    const totalFidback = totalLike + totalDislike;
-    console.log('totalFidback', totalFidback)
-
-    counter.feedback = Math.round((totalLike / totalFidback) * 100)
-    console.log('feedback', counter.feedback)
-
-
-    // const countObjLike = ratingItem.like
-    // const countObjLike = Object.keys(counter)
-    // console.log('countObjLike', countObjLike)
-    // console.log('countObjLike', countObjLike)
-    // const countObjDislike = ratingItem.like
-    // console.log('countObjDislike', countObjDislike)
-    
-    // const totalLike = counter.like += 1;
-    // const totalDislike = counter.dislike += 1;
 
 
 
@@ -81,7 +59,7 @@ export const FeedbackOptions = ({id}) => {
   //   dislike: "dislike",
   // });
 
-  const handleRating = (counter) => {
+  const handleRating = (ratingId, like, dislike) => {
 
     // event.preventDefault();
     // switch (counter) {
@@ -91,11 +69,21 @@ export const FeedbackOptions = ({id}) => {
     //       return counter.dislike += 1;
     //       default: break;
     // }
+    const totalLike = counter.like += 1;
+    console.log('totalLike', totalLike)
+    const totalDislike = counter.dislike += 1;
+    console.log('totalDislike', totalDislike)
+    const totalFidback = totalLike + totalDislike;
+    console.log('totalFidback', totalFidback)
+
+    counter.feedback = Math.round((totalLike / totalFidback) * 100)
+    console.log('feedback', counter.feedback)
    
-    if (counter.like && !isLoggedIn) {
+    if (ratingId !== id && !isLoggedIn) {
       dispatch(addRating({
-        like: counter,
-      }));
+        like: counter.like,
+        dislike: counter.dislike,
+    }));
       setRating(true);
     } 
       // dispatch(addRating({
@@ -107,8 +95,8 @@ export const FeedbackOptions = ({id}) => {
 
         return (
           <Container>
-           <LikeBtn type="button" ><AiFillLike onClick={() => handleRating(totalLike)} />{totalLike}</LikeBtn>
-           <DislikeBtn type="button" ><AiFillDislike onClick={() => handleRating(totalDislike)}/>{totalDislike}</DislikeBtn>
+           <LikeBtn type="button" ><AiFillLike onClick={() => handleRating(counter.like)} />{counter.like}</LikeBtn>
+           <DislikeBtn type="button" ><AiFillDislike onClick={() => handleRating(counter.dislike)}/>{counter.dislike}</DislikeBtn>
            <RatingCoach 
            positiveFidback={counter.feedback} 
            />
