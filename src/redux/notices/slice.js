@@ -93,27 +93,27 @@ const noticesPageSlice = createSlice({
     },
     [deleteFromFavorite.rejected]: handleRejected,
 
-    [fetchRating.pending]: handlePending,
-    [fetchRating.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.rating = action.payload;
-    },
-    [fetchRating.rejected]: handleRejected,
-    [addLike.pending]: handlePending,
-    [addLike.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.rating.push(action.payload);
-    },
-    [addLike.rejected]: handleRejected,
-    [addDislike.pending]: handlePending,
-    [addDislike.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.rating.push(action.payload);
-    },
-    [addDislike.rejected]: handleRejected,
+    // [fetchRating.pending]: handlePending,
+    // [fetchRating.fulfilled](state, action) {
+    //   state.isLoading = false;
+    //   state.error = null;
+    //   state.rating = action.payload;
+    // },
+    // [fetchRating.rejected]: handleRejected,
+    // [addLike.pending]: handlePending,
+    // [addLike.fulfilled](state, action) {
+    //   state.isLoading = false;
+    //   state.error = null;
+    //   state.rating.push(action.payload);
+    // },
+    // [addLike.rejected]: handleRejected,
+    // [addDislike.pending]: handlePending,
+    // [addDislike.fulfilled](state, action) {
+    //   state.isLoading = false;
+    //   state.error = null;
+    //   state.rating.push(action.payload);
+    // },
+    // [addDislike.rejected]: handleRejected,
 
     // [fetchDislike.pending]: handlePending,
     // [fetchDislike.fulfilled](state, action) {

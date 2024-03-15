@@ -11,15 +11,17 @@ import { addRating, fetchRating } from 'redux/counter/operations';
 import { useAuth } from 'hooks';
 
 
-export const FeedbackOptions = ({id}) => {
+export const FeedbackOptions = ({_id}) => {
     const { isLoggedIn } = useAuth();
     const [rating, setRating] = useState(false);
     console.log('rating', rating)
+    // console.log('id', id)
 
     const dispatch = useDispatch();
     // const counter = useSelector(selectRating);
 
-
+    const ratingItem = useSelector(selectRating).find(item => item._id === _id);
+    console.log('ratingItem', ratingItem)
     const counter = useSelector(selectRatingCount)
     console.log('counter', counter)
     // const counterArray = Object.values(counter)
@@ -31,7 +33,11 @@ export const FeedbackOptions = ({id}) => {
     }, [ dispatch, isLoggedIn]);
 
 
-
+    useEffect(() => {
+      if (ratingItem) {
+        setRating(true);
+      }
+    }, [ratingItem]);
 
 
   //   const result = counter.reduce(
@@ -58,47 +64,55 @@ export const FeedbackOptions = ({id}) => {
   //   like: "like",
   //   dislike: "dislike",
   // });
+  //  if() {}
+  let feedback = 0;
+  
 
-  const handleRating = (ratingId, like, dislike) => {
-
-    // event.preventDefault();
-    // switch (counter) {
-    //   case 'like':
-    //     return counter.like += 1;
-    //     case 'dislike':
-    //       return counter.dislike += 1;
-    //       default: break;
-    // }
+  const handleRating = () => {  
     const totalLike = counter.like += 1;
     console.log('totalLike', totalLike)
     const totalDislike = counter.dislike += 1;
     console.log('totalDislike', totalDislike)
-    const totalFidback = totalLike + totalDislike;
+    let totalFidback = totalLike + totalDislike;
     console.log('totalFidback', totalFidback)
+  
+    feedback = Math.round((totalLike / totalFidback) * 100)
+    console.log('feedback', feedback) 
+    const rating = {
+      id: _id,
+      like: totalLike,
+      dislike: totalDislike
+    }
+    if (counter.like && !isLoggedIn) {
 
-    counter.feedback = Math.round((totalLike / totalFidback) * 100)
-    console.log('feedback', counter.feedback)
-   
-    if (ratingId !== id && !isLoggedIn) {
-      dispatch(addRating({
-        like: counter.like,
-        dislike: counter.dislike,
-    }));
+      dispatch(addRating(rating.id, rating.like));
       setRating(true);
+      return;
     } 
-      // dispatch(addRating({
-      //   dislike: counter.dislike,
-      // }));
 
+      dispatch(addRating(rating.id, rating.dislike));
+      setRating(true);
+      return;
   }; 
+
+  // const handleRatingDislike = () => {  
+  //   if (!isLoggedIn) {
+  //     const rating = {
+  //       id: _id,
+  //       dislike: totalDislike
+  //     }
+  //     dispatch(addRating(rating.id, rating.dislike));
+  //     setRating(true);
+  //   } 
+  // };
 
 
         return (
           <Container>
-           <LikeBtn type="button" ><AiFillLike onClick={() => handleRating(counter.like)} />{counter.like}</LikeBtn>
-           <DislikeBtn type="button" ><AiFillDislike onClick={() => handleRating(counter.dislike)}/>{counter.dislike}</DislikeBtn>
+           <LikeBtn type="button" ><AiFillLike onClick={handleRating} />{counter.like}</LikeBtn>
+           <DislikeBtn type="button" ><AiFillDislike onClick={handleRating}/>{counter.dislike}</DislikeBtn>
            <RatingCoach 
-           positiveFidback={counter.feedback} 
+           positiveFidback={feedback} 
            />
            </Container>
         );
