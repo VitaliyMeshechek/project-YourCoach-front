@@ -8,12 +8,13 @@ export const selectRatingCount = createSelector([selectRating], counter => {
   console.log("Calculating visible tasks");
     return counter.reduce(
       (count, item) => {
-        if (item.like) {
-          count.like += 1 
-        } 
-        else {
-            count.dislike += 1
-          }
+        count += item
+        // if (item.like) {
+        //   count.like += 1 
+        // } 
+        // else {
+        //     count.dislike += 1
+        //   }
 
           return count;
       },

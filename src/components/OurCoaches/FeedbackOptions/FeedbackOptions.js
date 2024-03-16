@@ -12,6 +12,8 @@ import { useAuth } from 'hooks';
 
 
 export const FeedbackOptions = ({_id}) => {
+  // const [like, setLike] = useState(0);
+  // const [dislike, setDislike] = useState(0);
     const { isLoggedIn } = useAuth();
     const [rating, setRating] = useState(false);
     console.log('rating', rating)
@@ -24,8 +26,8 @@ export const FeedbackOptions = ({_id}) => {
     console.log('ratingItem', ratingItem)
     const counter = useSelector(selectRatingCount)
     console.log('counter', counter)
-    // const counterArray = Object.values(counter)
-    // console.log('counterArray', counterArray)
+    const counterArray = Object.keys(counter)
+    console.log('counterArray', counterArray)
 
     useEffect(() => {
         dispatch(fetchRating());
@@ -65,23 +67,37 @@ export const FeedbackOptions = ({_id}) => {
   //   dislike: "dislike",
   // });
   //  if() {}
-  let feedback = 0;
-  
+  const total = counter.like + counter.dislike;
+  console.log('total', total)
 
-  const handleRating = () => {  
-    const totalLike = counter.like += 1;
-    console.log('totalLike', totalLike)
-    const totalDislike = counter.dislike += 1;
-    console.log('totalDislike', totalDislike)
-    let totalFidback = totalLike + totalDislike;
-    console.log('totalFidback', totalFidback)
-  
-    feedback = Math.round((totalLike / totalFidback) * 100)
-    console.log('feedback', feedback) 
+  const feedback = Math.round((counter.like / total) * 100)
+  console.log('feedback', feedback) 
+  // const totalLike = counter.like += 1;
+  // console.log('totalLike', totalLike)
+  // const totalDislike = counter.dislike += 1;
+  // console.log('totalDislike', totalDislike)
+  // let totalFidback = totalLike + totalDislike;
+  // console.log('totalFidback', totalFidback)
+
+  // const feedback = Math.round((totalLike / totalFidback) * 100)
+  // console.log('feedback', feedback) 
+
+  const handleRating = (value) => { 
+    // switch (value) {
+    //   case 'like':
+    //     setBad(prevBad => prevBad + 1)
+    //     break;
+    //     case 'dislike':
+    //       setGood(prevGood => prevGood + 1);
+    //       break;
+    //     default:
+    //       return;
+    //   } 
+
     const rating = {
       id: _id,
-      like: totalLike,
-      dislike: totalDislike
+      like: counter.like + 1,
+      dislike: counter.dislike
     }
     if (counter.like && !isLoggedIn) {
 
@@ -90,9 +106,9 @@ export const FeedbackOptions = ({_id}) => {
       return;
     } 
 
-      dispatch(addRating(rating.id, rating.dislike));
-      setRating(true);
-      return;
+      // dispatch(addRating(rating.id, rating.dislike));
+      // setRating(true);
+      // return;
   }; 
 
   // const handleRatingDislike = () => {  
