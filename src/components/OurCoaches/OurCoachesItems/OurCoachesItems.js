@@ -195,7 +195,7 @@ export const OurCoachesItems = (items) => {
         // id={_id}
         /> */}
         <FeedbackOptions 
-        _id={_id}
+        id={_id}
         />
         <CoachProgramBtn onClick={handleLookDetails}>
           Ознайомитися

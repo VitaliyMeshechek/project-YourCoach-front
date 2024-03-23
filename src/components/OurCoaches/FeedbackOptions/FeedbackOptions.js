@@ -11,9 +11,9 @@ import { addRating, fetchRating } from 'redux/counter/operations';
 import { useAuth } from 'hooks';
 
 
-export const FeedbackOptions = ({_id}) => {
-  // const [like, setLike] = useState(0);
-  // const [dislike, setDislike] = useState(0);
+export const FeedbackOptions = ({id}) => {
+  const [like, setLike] = useState(0);
+  const [dislike, setDislike] = useState(0);
     const { isLoggedIn } = useAuth();
     const [rating, setRating] = useState(false);
     console.log('rating', rating)
@@ -22,12 +22,15 @@ export const FeedbackOptions = ({_id}) => {
     const dispatch = useDispatch();
     // const counter = useSelector(selectRating);
 
-    const ratingItem = useSelector(selectRating).find(item => item._id === _id);
+    const ratingItem = useSelector(selectRating).find(item => item._id === id);
     console.log('ratingItem', ratingItem)
     const counter = useSelector(selectRatingCount)
     console.log('counter', counter)
-    const counterArray = Object.keys(counter)
-    console.log('counterArray', counterArray)
+    // const counterArray = Object.keys(counter)
+    // console.log('counterArray', counterArray)
+    const ratingFeedbackLike = Object.keys({like})
+    const ratingFeedbackDislike = Object.keys({dislike})
+    console.log('ratingFeedbackLike', ratingFeedbackLike)
 
     useEffect(() => {
         dispatch(fetchRating());
@@ -67,11 +70,12 @@ export const FeedbackOptions = ({_id}) => {
   //   dislike: "dislike",
   // });
   //  if() {}
-  const total = counter.like + counter.dislike;
+  const total = like + dislike;
   console.log('total', total)
 
-  const feedback = Math.round((counter.like / total) * 100)
+  const feedback = Math.round((like / total) * 100)
   console.log('feedback', feedback) 
+
   // const totalLike = counter.like += 1;
   // console.log('totalLike', totalLike)
   // const totalDislike = counter.dislike += 1;
@@ -81,35 +85,37 @@ export const FeedbackOptions = ({_id}) => {
 
   // const feedback = Math.round((totalLike / totalFidback) * 100)
   // console.log('feedback', feedback) 
+  const onLeaveFeedback = (value) => {
+        switch (value) {
+      case 'like':
+        setLike(prevLike => prevLike + 1)
+        break;
+        case 'dislike':
+          setDislike(prevDislike => prevDislike + 1);
+          break;
+        default:
+          return;
+      }
+  }
 
-  const handleRating = (value) => { 
-    // switch (value) {
-    //   case 'like':
-    //     setBad(prevBad => prevBad + 1)
-    //     break;
-    //     case 'dislike':
-    //       setGood(prevGood => prevGood + 1);
-    //       break;
-    //     default:
-    //       return;
-    //   } 
+  // const handleRating = (value) => {  
 
-    const rating = {
-      id: _id,
-      like: counter.like + 1,
-      dislike: counter.dislike
-    }
-    if (counter.like && !isLoggedIn) {
+  //   const rating = {
+  //     id: id,
+  //     like: counter.like,
+  //     dislike: counter.dislike
+  //   }
+  //   if (counter.like && !isLoggedIn) {
 
-      dispatch(addRating(rating.id, rating.like));
-      setRating(true);
-      return;
-    } 
+  //     dispatch(addRating(rating.id, rating.like));
+  //     setRating(true);
+  //     return;
+  //   } 
 
-      // dispatch(addRating(rating.id, rating.dislike));
-      // setRating(true);
-      // return;
-  }; 
+  //     // dispatch(addRating(rating.id, rating.dislike));
+  //     // setRating(true);
+  //     // return;
+  // }; 
 
   // const handleRatingDislike = () => {  
   //   if (!isLoggedIn) {
@@ -125,8 +131,17 @@ export const FeedbackOptions = ({_id}) => {
 
         return (
           <Container>
-           <LikeBtn type="button" ><AiFillLike onClick={handleRating} />{counter.like}</LikeBtn>
-           <DislikeBtn type="button" ><AiFillDislike onClick={handleRating}/>{counter.dislike}</DislikeBtn>
+            {ratingFeedbackLike.map(item => (
+              <div key={item.id}>
+              <LikeBtn  type="button" onClick={() => onLeaveFeedback(item)}><AiFillLike />{like}</LikeBtn>
+              </div>
+            ))}
+            { ratingFeedbackDislike.map(item => (
+              <div key={item.id}>
+                <DislikeBtn type="button" onClick={() => onLeaveFeedback(item)}><AiFillDislike />{dislike}</DislikeBtn>
+              </div>
+            ))}
+
            <RatingCoach 
            positiveFidback={feedback} 
            />

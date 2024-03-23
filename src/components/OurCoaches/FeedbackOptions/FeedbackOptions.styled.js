@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 
 export const Container = styled.div`
 display: flex;
@@ -40,7 +41,9 @@ min-width: 100%;
   export const DislikeBtn = styled.button`
  position: absolute;
   top: 100px;
-  right: 12px;
+  right: 12px; 
+  /* top: 120px;
+  right: 22px; */
   display: flex;
   justify-content: center;
   align-items: center;
