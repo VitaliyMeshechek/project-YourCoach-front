@@ -31,6 +31,10 @@ export const FeedbackOptions = ({id}) => {
     const ratingFeedbackLike = Object.keys({like})
     const ratingFeedbackDislike = Object.keys({dislike})
     console.log('ratingFeedbackLike', ratingFeedbackLike)
+    useEffect(() => {
+      localStorage.setItem('likeKey', JSON.stringify(like));
+      localStorage.setItem('dislikeKey', JSON.stringify(dislike));
+    }, [like, dislike]);
 
     useEffect(() => {
         dispatch(fetchRating());
