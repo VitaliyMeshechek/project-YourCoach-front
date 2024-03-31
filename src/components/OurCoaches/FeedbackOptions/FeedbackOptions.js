@@ -37,6 +37,17 @@ export const FeedbackOptions = ({id}) => {
     }, [like, dislike]);
 
     useEffect(() => {
+      const likeKey = JSON.parse(localStorage.getItem('likeKey'));
+      if (likeKey) {
+        setLike(likeKey);
+      }
+      const dislikeKey = JSON.parse(localStorage.getItem('dislikeKey'));
+      if (dislikeKey) {
+        setDislike(dislikeKey);
+      }
+    }, []);
+
+    useEffect(() => {
         dispatch(fetchRating());
 
     }, [ dispatch, isLoggedIn]);
